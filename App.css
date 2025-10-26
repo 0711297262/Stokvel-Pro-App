@@ -1,0 +1,89 @@
+
+
+/* Custom styles for Stokvel Pro */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.custom-navbar {
+  background: linear-gradient(135deg, #2E8B57, #1e6b46) !important;
+  padding: 1rem 0;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.logo-text {
+   font-size: 24px;
+   font-weight: bold; /* corrected */
+   color: white; /* corrected */
+   margin: 0;
+}
+
+.h1, h1 {
+   font-size: calc(1.375rem + 1.5vw); /* assuming this was the intended calculation */
+}
+
+h1, h2, h3, h4, h5, h6 {
+   margin: 0;
+   margin-bottom: 0.5rem; /* reasonable value instead of 42cm */
+   font-weight: 600; /* reasonable value instead of 38px */
+   line-height: 1.2;
+   color: #333; /* example valid color */
+   border-color: #ddd; /* example valid color */
+}
+
+.main-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.text-primary {
+  color: #2E8B57 !important;
+}
+
+.btn-success {
+  background-color: #2E8B57;
+  border-color: #2E8B57;
+}
+
+.btn-success:hover {
+  background-color: #1e6b46;
+  border-color: #1e6b46;
+}
+
+.start-btn {
+  padding: 12px 30px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.feature-card {
+  border: none;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}

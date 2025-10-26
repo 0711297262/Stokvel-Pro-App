@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Information Officer Appointment - Stokvel Pro</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .content { max-width: 800px; margin: 0 auto; }
+        .signature { margin-top: 60px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>APPOINTMENT OF INFORMATION OFFICER</h1>
+        <p>In terms of the Protection of Personal Information Act, 2013 (POPIA)</p>
+    </div>
+    
+    <div class="content">
+        <p><strong>TO WHOM IT MAY CONCERN</strong></p>
+        
+        <p><strong>COMPANY:</strong> Stokvel Pro (Pty) Ltd<br>
+        <strong>REGISTRATION NUMBER:</strong> [Your CIPC Number]<br>
+        <strong>PHYSICAL ADDRESS:</strong> [Your Business Address]</p>
+        
+        <p>This letter serves to confirm that <strong>[Your Full Name]</strong> (ID: [Your ID Number]) has been duly appointed as the Information Officer for Stokvel Pro (Pty) Ltd in terms of Section 55(1) of the Protection of Personal Information Act, 2013 (POPIA).</p>
+        
+        <p><strong>Responsibilities of the Information Officer include:</strong></p>
+        <ul>
+            <li>Encouraging compliance with POPIA conditions</li>
+            <li>Dealing with requests made to the business pursuant to POPIA</li>
+            <li>Working with the Information Regulator in relation to investigations</li>
+            <li>Ensuring the business complies with POPIA provisions</li>
+            <li>Developing and updating the business's Privacy Policy</li>
+            <li>Conducting personal information impact assessments</li>
+            <li>Maintaining records of all processing operations</li>
+        </ul>
+        
+        <p>This appointment is effective from [Current Date] and remains in force until withdrawn in writing.</p>
+        
+        <div class="signature">
+            <p>_________________________<br>
+            <strong>Director/Owner</strong><br>
+            Stokvel Pro (Pty) Ltd</p>
+            
+            <p>Date: ___________________</p>
+        </div>
+        
+        <div class="signature">
+            <p>_________________________<br>
+            <strong>[Your Full Name]</strong><br>
+            Information Officer</p>
+            
+            <p>Date: ___________________</p>
+        </div>
+    </div>
+</body>
+</html>
