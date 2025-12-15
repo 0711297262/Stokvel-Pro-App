@@ -5,8 +5,6 @@
   <title>Login — Stokvel Pro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -42,6 +40,11 @@
       font-weight: 600;
       cursor: pointer;
     }
+    .demo-note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 10px;
+    }
   </style>
 </head>
 
@@ -51,32 +54,28 @@
     <p>Enter your phone number</p>
 
     <input id="phone" placeholder="+2771..." />
-    <button id="loginBtn">Send OTP</button>
+    <button id="loginBtn">Continue</button>
+
+    <div class="demo-note">
+      Demo mode — no SMS required
+    </div>
   </div>
 
   <script>
-    const supabase = window.supabase.createClient(
-      "https://kmujqhvywyykwaiwalys.supabase.co",
-      "YOUR_ANON_KEY"
-    );
-
-    document.getElementById("loginBtn").onclick = async () => {
-      const phone = document.getElementById("phone").value;
+    // ✅ DEMO MODE ONLY
+    document.getElementById("loginBtn").onclick = () => {
+      const phone = document.getElementById("phone").value.trim();
 
       if (!phone) {
         alert("Enter phone number");
         return;
       }
 
-      const { error } = await supabase.auth.signInWithOtp({
-        phone
-      });
+      // Simulate login success
+      localStorage.setItem("demoUserPhone", phone);
 
-      if (error) {
-        alert(error.message);
-      } else {
-        alert("OTP sent. Check your phone.");
-      }
+      // Go straight to dashboard
+      window.location.href = "/dashboard.html";
     };
   </script>
 </body>
