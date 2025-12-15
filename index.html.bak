@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stokvel PRO — Welcome</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <!-- Partials loader -->
+  <script type="module" src="js/load-partials.js"></script>
+</head>
+<body class="motion-fade-scale">
+  <div id="header"></div>
+  <main class="page motion-container">
+    <h1>Stokvel PRO</h1>
+    <p>Welcome — sign in with your phone to continue.</p>
+    <label>Phone</label>
+<input id="phone" 
+       type="tel" 
+       placeholder="82 000 0000"
+       class="input" />
+<button id="continueBtn" class="btn-primary">
+  Continue
+</button>
+  </main>
+<div id="footer"></div>
+<script src="js/load-partials.js" type="module"></script>
+<!-- Page modules -->
+<script type="module" src="js/motion-engine.js"></script>
+<script type="module" src="js/auth-login.js"></script>
+<script type="module" src="js/router-transitions.js"></script>
+<script type="module" src="/js/ui-helpers.js"></script>
+</body>
+</html>

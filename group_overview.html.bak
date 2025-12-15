@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Group Overview — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <script type="module" src="js/load-partials.js"></script>
+
+</head>
+<body class="motion-page">
+
+  <div id="header"></div>
+
+  <main class="container" style="max-width:1100px;margin:36px auto;padding:18px;">
+    <h1 id="groupTitle">Group Overview</h1>
+
+    <section class="hero">
+      <div style="display:flex;gap:16px;align-items:center;">
+        <div style="width:72px;height:72px;border-radius:12px;background:linear-gradient(180deg,#2b78c9,#4ea8ff);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:28px">G</div>
+        <div>
+          <div id="group-name">— • Code: —</div>
+          <div id="group-sub" style="color:#6b7280">Group details here</div>
+        </div>
+      </div>
+
+      <div style="margin-left:auto;display:flex;gap:12px;align-items:center">
+        <button class="btn btn-primary" id="btnContribute">+ Contribute</button>
+        <button class="btn btn-ghost" id="btnSettings">Settings</button>
+      </div>
+    </section>
+
+    <div style="margin-top:18px;">
+      <h2>Recent Activity</h2>
+      <div id="activityList" class="card list">Loading…</div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    // fetch gid if provided, otherwise show placeholder
+    const url = new URL(window.location.href);
+    const gid = url.searchParams.get('gid');
+    if (gid) {
+      document.getElementById('groupTitle').textContent = 'Group Overview — ' + gid;
+    }
+    document.getElementById('btnContribute').onclick = () => alert('Contribute clicked');
+    document.getElementById('btnSettings').onclick = () => window.location.href = 'group_admin.html?gid=' + (gid || '');
+  </script>
+
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+</body>
+</html>

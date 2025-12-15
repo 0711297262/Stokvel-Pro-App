@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payouts — Stokvel PRO</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+  <!-- Partials Loader -->
+  <script type="module" src="js/load-partials.js"></script>
+</head>
+
+<body class="motion-fade-scale">
+  <div id="header"></div>
+
+  <main class="page motion-container">
+    <h1>Payouts</h1>
+
+    <div id="payoutList" class="card list">
+      <p class="muted">Loading payouts…</p>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- MAIN LOGIC -->
+  <script type="module" src="js/payouts.js"></script>
+
+  <!-- GLOBAL ENGINES -->
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+</body>
+</html>

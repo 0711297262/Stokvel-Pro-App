@@ -1,0 +1,66 @@
+/* -----------------------------------------
+   UI SYSTEM TOKENS — FOUNDATIONS
+   Stokvel PRO – v1.0
+------------------------------------------*/
+
+/* SPACING SCALE */
+:root {
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+}
+
+/* RADIUS SYSTEM */
+:root {
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --radius-full: 999px;
+}
+
+/* ELEVATION (SHADOWS) */
+:root {
+  --shadow-xs: 0 1px 3px rgba(0,0,0,0.10);
+  --shadow-sm: 0 2px 6px rgba(0,0,0,0.12);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+  --shadow-lg: 0 8px 20px rgba(0,0,0,0.18);
+  --shadow-glow: 0 0 25px rgba(var(--primary-rgb), 0.45);
+}
+
+/* TRANSITIONS */
+:root {
+  --transition-fast: 0.15s ease;
+  --transition-med: 0.25s ease;
+  --transition-slow: 0.45s ease;
+}
+
+/* TYPOGRAPHY */
+:root {
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --text-xs: 0.72rem;
+  --text-sm: 0.85rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.45rem;
+  --text-2xl: 1.85rem;
+  --text-3xl: 2.2rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-md);
+  margin: 0;
+  padding: 0;
+  background: var(--app-bg);
+  color: var(--text-color);
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Summary — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <script type="module" src="js/load-partials.js"></script>
+</head>
+<body class="motion-page">
+
+  <div id="header"></div>
+
+  <main class="container page">
+    <h1 class="motion-fade-in">Summary</h1>
+
+    <section class="card motion-pop">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div class="muted">Total Balance</div>
+          <div id="summaryBalance" style="font-size:28px;font-weight:800">R 0.00</div>
+        </div>
+        <div>
+          <button id="btn-download" class="btn btn-ghost">Export</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card list motion-slide-up" style="margin-top:18px;">
+      <h3>Recent Activity</h3>
+      <div id="summaryList">
+        <div class="empty">Loading…</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Scripts: keep order stable -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module" src="js/summary.js"></script>
+
+  <script src="js/load-partials.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+</body>
+</html>

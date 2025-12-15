@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Savings circle members — Stokvel Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 24px;
+      min-height: 100vh;
+      background: radial-gradient(1200px 600px at top, #111827, #0b1220);
+      color: #0f172a;
+    }
+
+    .glass {
+      max-width: 520px;
+      margin: auto;
+      background: rgba(255,255,255,0.68);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow:
+        0 14px 40px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    a {
+      text-decoration: none;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    h1 {
+      margin: 12px 0 4px;
+      font-size: 22px;
+    }
+
+    p {
+      color: #6b7280;
+      margin: 0 0 18px;
+      font-size: 14px;
+    }
+
+    .member {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      font-size: 14px;
+    }
+
+    .member span {
+      color: #6b7280;
+      margin-left: 6px;
+    }
+
+    h3 {
+      margin-top: 22px;
+      font-size: 16px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.1);
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 16px;
+      padding: 12px;
+      width: 100%;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, #ec4899, #f472b6);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .empty {
+      text-align: center;
+      margin: 30px 0;
+      color: #6b7280;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="glass">
+    <a href="dashboard.html">← Back to dashboard</a>
+
+    <h1>Savings circle members</h1>
+    <p>Everyone saving together in this circle.</p>
+
+    <div id="members"></div>
+
+    <div id="empty" class="empty" style="display:none;">
+      <strong>No one here yet</strong>
+      <p>Add people to start saving together.</p>
+    </div>
+
+    <h3>Add someone to this circle</h3>
+    <input id="name" placeholder="Full name" />
+    <input id="phone" placeholder="Phone number (e.g. 071 234 5678)" />
+    <p id="formHint" style="display:none;margin-top:10px;color:#6b7280;font-size:13px;"></p>
+
+
+    <button id="addBtn">Add to circle</button>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://kmujqhvywyykwaiwalys.supabase.co";
+    const SUPABASE_ANON_KEY = "YOUR_ANON_KEY_HERE";
+
+    const supabase = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+    const params = new URLSearchParams(window.location.search);
+    const stokvelId = params.get("id");
+
+    async function loadMembers() {
+      const { data } = await supabase
+        .from("members")
+        .select("*")
+        .eq("stokvel_id", stokvelId)
+        .order("created_at");
+
+      const container = document.getElementById("members");
+      const empty = document.getElementById("empty");
+
+      container.innerHTML = "";
+
+      if (!data || data.length === 0) {
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+
+      data.forEach(m => {
+        const div = document.createElement("div");
+        div.className = "member";
+        div.innerHTML = `<strong>${m.name}</strong><span>· ${m.phone}</span>`;
+        container.appendChild(div);
+      });
+    }
+
+   document.getElementById("addBtn").onclick = async () => {
+  const nameInput = document.getElementById("name");
+  const phoneInput = document.getElementById("phone");
+  const hint = document.getElementById("formHint");
+  const btn = document.getElementById("addBtn");
+
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+
+  // Reset hint
+  hint.style.display = "none";
+  hint.textContent = "";
+
+  if (!name) {
+    hint.textContent = "Please add a name so everyone knows who this is.";
+    hint.style.display = "block";
+    nameInput.focus();
+    return;
+  }
+
+  if (!phone || phone.length < 9) {
+    hint.textContent = "Please enter a valid phone number.";
+    hint.style.display = "block";
+    phoneInput.focus();
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = "Adding…";
+
+  const { error } = await supabase.from("members").insert({
+    stokvel_id: stokvelId,
+    name,
+    phone
+  });
+
+  btn.disabled = false;
+  btn.textContent = "Add to circle";
+
+  if (error) {
+    hint.textContent = "Something didn’t work. Please try again.";
+    hint.style.display = "block";
+    return;
+  }
+
+  nameInput.value = "";
+  phoneInput.value = "";
+  loadMembers();
+};
+
+
+    loadMembers();
+  </script>
+
+</body>
+</html>

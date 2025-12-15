@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Groups — Stokvel PRO</title>
+
+  <!-- Correct relative paths -->
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <!-- Load header + footer -->
+  <script type="module" src="js/load-partials.js"></script>
+  <link rel="stylesheet" href="css/glass-ui.css">
+</head>
+
+<body class="motion-fade-scale">
+  <div id="headerContainer"></div>
+  
+  <div id="header"></div>
+
+  <main class="page motion-container">
+    <h1>My Groups</h1>
+
+    <div id="myGroupsList" class="glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card list">
+      <!-- JS will fill content -->
+    </div>
+
+    <div style="margin-top:20px;">
+      <a href="create_stokvel.html">
+        <glass-glass-glass-btn class="glass-glass-btn glass-glass-glass-btn motion-pop">+ Create New Stokvel</glass-glass-glass-btn>
+      </a>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Bottom scripts (important order) -->
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+  <script type="module" src="js/group-engine.js"></script>
+
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

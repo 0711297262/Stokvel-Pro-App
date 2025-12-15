@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Component Gallery v5 — Stokvel PRO</title>
+
+<style>
+  :root {
+    --brand: #2b7bff;
+    --brand-soft: rgba(43,123,255,0.14);
+    --text: #1d2a38;
+    --text-soft: #6d7b8b;
+    --card-bg: #ffffff;
+    --radius: 18px;
+  }
+
+  body {
+    margin:0;
+    padding:40px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto;
+    background: linear-gradient(180deg,#f7faff,#eef3f8);
+    color:var(--text);
+  }
+
+  h1 { font-size:34px; font-weight:800; margin-bottom:6px; }
+  h2 { margin-top:38px; font-weight:700; }
+
+  .section {
+    background:var(--card-bg);
+    border-radius: var(--radius);
+    padding:24px;
+    margin-top:18px;
+    box-shadow:0 12px 32px rgba(0,0,0,0.04);
+  }
+
+  /* Buttons */
+  .btn {
+    padding:14px 20px;
+    border-radius:14px;
+    font-size:16px;
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    transition:.22s ease;
+  }
+  .btn-primary {
+    background:linear-gradient(90deg,#2b7bff,#66a8ff);
+    color:white;
+    box-shadow:0 6px 20px rgba(43,123,255,.25);
+  }
+  .btn-primary:hover {
+    transform:translateY(-3px);
+    box-shadow:0 12px 30px rgba(43,123,255,.32);
+  }
+  .btn-ghost {
+    background:rgba(43,123,255,0.1);
+    color:#2b7bff;
+  }
+
+  /* Glass Input */
+  .input {
+    width:100%;
+    padding:14px 16px;
+    border-radius:14px;
+    border:1px solid rgba(0,0,0,0.06);
+    margin-bottom:16px;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(6px);
+    font-size:15px;
+  }
+
+  /* Toggle */
+  .toggle {
+    position:relative;
+    width:52px;
+    height:28px;
+  }
+  .toggle input { display:none; }
+  .toggle-slider {
+    position:absolute;
+    width:100%; height:100%;
+    background:#c6d2e0;
+    border-radius:28px;
+    transition:.25s;
+  }
+  .toggle input:checked + .toggle-slider {
+    background:#2b7bff;
+  }
+  .toggle-slider:before {
+    content:"";
+    width:22px; height:22px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    top:3px; left:4px;
+    transition:.25s;
+    box-shadow:0 2px 6px rgba(0,0,0,0.15);
+  }
+  .toggle input:checked + .toggle-slider:before {
+    transform:translateX(24px);
+  }
+
+  /* Status Chips */
+  .chip {
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:600;
+    margin-right:8px;
+  }
+  .chip-blue { background:#e7f1ff; color:#2b7bff; }
+  .chip-yellow { background:#fff8d4; color:#b58a00; }
+  .chip-red { background:#ffe4e4; color:#d43c3c; }
+  .chip-green { background:#e7fbe8; color:#2f9e44; }
+
+  /* Cards */
+  .card {
+    padding:20px;
+    border-radius: var(--radius);
+    background:white;
+    box-shadow:0 8px 22px rgba(0,0,0,0.06);
+    margin-bottom:16px;
+  }
+
+  /* Skeletons */
+  .skeleton {
+    height:16px;
+    border-radius:10px;
+    margin-bottom:12px;
+    background:linear-gradient(90deg,#ececec,#f5f5f5,#ececec);
+    background-size:200%;
+    animation:shimmer 1.6s infinite linear;
+  }
+  @keyframes shimmer {
+    0% { background-position:200%; }
+    100% { background-position:-200%; }
+  }
+
+  /* Payout cycle widget */
+  .payout-widget {
+    padding:20px;
+    background:white;
+    border-radius:18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+  }
+  .payout-widget .num {
+    font-size:34px;
+    font-weight:800;
+    color:#2b7bff;
+  }
+
+  /* Admin Table */
+  table {
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0 10px;
+  }
+  table tr {
+    background:white;
+    box-shadow:0 4px 18px rgba(0,0,0,0.05);
+    border-radius:14px;
+  }
+  table tr td {
+    padding:14px 18px;
+    font-size:15px;
+  }
+</style>
+</head>
+
+<body>
+<script src="/devtools/devtools_loader.js" defer></script>
+<script src="/devtools/use_real_theme.js" defer></script>
+<script src="/devtools/motion_presets.js"></script>
+
+<h1>Component Gallery v5</h1>
+<p>Next-gen UI system for Stokvel PRO (2025 Premium Edition)</p>
+
+<hr style="opacity:.3;margin:20px 0;">
+
+<!-- Buttons -->
+<h2>Buttons</h2>
+<div class="section">
+  <button class="btn btn-primary">Primary Button</button>
+  <button class="btn btn-ghost">Ghost Button</button>
+</div>
+
+<!-- Inputs -->
+<h2>Input Fields</h2>
+<div class="section">
+  <input class="input" placeholder="Phone Number" value="+27 82 000 0000">
+  <input class="input" placeholder="Amount" value="R 0.00">
+</div>
+
+<!-- Toggle -->
+<h2>Toggle</h2>
+<div class="section">
+  <label class="toggle">
+    <input type="checkbox" checked>
+    <span class="toggle-slider"></span>
+  </label>
+</div>
+
+<!-- Status Chips -->
+<h2>Status Chips</h2>
+<div class="section">
+  <span class="chip chip-blue">Active</span>
+  <span class="chip chip-yellow">Pending</span>
+  <span class="chip chip-red">Overdue</span>
+  <span class="chip chip-green">Completed</span>
+</div>
+
+<!-- Cards -->
+<h2>Card Components</h2>
+<div class="section">
+  <div class="card">Standard card block</div>
+  <div class="card">Another card</div>
+</div>
+
+<!-- Skeletons -->
+<h2>Skeleton Loading</h2>
+<div class="section">
+  <div class="card">
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton" style="width:40%;"></div>
+  </div>
+</div>
+
+<!-- Payout Widget -->
+<h2>Payout Cycle Widget</h2>
+<div class="section">
+  <div class="payout-widget">
+    <div>
+      <div style="font-size:14px;color:var(--text-soft);">Next Payout</div>
+      <div class="num">12 Aug</div>
+    </div>
+    <button class="btn btn-primary">Manage Cycle</button>
+  </div>
+</div>
+
+<!-- Admin Table -->
+<h2>Admin Table</h2>
+<div class="section">
+  <table>
+    <tr>
+      <td>Member</td>
+      <td>Amount</td>
+      <td>Status</td>
+    </tr>
+    <tr>
+      <td>John Dube</td>
+      <td>R 300</td>
+      <td><span class="chip chip-green">Completed</span></td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = supabase.createClient(
+      "https://YOURPROJECT.supabase.co",
+      "YOUR_PUBLIC_ANON_KEY"
+    );
+  </script>
+
+  <!-- Insert partials (header/footer) -->
+  <script type="module" src="js/load-partials.js"></script>
+  <link rel="stylesheet" href="css/glass-ui.css">
+</head>
+
+<body class="motion-fade-scale">
+  <div id="headerContainer"></div>
+
+  <div id="header"></div>
+
+  <main class="page motion-fade-scale" style="max-width:1100px;margin:36px auto;padding:18px;">
+
+    <h1 class="motion-fade-scale">Dashboard</h1>
+
+    <!-- KPI Block -->
+    <section class="glass glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card motion-slide-up">
+
+      <div>Total Balance</div>
+      <div id="totalBalance" class="kpi-big">Loading...</div>
+
+      <div class="kpi-row">
+        <glass-glass-glass-btn class="glass-glass-btn glass-glass-glass-btn" id="contributeBtn">+ Contribute</glass-glass-glass-btn>
+        <glass-glass-glass-btn class="glass-glass-btn glass-glass-btn-ghost" id="viewGroupsBtn">View Groups</glass-glass-glass-btn>
+        <glass-glass-glass-btn class="glass-glass-btn glass-glass-btn-ghost" onclick="window.location='activity.html'">View Activity</glass-glass-glass-btn>
+      </div>
+    </section>
+
+    <h2 class="section-title">Overview</h2>
+
+    <div class="kpi-3 motion-fade">
+  <div class="glass-kpi">
+    <div class="label">Total Groups</div>
+    <div id="kpiGroups" class="value">Loading...</div>
+  </div>
+
+  <div class="glass-kpi">
+    <div class="label">Monthly Contributions</div>
+    <div id="kpiMonthly" class="value">Loading...</div>
+  </div>
+
+  <div class="glass-kpi">
+    <div class="label">Upcoming Payout</div>
+    <div id="kpiPayout" class="value">Loading...</div>
+  </div>
+</div>
+
+
+    <h2 class="section-title">My Groups</h2>
+   <div id="groupsList" class="glass glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card list motion-slide-up">
+
+      <div style="padding:12px; color:#888;">Loading groups...</div>
+    </div>
+<div class="kpi-3">
+  <div class="glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-kpi">
+    <div class="label">My Next Payout</div>
+    <div id="kpiPayout" class="value">Loading...</div>
+  </div>
+
+  <div class="glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-kpi">
+    <div class="label">Completed Payouts</div>
+    <div id="kpiCompleted" class="value">0</div>
+  </div>
+
+  <div class="glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-kpi">
+    <div class="label">Total Pot</div>
+    <div id="kpiPot" class="value">R 0.00</div>
+  </div>
+</div>
+
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    document.getElementById('viewGroupsBtn').onclick = () => window.location.href = 'groups.html';
+    document.getElementById('contributeBtn').onclick = () => window.location.href = 'contribute.html';
+  </script>
+
+  <script type="module" src="js/dashboard-kpis.js"></script>
+  <script type="module" src="js/dashboard-groups.js"></script>
+
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+  
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

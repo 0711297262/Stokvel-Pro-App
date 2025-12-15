@@ -1,0 +1,134 @@
+/* css/ui-theme.css — Glassmorphism / Bento UI (Option A) */
+/* Tokens */
+:root{
+  --bg-1: #071126;            /* deep background */
+  --bg-2: #0b2340;
+  --glass-01: rgba(255,255,255,0.04);
+  --glass-02: rgba(255,255,255,0.06);
+  --glass-stroke: rgba(255,255,255,0.12);
+  --text-1: #E6F0FF;
+  --muted: rgba(230,240,255,0.6);
+
+  --accent-aqua: #3EB8FF;     /* main aqua accent */
+  --accent-aqua-600: #28A6FF;
+  --accent-blue-glow: rgba(62,184,255,0.18);
+
+  --success: #16A34A;
+  --danger: #F43F5E;
+
+  --radius-xl: 22px;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+
+  --space-xs:8px; --space-sm:12px; --space-md:18px; --space-lg:28px;
+
+  --shadow-soft: 0 10px 30px rgba(4,12,30,0.45);
+  --shadow-deep: 0 18px 48px rgba(4,12,30,0.6);
+
+  --fs-xl:22px; --fs-lg:16px; --fs-md:14px; --fs-sm:12px;
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(62,184,255,0.06), transparent 8%),
+              radial-gradient(1000px 500px at 90% 90%, rgba(62,184,255,0.03), transparent 8%),
+              linear-gradient(180deg,var(--bg-1) 0%, var(--bg-2) 100%);
+  color:var(--text-1);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  font-size:14px;
+  padding-bottom:90px; /* room for bottom nav on mobile */
+}
+
+/* Utilities */
+.container{max-width:1100px;margin:24px auto;padding:18px}
+.row{display:flex;gap:12px;align-items:center}
+.col{display:flex;flex-direction:column;gap:12px}
+.center{text-align:center}
+.right{margin-left:auto}
+
+/* Glass card */
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border-radius:var(--radius-lg);
+  padding:var(--space-md);
+  border:1px solid var(--glass-stroke);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  box-shadow:var(--shadow-soft);
+  color:var(--text-1);
+}
+
+/* variant sizes */
+.glass-sm{padding:10px;border-radius:var(--radius-md)}
+.glass-lg{padding:24px;border-radius:var(--radius-xl)}
+
+/* Headings */
+.h1{font-size:var(--fs-xl);margin:0;font-weight:700}
+.h2{font-size:var(--fs-lg);margin:0;font-weight:700}
+.lead{font-size:var(--fs-md);color:var(--muted)}
+
+/* Buttons */
+.btn{border:0;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;justify-content:center}
+.btn:active{transform:translateY(1px)}
+.btn-primary{
+  background: linear-gradient(90deg,var(--accent-aqua),var(--accent-aqua-600));
+  color: #042135;
+  box-shadow: 0 8px 30px var(--accent-blue-glow);
+}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text-1)}
+.btn-sm{padding:6px 8px;border-radius:10px;font-size:13px}
+
+/* Icon button */
+.icon-btn{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04)}
+
+/* KPI card (bento style) */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.kpi-card{padding:14px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);box-shadow:0 8px 26px rgba(3,10,30,0.45)}
+.kpi-card .label{font-size:12px;color:var(--muted)}
+.kpi-card .value{font-size:18px;font-weight:800;margin-top:6px}
+
+/* Bento grid for dashboard blocks */
+.bento-grid{
+  display:grid;
+  grid-template-columns: repeat(12,1fr);
+  gap:16px;
+}
+.bento-item{grid-column: span 4; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:18px; padding:16px; border:1px solid rgba(255,255,255,0.04)}
+/* larger blocks */
+.bento-item.span-8{grid-column: span 8}
+.bento-item.span-12{grid-column: span 12}
+
+/* Activity list */
+.activity-row{padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;justify-content:space-between;gap:12px}
+
+/* Avatar */
+.avatar{width:48px;height:48px;border-radius:12px;object-fit:cover;border:1px solid rgba(255,255,255,0.04)}
+
+/* modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,8,23,0.6);display:grid;place-items:center;z-index:9999}
+.modal{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,0.06);max-width:720px;width:92%}
+
+/* bottom nav */
+#bottomNav{
+  position:fixed;left:16px;right:16px;bottom:18px;display:flex;justify-content:space-between;padding:10px 14px;border-radius:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow-deep);backdrop-filter:blur(8px);z-index:999;
+}
+#bottomNav .active{background:linear-gradient(90deg,var(--accent-aqua),var(--accent-aqua-600));color:#042135;border-radius:12px;padding:8px 12px}
+
+/* motion utilities (bento feel) */
+.motion-fade-scale{animation:fadeScale .36s cubic-bezier(.2,.9,.2,1) both}
+@keyframes fadeScale{from{opacity:0;transform:scale(.985)} to{opacity:1;transform:none}}
+.motion-slide-up{animation:slideUp .36s cubic-bezier(.2,.9,.2,1) both}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* responsiveness */
+@media (max-width:900px){
+  .kpi-grid{grid-template-columns:repeat(1,1fr)}
+  .bento-item{grid-column: span 12}
+  .bento-grid{grid-template-columns:repeat(1,1fr)}
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notifications — Stokvel PRO</title>
+
+  <!-- Correct relative CSS paths -->
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+  <!-- Load shared header/footer -->
+  <script type="module" src="js/load-partials.js"></script>
+
+  <style>
+    .notif-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .notif-item {
+      background: white;
+      padding: 16px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: fade-in 0.25s ease;
+    }
+
+    .notif-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #183153;
+    }
+
+    .notif-body {
+      font-size: 14px;
+      color: #5b6675;
+    }
+
+    .notif-time {
+      font-size: 12px;
+      color: #8793a2;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="motion-fade-scale">
+
+  <div id="header"></div>
+
+  <main class="page motion-container">
+    <h1>Notifications</h1>
+
+    <div id="notifList" class="notif-list motion-stagger-container">
+      <!-- Dynamic notifications inserted here -->
+      <div class="notif-item motion-fade-in">
+        <div class="notif-title">Welcome to Stokvel PRO 🎉</div>
+        <div class="notif-body">Your account has been created successfully.</div>
+        <div class="notif-time">Just now</div>
+      </div>
+
+      <div class="notif-item motion-fade-in" style="animation-delay:.1s;">
+        <div class="notif-title">New Group Features</div>
+        <div class="notif-body">Admin tools are now available in your dashboard.</div>
+        <div class="notif-time">Today</div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Correct module scripts -->
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+
+</body>
+</html>

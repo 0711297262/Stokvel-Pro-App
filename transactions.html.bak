@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transactions — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+  <script type="module" src="js/load-partials.js"></script>
+</head>
+
+<body class="motion-fade-scale">
+  <div id="header"></div>
+
+  <main class="page motion-container">
+    <h1>Transactions</h1>
+    <div id="txnList" class="card list"></div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module" src="js/transactions.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+</body>
+</html>

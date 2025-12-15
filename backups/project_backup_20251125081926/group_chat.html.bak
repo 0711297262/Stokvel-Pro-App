@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stokvel Chat – Stokvel Pro</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #1a365d;
+      color: white;
+      font-family: Inter, Arial;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .header {
+      padding: 16px;
+      text-align: center;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    #messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .bubble {
+      padding: 10px 14px;
+      margin: 8px 0;
+      border-radius: 12px;
+      max-width: 80%;
+      line-height: 1.4;
+      font-size: 15px;
+    }
+
+    .me {
+      background: #2b6cb0;
+      margin-left: auto;
+      border-bottom-right-radius: 0;
+    }
+
+    .them {
+      background: rgba(255,255,255,0.15);
+      border-bottom-left-radius: 0;
+    }
+
+    .input-area {
+      display: flex;
+      padding: 12px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 16px;
+      margin-left: 8px;
+      background: white;
+      color: #1a365d;
+      border: none;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+<div id="header"></div>
+  <div class="header" id="groupName">Loading Chat...</div>
+
+  <div id="messages"></div>
+
+  <div class="input-area">
+    <input id="msgInput" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script type="module" src="group_chat.js"></script>
+<div id="footer"></div>
+<script type="module" src="js/load-partials.js"></script>
+</body>
+</html>

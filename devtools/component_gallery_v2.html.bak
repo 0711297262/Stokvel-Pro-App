@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Stokvel PRO — Component Gallery v2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    margin:0;
+    padding:20px;
+    background:#eef2f9;
+    font-family: system-ui, -apple-system;
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+  }
+
+  h2 {
+    font-size:22px;
+    margin:0;
+    font-weight:700;
+    color:#1a2c45;
+    border-left:4px solid #2b78c9;
+    padding-left:10px;
+  }
+
+  .section {
+    background:white;
+    padding:22px;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+  }
+
+  .row { display:flex; gap:22px; flex-wrap:wrap; margin-top:16px; }
+
+  /* Tabs */
+  .tabs {
+    display:flex;
+    gap:10px;
+  }
+  .tab {
+    padding:10px 16px;
+    border-radius:12px;
+    background:#f1f3f7;
+    cursor:pointer;
+    font-weight:600;
+    color:#53657a;
+  }
+  .tab.active {
+    background:#2b78c9;
+    color:white;
+    box-shadow:0 4px 10px rgba(43,120,200,0.25);
+  }
+
+  /* Toast */
+  .toast {
+    padding:14px 18px;
+    border-radius:14px;
+    color:white;
+    font-weight:600;
+    box-shadow:0 8px 25px rgba(0,0,0,0.28);
+    width:260px;
+  }
+  .toast-success { background:#0cb77b; }
+  .toast-error { background:#e74c3c; }
+  .toast-info { background:#3498db; }
+
+  /* Floating Action Button */
+  .fab {
+    width:64px;
+    height:64px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#2b78c9;
+    color:white;
+    font-size:28px;
+    box-shadow:0 10px 30px rgba(43,120,200,0.2);
+  }
+
+  /* Bottom Sheet */
+  .sheet {
+    width:300px;
+    height:180px;
+    border-radius:20px;
+    background:white;
+    box-shadow:0 -10px 40px rgba(0,0,0,0.18);
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .sheet h3 { margin:0; font-size:18px; font-weight:700; }
+
+  /* Status Badges */
+  .badge {
+    padding:6px 10px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:600;
+  }
+  .badge-success { background:#e3f9ef; color:#0a995d; }
+  .badge-warning { background:#fff7d9; color:#b68500; }
+  .badge-error { background:#fde4e4; color:#ce3939; }
+  .badge-info { background:#dff0ff; color:#1e7acb; }
+
+  /* Progress Bar */
+  .progress {
+    width:260px;
+    background:#e4e9f0;
+    height:10px;
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .progress-inner {
+    height:100%;
+    background:#2b78c9;
+    width:45%;
+    border-radius:10px;
+  }
+
+  /* Chart placeholder */
+  .chart {
+    width:280px;
+    height:160px;
+    border-radius:14px;
+    background:linear-gradient(135deg, #dbe5f2, #eef3fb);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#7b8ba1;
+    font-weight:600;
+  }
+
+  /* Loader */
+  .loader {
+    width:40px; height:40px;
+    border-radius:50%;
+    border:4px solid #d0d9e8;
+    border-top-color:#2b78c9;
+    animation:spin 1s infinite linear;
+  }
+  @keyframes spin {
+    100% { transform:rotate(360deg); }
+  }
+
+  /* Empty State */
+  .empty {
+    width:260px;
+    padding:20px;
+    background:#fff;
+    border-radius:16px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  }
+  .empty img {
+    width:80px;
+    margin-bottom:12px;
+  }
+
+  /* Steps */
+  .steps { display:flex; gap:8px; }
+  .step {
+    width:22px; height:22px;
+    border-radius:50%;
+    border:2px solid #2b78c9;
+  }
+  .step.active { background:#2b78c9; }
+
+  /* Pills / Chips */
+  .pill {
+    padding:8px 14px;
+    border-radius:20px;
+    background:#f2f5fb;
+    color:#415064;
+    font-weight:600;
+    font-size:14px;
+  }
+</style>
+</head>
+
+<body>
+<script src="/devtools/devtools_loader.js" defer></script>
+<script src="/devtools/use_real_theme.js" defer></script>
+<script src="/devtools/motion_presets.js"></script>
+
+<!-- TABS -->
+<h2>Tabs</h2>
+<div class="section">
+  <div class="row">
+    <div class="tabs">
+      <div class="tab active">Overview</div>
+      <div class="tab">Transactions</div>
+      <div class="tab">Settings</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<h2>Toast Notifications</h2>
+<div class="section">
+  <div class="row">
+    <div class="toast toast-success">Success: Contribution Added</div>
+    <div class="toast toast-error">Error: Something went wrong</div>
+    <div class="toast toast-info">Info: Balance updated</div>
+  </div>
+</div>
+
+<!-- FLOATING ACTION BUTTON -->
+<h2>Floating Action Button</h2>
+<div class="section">
+  <div class="row">
+    <div class="fab">+</div>
+  </div>
+</div>
+
+<!-- BOTTOM SHEET -->
+<h2>Bottom Sheet</h2>
+<div class="section">
+  <div class="row">
+    <div class="sheet">
+      <h3>Action Menu</h3>
+      <button class="btn btn-primary">Add Contribution</button>
+      <button class="btn btn-ghost">View Members</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS BADGES -->
+<h2>Status Badges</h2>
+<div class="section">
+  <div class="row">
+    <div class="badge badge-success">Active</div>
+    <div class="badge badge-warning">Pending</div>
+    <div class="badge badge-error">Failed</div>
+    <div class="badge badge-info">Info</div>
+  </div>
+</div>
+
+<!-- PROGRESS BAR -->
+<h2>Progress Bar</h2>
+<div class="section">
+  <div class="row">
+    <div class="progress"><div class="progress-inner"></div></div>
+  </div>
+</div>
+
+<!-- CHART PLACEHOLDER -->
+<h2>Chart Placeholder</h2>
+<div class="section">
+  <div class="row">
+    <div class="chart">Chart Component</div>
+  </div>
+</div>
+
+<!-- LOADER -->
+<h2>Loader</h2>
+<div class="section">
+  <div class="row">
+    <div class="loader"></div>
+  </div>
+</div>
+
+<!-- EMPTY STATE -->
+<h2>Empty State</h2>
+<div class="section">
+  <div class="row">
+    <div class="empty">
+      <img src="https://cdn-icons-png.flaticon.com/512/4076/4076500.png">
+      <div>No Data Yet</div>
+    </div>
+  </div>
+</div>
+
+<!-- STEPS -->
+<h2>Step Indicator</h2>
+<div class="section">
+  <div class="row">
+    <div class="steps">
+      <div class="step active"></div>
+      <div class="step"></div>
+      <div class="step"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PILLS -->
+<h2>Pills / Chips</h2>
+<div class="section">
+  <div class="row">
+    <div class="pill">Monthly</div>
+    <div class="pill">Payout</div>
+    <div class="pill">Admin</div>
+  </div>
+</div>
+
+</body>
+</html>

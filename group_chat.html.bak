@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Group Chat — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css" />
+
+  <script type="module" src="js/load-partials.js"></script>
+  <script type="module" src="js/auth-guard.js"></script>
+</head>
+
+<body class="motion-fade-scale">
+  <div id="header"></div>
+
+  <main class="page motion-container">
+    <h1 id="groupName">Chat</h1>
+
+    <div id="messages" class="chat-box"></div>
+
+    <div class="chat-input-row">
+      <input id="msgInput" placeholder="Message…" />
+      <button id="sendMsg" class="btn btn-primary">Send</button>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module" src="js/group_chat.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = supabase.createClient(
+      "https://YOURPROJECT.supabase.co",
+      "YOUR_PUBLIC_ANON_KEY"
+    );
+  </script>
+
+  <!-- Insert partials (header/footer) -->
+  <script type="module" src="js/load-partials.js"></script>
+</head>
+
+<body class="motion-fade-scale">
+
+  <div id="header"></div>
+
+  <main class="page motion-fade-scale" style="max-width:1100px;margin:36px auto;padding:18px;">
+
+    <h1 class="motion-fade-scale">Dashboard</h1>
+
+    <!-- KPI Block -->
+    <section class="section-gradient motion-slide-up">
+      <div>Total Balance</div>
+      <div id="totalBalance" class="kpi-big">Loading...</div>
+
+      <div class="kpi-row">
+        <button class="btn btn-primary" id="contributeBtn">+ Contribute</button>
+        <button class="btn btn-ghost" id="viewGroupsBtn">View Groups</button>
+        <button class="btn btn-ghost" onclick="window.location='activity.html'">View Activity</button>
+      </div>
+    </section>
+
+    <h2 class="section-title">Overview</h2>
+
+    <div class="kpi-3 motion-fade">
+      <div class="card-kpi"><div class="label">Total Groups</div><div id="kpiGroups" class="value">Loading...</div></div>
+      <div class="card-kpi"><div class="label">Monthly Contributions</div><div id="kpiMonthly" class="value">Loading...</div></div>
+      <div class="card-kpi"><div class="label">Upcoming Payout</div><div id="kpiPayout" class="value">Loading...</div></div>
+    </div>
+
+    <h2 class="section-title">My Groups</h2>
+    <div id="groupsList" class="card list motion-slide-up">
+      <div style="padding:12px; color:#888;">Loading groups...</div>
+    </div>
+<div class="kpi-3">
+  <div class="card-kpi">
+    <div class="label">My Next Payout</div>
+    <div id="kpiPayout" class="value">Loading...</div>
+  </div>
+
+  <div class="card-kpi">
+    <div class="label">Completed Payouts</div>
+    <div id="kpiCompleted" class="value">0</div>
+  </div>
+
+  <div class="card-kpi">
+    <div class="label">Total Pot</div>
+    <div id="kpiPot" class="value">R 0.00</div>
+  </div>
+</div>
+
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    document.getElementById('viewGroupsBtn').onclick = () => window.location.href = 'groups.html';
+    document.getElementById('contributeBtn').onclick = () => window.location.href = 'contribute.html';
+  </script>
+
+  <script type="module" src="js/dashboard-kpis.js"></script>
+  <script type="module" src="js/dashboard-groups.js"></script>
+
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+  
+</body>
+</html>

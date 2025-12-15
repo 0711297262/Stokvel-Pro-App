@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stokvel PRO — Dashboard</title>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f6fa;
+      padding: 40px;
+      margin: 0;
+    }
+    .card {
+      max-width: 480px;
+      margin: auto;
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+    button {
+      padding: 10px 14px;
+      font-size: 16px;
+      width: 100%;
+      border: none;
+      background: #dc2626;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #b91c1c;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h2>Welcome to Stokvel PRO 👋</h2>
+    <p id="userPhone" style="margin-bottom: 20px; color:#555;"></p>
+
+    <button id="logoutBtn">Log Out</button>
+  </div>
+
+
+  <script type="module">
+    import { supabase } from "./js/supabase-client.js";
+
+    // ----------------------------------------------------
+    // 1️⃣ CHECK IF USER IS LOGGED IN — otherwise redirect
+    // ----------------------------------------------------
+    const { data: { session } } = await supabase.auth.getSession();
+
+    if (!session) {
+      window.location.href = "index.html";
+    }
+
+    // Show phone number on dashboard
+    document.getElementById("userPhone").innerText =
+      "Logged in as: " + (session.user.phone || session.user.email || "Unknown");
+
+
+    // ----------------------------------------------------
+    // 2️⃣ LOGOUT HANDLER
+    // ----------------------------------------------------
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      const { error } = await supabase.auth.signOut();
+
+      if (!error) {
+        window.location.href = "index.html";
+      } else {
+        alert("Could not log out.");
+      }
+    });
+  </script>
+
+</body>
+</html>

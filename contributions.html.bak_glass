@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Record Contribution — Stokvel PRO</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = supabase.createClient(
+      "https://YOURPROJECT.supabase.co",
+      "YOUR_PUBLIC_ANON_KEY"
+    );
+  </script>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/glass-ui.css">
+</head>
+
+<body class="motion-fade-scale">
+  <div id="headerContainer"></div>
+
+  <div class="glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card centered" style="max-width:400px;">
+    <h2>Record Contribution</h2>
+
+    <label>Group</label>
+    <select id="groupSelect"></select>
+
+    <label>Amount (R)</label>
+    <input id="amountInput" type="number" placeholder="0.00" />
+
+    <glass-glass-glass-btn id="submitBtn">Submit Contribution</glass-glass-glass-btn>
+
+    <p id="status"></p>
+  </div>
+
+  <script src="js/contribute.js"></script>
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

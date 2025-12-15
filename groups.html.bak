@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Group — Stokvel PRO</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = supabase.createClient(
+      "https://YOURPROJECT.supabase.co",
+      "YOUR_PUBLIC_ANON_KEY"
+    );
+  </script>
+
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+<section id="groupFinancialOverview" class="card" style="margin-top:18px;">
+  <h2 class="section-title">Group Financial Overview</h2>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+    <div class="kpi-card" style="flex:1;min-width:180px">
+      <div class="label">Total collected (all time)</div>
+      <div id="gf_totalAll" class="kpi-big">R 0.00</div>
+    </div>
+
+    <div class="kpi-card" style="flex:1;min-width:180px">
+      <div class="label">Collected this month</div>
+      <div id="gf_monthly" class="kpi-big">R 0.00</div>
+    </div>
+
+    <div class="kpi-card" style="flex:1;min-width:160px">
+      <div class="label">Members paid this month</div>
+      <div id="gf_paidCount" class="kpi-big">0 / 0</div>
+    </div>
+
+    <div class="kpi-card" style="flex:1;min-width:160px">
+      <div class="label">Outstanding (this month)</div>
+      <div id="gf_outstanding" class="kpi-big">R 0.00</div>
+    </div>
+
+    <div class="kpi-card" style="flex:1;min-width:160px">
+      <div class="label">Your status (this month)</div>
+      <div id="gf_yourStatus" class="kpi-big">—</div>
+    </div>
+  </div>
+
+  <!-- Detailed member payment table -->
+  <div style="margin-top:12px;">
+    <h3 style="margin:0 0 8px 0">Member Payments — This Month</h3>
+    <div id="gf_memberTableWrap" class="card" style="padding:8px;">
+      <table id="gf_memberTable" style="width:100%; border-collapse:collapse;">
+        <thead>
+          <tr style="text-align:left;">
+            <th style="padding:8px;">Member</th>
+            <th style="padding:8px;">Paid?</th>
+            <th style="padding:8px;">Amount</th>
+            <th style="padding:8px;">Date</th>
+            <th style="padding:8px;">Reference</th>
+          </tr>
+        </thead>
+        <tbody id="gf_memberTableBody">
+          <!-- rows injected by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<body class="motion-fade-scale">
+
+  <div id="header"></div>
+
+  <main class="page" style="max-width:1100px;margin:36px auto;padding:18px;">
+
+    <h1 id="groupName">Loading...</h1>
+    <p id="groupDesc"></p>
+
+    <section class="card">
+      <h2>Members</h2>
+      <div id="membersList">Loading members...</div>
+    </section>
+
+    <section class="card">
+      <h2>Actions</h2>
+      <button id="contributeBtn">Make Contribution</button>
+
+      <div id="adminActions" style="margin-top:20px; display:none;">
+        <h3>Admin Panel</h3>
+        <button id="inviteBtn">Invite Members</button>
+        <button id="settingsBtn">Group Settings</button>
+        <button id="triggerPayoutBtn" class="btn btn-primary">Trigger Payout</button>
+        <button id="triggerPayoutBtn" class="btn btn-primary" style="margin-top:16px;">
+          <button id="generateInviteBtn" class="btn btn-primary">Generate Invite Link</button>
+          <button id="inviteMembersBtn" class="btn btn-ghost">Invite Members</button>
+
+
+<div id="inviteOutput" style="margin-top:12px; display:none;">
+  <p>Share this link with your members:</p>
+  <input id="inviteLinkBox" style="width:100%; padding:8px;">
+</div>
+
+  Trigger Payout
+</button>
+
+      </div>
+    </section>
+    <section class="card" style="margin-top:24px;">
+  <h2>Contributions</h2>
+  <div id="contributionsList">Loading contributions...</div>
+</section>
+<section class="card" style="margin-top:24px;">
+  <h2>Group Activity</h2>
+  <div id="groupActivityList">Loading activity...</div>
+</section>
+<section class="card" style="margin-top:24px;">
+  <h2>Group Activity</h2>
+  <div id="groupActivityList">Loading activity...</div>
+</section>
+<section class="card" style="margin-top:24px;">
+  <h2>Group Activity</h2>
+  <div id="groupActivityList">Loading activity...</div>
+</section>
+<section class="card" style="margin-top:24px;">
+  <h2>Next Payout</h2>
+  <div id="nextPayout" class="kpi-big">Loading...</div>
+</section>
+<section class="card" style="margin-top:24px;">
+  <h2>Payout History</h2>
+  <div id="payoutHistoryList">Loading...</div>
+</section>
+<section id="payoutCycleSection" class="card" style="margin-top:24px; display:none;">
+  <h2>Payout Cycle Order</h2>
+  <div id="payoutCycleList">Loading...</div>
+  <button id="addToCycleBtn" class="btn btn-primary" style="margin-top:16px;">
+    Add Member to Cycle
+  </button>
+</section>
+<section id="adminSettings" class="card" style="margin-top:24px; display:none;">
+  <h2>Group Settings</h2>
+
+  <button id="manageRolesBtn" class="btn btn-ghost" style="margin-bottom:12px;">
+    Manage Member Roles
+  </button>
+
+  <button id="exportContributionsBtn" class="btn btn-ghost" style="margin-bottom:12px;">
+    Export Contributions CSV
+  </button>
+
+  <button id="exportPayoutsBtn" class="btn btn-ghost" style="margin-bottom:12px;">
+    Export Payout History CSV
+  </button>
+
+  <button id="exportFullGroupBtn" class="btn btn-primary">
+    Export Full Group Report
+  </button>
+
+</section>
+<section id="paymentHistorySection" class="card" style="margin-top:18px;">
+  <h2 class="section-title">Payment History</h2>
+
+  <div style="display:flex;align-items:center;gap:12px;">
+    <label>Select Year:</label>
+    <select id="historyYearSelect"></select>
+
+    <button id="exportHistoryBtn" class="btn btn-ghost">Download CSV</button>
+  </div>
+
+  <div id="historyMatrixContainer" style="overflow-x:auto; margin-top:12px;">
+    <!-- table rendered by JS -->
+  </div>
+</section>
+
+<div id="groupMonthlySettings" class="card" style="padding:12px; margin-top:16px; display:none;">
+  <h3>Contribution Settings</h3>
+
+  <label>Monthly Contribution Amount (per member)</label>
+  <input id="gs_amount" type="number" step="0.01" placeholder="e.g. 500" />
+
+  <label>Contribution Due Day</label>
+  <input id="gs_cycle_day" type="number" min="1" max="28" placeholder="1" />
+
+  <label>Payment Policy</label>
+  <select id="gs_policy">
+    <option value="strict">Strict (everyone must pay before payout)</option>
+    <option value="flexible">Flexible (late payments allowed)</option>
+  </select>
+  <section id="payoutStatusSection" class="card" style="margin-top:16px;">
+  <h3>Payout Status</h3>
+
+  <div id="payoutStatusText" style="margin:8px 0; color:#333;">
+    Loading payout status...
+  </div>
+
+  <div id="lastPayoutInfo" style="margin:8px 0; font-size:14px; color:#555;">
+    <!-- last payout info inserted here -->
+  </div>
+
+  <div id="currentMonthStatus" style="margin:8px 0; font-size:14px;">
+    <!-- eligibility status -->
+  </div>
+
+  <!-- Only admins see the payout button -->
+  <button id="triggerPayoutBtn" class="btn btn-primary" style="display:none;">
+    Trigger Payout
+  </button>
+
+  <p id="eligibilityWarning" style="margin-top:8px; font-size:14px;"></p>
+</section>
+
+
+  <button id="gs_save" class="btn btn-primary" style="margin-top:12px;">Save Settings</button>
+  <p id="gs_status" class="small" style="margin-top:8px;"></p>
+</div>
+
+
+<div id="roleManager" style="display:none; margin-top:20px;">
+  <h3>Member Roles</h3>
+  <div id="roleList">Loading...</div>
+</div>
+<div style="margin-top:20px;">
+  <h3>Send Invite via SMS</h3>
+  <input id="smsPhoneInput" type="text" placeholder="Enter phone number (e.g. 0781234567)" class="input">
+  <button id="sendSmsInviteBtn" class="btn btn-primary" style="margin-top:8px;">
+    Send SMS Invite
+  </button>
+  <p id="smsStatus" style="margin-top:8px; color:#888;"></p>
+</div>
+<button class="btn btn-primary" id="payEftBtn">
+   Pay by EFT
+</button>
+<p id="eligibilityWarning" style="color:#b00; margin-top:8px;"></p>
+
+<button id="sendReminderBtn" class="btn btn-warning">Send Contribution Reminders</button>
+<p id="reminderStatus"></p>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/group.js"></script>
+  <script type="module" src="js/group-financials.js"></script>
+  <script type="module" src="js/group-history.js"></script>
+
+
+</body>
+</html>

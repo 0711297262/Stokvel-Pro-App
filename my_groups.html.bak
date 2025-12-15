@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Groups — Stokvel PRO</title>
+
+  <!-- Correct relative paths -->
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <!-- Load header + footer -->
+  <script type="module" src="js/load-partials.js"></script>
+</head>
+
+<body class="motion-fade-scale">
+  
+  <div id="header"></div>
+
+  <main class="page motion-container">
+    <h1>My Groups</h1>
+
+    <div id="myGroupsList" class="card list">
+      <!-- JS will fill content -->
+    </div>
+
+    <div style="margin-top:20px;">
+      <a href="create_stokvel.html">
+        <button class="btn btn-primary motion-pop">+ Create New Stokvel</button>
+      </a>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Bottom scripts (important order) -->
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+  <script type="module" src="js/group-engine.js"></script>
+
+</body>
+</html>

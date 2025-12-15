@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Profile — Stokvel PRO</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = supabase.createClient(
+      "https://YOURPROJECT.supabase.co",
+      "YOUR_PUBLIC_ANON_KEY"
+    );
+  </script>
+  <link rel="stylesheet" href="css/glass-ui.css">
+</head>
+
+<body class="motion-fade-scale">
+  <div id="headerContainer"></div>
+
+  <div class="glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card centered">
+    <h2>Setup your profile</h2>
+
+    <p>Enter your name so members can recognise you.</p>
+
+    <input id="nameInput" placeholder="Your full name" />
+
+    <glass-glass-glass-btn id="saveBtn">Save Profile</glass-glass-glass-btn>
+
+    <p id="statusText" class="small mt-2"></p>
+  </div>
+
+  <script src="js/profile.js"></script>
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

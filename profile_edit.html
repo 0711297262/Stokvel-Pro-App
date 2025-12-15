@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Edit Profile — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+  <script type="module" src="js/load-partials.js"></script>
+  <link rel="stylesheet" href="css/glass-ui.css">
+</head>
+
+<body class="motion-page">
+  <div id="headerContainer"></div>
+
+  <div id="header"></div>
+
+  <main class="container" style="max-width:720px;margin:28px auto;padding:18px;">
+    <h1>Edit Profile</h1>
+
+    <div class="glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card glass-glass-glass-card glass-glass-card glass-glass-card glass-glass-card list" style="padding:16px;margin-top:12px;">
+      <label>Name</label>
+      <input id="nameInput" placeholder="Your full name" />
+
+      <label style="margin-top:12px">Phone</label>
+      <input id="phoneInput" placeholder="+27 82 000 0000" />
+
+      <label style="margin-top:12px">Avatar URL</label>
+      <input id="avatarInput" placeholder="https://..." />
+
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <glass-glass-glass-btn id="saveBtn" class="glass-glass-btn glass-glass-glass-btn">Save</glass-glass-glass-btn>
+        <glass-glass-glass-btn id="cancelBtn" class="glass-glass-btn glass-glass-btn-ghost">Cancel</glass-glass-glass-btn>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Page scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module">
+    import { auth, db, onAuthStateChanged, updateDoc, doc, getDoc } from './js/firebase-config.js';
+
+    let currentUser = null;
+    onAuthStateChanged(auth, async (u) => {
+      if (!u) return window.location.href = 'index.html';
+      currentUser = u;
+      // populate fields from user doc
+      try {
+        const uRef = doc(db, 'users', u.uid);
+        const uSnap = await getDoc(uRef);
+        if (uSnap.exists()) {
+          const data = uSnap.data();
+          document.getElementById('nameInput').value = data.name || u.displayName || '';
+          document.getElementById('phoneInput').value = data.phone || u.phoneNumber || '';
+          document.getElementById('avatarInput').value = data.avatarUrl || '';
+        } else {
+          document.getElementById('nameInput').value = u.displayName || '';
+          document.getElementById('phoneInput').value = u.phoneNumber || '';
+        }
+      } catch (err) {
+        console.error('load profile edit', err);
+      }
+    });
+
+    document.getElementById('cancelBtn').addEventListener('click', () => {
+      window.location.href = 'profile.html';
+    });
+
+    document.getElementById('saveBtn').addEventListener('click', async () => {
+      if (!currentUser) return alert('Not signed in');
+      const name = document.getElementById('nameInput').value.trim();
+      const phone = document.getElementById('phoneInput').value.trim();
+      const avatarUrl = document.getElementById('avatarInput').value.trim();
+
+      try {
+        const uRef = doc(db, 'users', currentUser.uid);
+        await updateDoc(uRef, {
+          name: name || null,
+          phone: phone || null,
+          avatarUrl: avatarUrl || null
+        });
+        alert('Saved');
+        window.location.href = 'profile.html';
+      } catch (err) {
+        console.error('save profile', err);
+        alert('Failed to save — check console');
+      }
+    });
+  </script>
+
+  <script src="js/load-partials.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

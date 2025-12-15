@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Welcome — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <script type="module" src="js/load-partials.js"></script>
+</head>
+<body class="motion-page">
+
+  <div id="header"></div>
+
+  <main style="max-width:760px;margin:48px auto;padding:18px;">
+    <h1>Welcome to Stokvel PRO</h1>
+    <p class="muted">Quick tour — tap Next to continue.</p>
+
+    <div id="slides" style="min-height:220px;margin-top:18px">
+      <div class="card" id="slide1">
+        <h3>Manage groups</h3>
+        <p>Create and manage stokvel groups, contributions and payouts.</p>
+      </div>
+      <div class="card" id="slide2" style="display:none">
+        <h3>Secure logins</h3>
+        <p>Phone + OTP (or PIN) keeps your account secure.</p>
+      </div>
+      <div class="card" id="slide3" style="display:none">
+        <h3>Get started</h3>
+        <p>Create your first group or join with a code.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn btn-ghost" id="skipBtn">Skip</button>
+      <button class="btn btn-primary" id="nextBtn">Next</button>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    const slides = [...document.querySelectorAll('#slides > div')];
+    let idx = 0;
+    const nextBtn = document.getElementById('nextBtn');
+    const skipBtn = document.getElementById('skipBtn');
+
+    function show(i){
+      slides.forEach((s, j) => s.style.display = j===i ? 'block' : 'none');
+      if(i === slides.length-1) nextBtn.textContent = 'Finish';
+      else nextBtn.textContent = 'Next';
+    }
+    show(0);
+
+    nextBtn.addEventListener('click', () => {
+      if(idx < slides.length-1){ idx++; show(idx); return; }
+      // finished
+      localStorage.setItem('onboard_done_v1', '1');
+      window.location.href = 'dashboard.html';
+    });
+    skipBtn.addEventListener('click', () => { localStorage.setItem('onboard_done_v1', '1'); window.location.href = 'dashboard.html'; });
+  </script>
+
+  <script src="js/load-partials.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+</body>
+</html>

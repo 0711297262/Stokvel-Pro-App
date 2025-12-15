@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groups — Stokvel PRO</title>
+
+  <!-- Working Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 760px;
+      margin: auto;
+      padding: 20px;
+    }
+    .error-box {
+      padding: 15px;
+      background: #ffe5e5;
+      border: 1px solid #ffb5b5;
+      color: #b30000;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 14px;
+      margin: 10px 0;
+      border: 1px solid #e2e4ea;
+    }
+    .loading {
+      font-size: 16px;
+      color: #666;
+      padding: 20px;
+    }
+    button {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: none;
+      background: #045dff;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #0046cc;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Groups</h2>
+
+  <!-- Error UI -->
+  <div id="error-box" class="error-box" style="display:none;"></div>
+
+  <div id="status" style="float:right; margin-top:-40px;">Checking...</div>
+
+  <div class="card">
+    <strong>My groups</strong>
+    <button id="refresh-btn">Refresh</button>
+    <div id="groups-area" class="loading">Loading groups...</div>
+  </div>
+</div>
+
+<script>
+  console.log("🔥 groups.html v2 loaded");
+
+  const SUPABASE_URL = "https://kmujqhvywyykwaiwalys.supabase.co";
+  const SUPABASE_ANON_KEY = "<YOUR_ANON_KEY_HERE>";
+
+  // Create client safely
+  let supabaseClient = null;
+
+  try {
+    if (window.supabase) {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      console.log("✅ Supabase client created");
+    } else {
+      throw new Error("Supabase SDK failed to load.");
+    }
+  } catch (e) {
+    showInitError(e.message);
+  }
+
+  function showInitError(msg) {
+    document.getElementById("error-box").style.display = "block";
+    document.getElementById("error-box").innerText =
+      "Supabase client failed to initialize: " + msg;
+    document.getElementById("status").innerText = "Not connected";
+    document.getElementById("groups-area").innerText =
+      "Error initialising Supabase — see console.";
+  }
+
+  async function loadGroups() {
+    if (!supabaseClient) return;
+
+    document.getElementById("status").innerText = "Connected ✔";
+    document.getElementById("groups-area").innerText = "Loading groups...";
+
+    console.log("🔍 Checking session...");
+    const { data: { session }, error: sessionErr } = await supabaseClient.auth.getSession();
+
+    if (sessionErr) {
+      showInitError("Session error: " + sessionErr.message);
+      return;
+    }
+
+    if (!session) {
+      showInitError("No active session. Please login first.");
+      return;
+    }
+
+    console.log("🔑 Session:", session);
+
+    const userId = session.user.id;
+    console.log("👤 User ID:", userId);
+
+    console.log("📡 Fetching groups...");
+
+    const { data, error } = await supabaseClient
+      .from("groups")
+      .select("*")
+      .eq("created_by", userId);
+
+    if (error) {
+      console.error("❌ Groups fetch error:", error);
+      document.getElementById("groups-area").innerHTML =
+        `<div class="error-box">${error.message}</div>`;
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      document.getElementById("groups-area").innerHTML =
+        `<div class="loading">You have no groups yet.</div>`;
+      return;
+    }
+
+    console.log("📦 Groups:", data);
+
+    document.getElementById("groups-area").innerHTML =
+      data.map(g =>
+        `<div class="card">
+           <strong>${g.name}</strong><br>
+           Members: ${g.member_count || 0}
+         </div>`
+      ).join("");
+  }
+
+  // Button refresh
+  document.getElementById("refresh-btn").addEventListener("click", loadGroups);
+
+  // Auto-load
+  loadGroups();
+</script>
+
+</body>
+</html>

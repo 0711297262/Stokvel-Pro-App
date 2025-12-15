@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Enter OTP — Stokvel PRO</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body { font-family: system-ui; background:#f5f6fa; padding:40px; }
+    .card { max-width:420px; margin:auto; background:white; padding:24px;
+      border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.05); }
+    input,button { padding:12px; font-size:18px; width:100%; margin-top:10px; }
+    button { background:#2563eb; border:none; color:white; border-radius:8px; }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+  <h2>Sign in to Stokvel PRO</h2>
+  <p class="subtitle">Enter your mobile number to receive an OTP</p>
+
+  <input id="phoneInput" class="input" placeholder="+27 71 129 7262" />
+
+  <button id="sendOtpBtn" class="btn" onclick="sendOTP()">
+    Send OTP
+  </button>
+
+  <p id="loadingSend" class="loading" style="display:none;">Sending...</p>
+</div>
+<div id="otpSection" class="otp-container" style="display:none;">
+  <h3>Enter OTP</h3>
+  <p class="subtitle">We sent an SMS code to your phone.</p>
+
+  <div class="otp-inputs">
+    <input maxlength="1" class="otp-box" />
+    <input maxlength="1" class="otp-box" />
+    <input maxlength="1" class="otp-box" />
+    <input maxlength="1" class="otp-box" />
+    <input maxlength="1" class="otp-box" />
+    <input maxlength="1" class="otp-box" />
+  </div>
+
+  <button class="btn" onclick="verifyOTP()">Verify OTP</button>
+
+  <p id="loadingVerify" class="loading" style="display:none;">Verifying...</p>
+</div>
+<p id="resendText" class="subtitle">
+  Didn’t get the code? <span id="resendBtn" class="resend" onclick="resendOTP()">Resend</span>
+</p>
+
+<p id="countdown" class="countdown" style="display:none;"></p>
+
+
+  <script type="module">
+    import { supabase } from "./js/supabase-client.js";
+
+    const otpInput = document.getElementById("otpInput");
+    const verifyBtn = document.getElementById("verifyBtn");
+    const phone = localStorage.getItem("pendingPhone");
+
+    document.getElementById("phoneDisplay").textContent =
+      phone ? "Sent to " + phone : "";
+
+    verifyBtn.addEventListener("click", async () => {
+      const token = otpInput.value.trim();
+
+      if (token.length < 4) return alert("Enter the OTP code");
+
+      verifyBtn.disabled = true;
+      verifyBtn.textContent = "Verifying...";
+
+      const { data, error } = await supabase.auth.verifyOtp({
+        phone,
+        token,
+        type: "sms",
+      });
+
+      if (error) {
+        alert("OTP failed: " + error.message);
+        console.error(error);
+      } else {
+        window.location.href = "dashboard.html";
+      }
+
+      verifyBtn.disabled = false;
+      verifyBtn.textContent = "Verify";
+    });
+  </script>
+</body>
+</html>

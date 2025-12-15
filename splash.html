@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stokvel PRO — Loading…</title>
+
+  <link rel="stylesheet" href="css/layout.css" />
+
+  <script type="module" src="js/load-partials.js"></script>
+  <link rel="stylesheet" href="css/glass-ui.css">
+</head>
+
+<body class="motion-fade-scale">
+  <div id="headerContainer"></div>
+
+  <main class="page center">
+    <img src="images/logo.png" class="splash-logo" />
+    <p class="small muted">Loading…</p>
+  </main>
+
+  <script type="module">
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1400);
+  </script>
+
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+/* css/dashboard.css - small dashboard styles */
+.kpi-big{ font-size:28px; font-weight:700; margin-top:8px; }
+.section-gradient{ padding:18px; border-radius:12px; background:linear-gradient(180deg,#0a0f1a, #071028); margin-bottom:20px; }
+.kpi-3{ display:flex; gap:16px; margin-top:12px; }
+.card-kpi{ padding:12px; background: rgba(255,255,255,0.03); border-radius:10px; flex:1; }
+.section-title{ margin-top:26px; color:var(--muted); font-weight:600; }
+.card.list{ margin-top:12px; padding:10px; background: rgba(255,255,255,0.02); min-height:80px; }
+.contrib-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+.kpi-big {
+  font-size: 34px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.kpi-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.kpi-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card-kpi {
+  background: #fff;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.card-kpi .label {
+  color: #7b7b7b;
+  font-size: 14px;
+}
+
+.card-kpi .value {
+  font-size: 22px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+/* KPI Styling */
+.kpi-big {
+  font-size: 34px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.kpi-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.kpi-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card-kpi {
+  background: #fff;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.card-kpi .label {
+  color: #7b7b7b;
+  font-size: 14px;
+}
+
+.card-kpi .value {
+  font-size: 22px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* Group Cards */
+.groupCard {
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.25s ease, padding-left 0.25s ease;
+}
+
+.groupCard:hover {
+  background: #f9f9f9;
+  padding-left: 28px;
+}
+
+.groupCard h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.groupCard p {
+  margin: 4px 0 0;
+  color: #666;
+  font-size: 14px;
+}
+.activity-row {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+.activity-row strong {
+  font-weight: 600;
+}
+
+.activity-row small {
+  color: #777;
+}

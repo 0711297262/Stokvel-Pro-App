@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stokvel details — Stokvel PRO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f6f7f9;
+      color: #222;
+    }
+
+    .app {
+      max-width: 420px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Content */
+    .content {
+      flex: 1;
+      padding: 24px 20px;
+    }
+
+    .card {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 22px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #444;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .row:last-child {
+      margin-bottom: 0;
+    }
+
+    .label {
+      color: #666;
+    }
+
+    .value {
+      font-weight: 500;
+    }
+
+    .member {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .member:last-child {
+      border-bottom: none;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #777;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .primary-btn {
+      background: #0b5cff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .secondary-btn {
+      background: #f1f3f6;
+      color: #222;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      border-top: 1px solid #eee;
+    }
+
+    .nav a {
+      flex: 1;
+      padding: 12px 0;
+      text-align: center;
+      font-size: 12px;
+      text-decoration: none;
+      color: #666;
+    }
+
+    .nav a.active {
+      color: #0b5cff;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- Header -->
+    <div class="header">
+      <h1>Family Savings</h1>
+      <p>Stokvel details</p>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+      <!-- Stokvel info -->
+      <div class="card">
+        <div class="card-title">Stokvel information</div>
+
+        <div class="row">
+          <div class="label">Contribution</div>
+          <div class="value">R500 per month</div>
+        </div>
+
+        <div class="row">
+          <div class="label">Members</div>
+          <div class="value">5 people</div>
+        </div>
+      </div>
+
+      <!-- Members -->
+      <div class="card">
+        <div class="card-title">Members</div>
+
+        <div class="member">Nthabiseng (You)</div>
+        <div class="member">Thabo</div>
+        <div class="member">Lerato</div>
+        <div class="member">Nomsa</div>
+        <div class="member">Sipho</div>
+      </div>
+
+      <!-- Invite -->
+      <div class="card">
+        <div class="card-title">Invite a member</div>
+
+        <input
+          type="text"
+          placeholder="e.g. +27 71 123 4567"
+          style="
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 15px;
+          "
+        />
+
+        <div class="hint">
+          We’ll send them an invite to join this stokvel.
+        </div>
+
+        <button class="primary-btn">
+          Send invite
+        </button>
+
+        <button class="secondary-btn">
+          Copy invite link
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+      <a href="dashboard.html">🏠 Home</a>
+      <a href="create-stokvel.html">➕ Create</a>
+      <a href="profile.html">⚙️ Profile</a>
+    </div>
+
+  </div>
+</body>
+</html>

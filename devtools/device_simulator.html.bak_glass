@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Stokvel PRO — Device Simulator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+    margin:0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto;
+    background: #ecf0f3;
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    padding:14px 20px;
+    background:#fff;
+    box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    display:flex;
+    align-items:center;
+    gap:14px;
+    z-index:10;
+  }
+  select, glass-glass-glass-btn, input {
+    padding:6px 10px;
+    border-radius:6px;
+    border:1px solid #ccd4dd;
+    font-size:14px;
+  }
+  glass-glass-glass-btn{
+    cursor:pointer;
+    background:#2b78c9;
+    color:white;
+    border:none;
+  }
+
+  /* SIMULATOR WRAPPER */
+  .sim-wrap {
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px;
+  }
+
+  /* DEVICE FRAME */
+  .device {
+    background:#000;
+    border-radius:26px;
+    padding:20px;
+    width:390px;
+    height:800px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.25);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+
+  iframe {
+    flex:1;
+    border:none;
+    border-radius:18px;
+    background:white;
+    width:100%;
+  }
+</style>
+  <link rel="stylesheet" href="css/glass-ui.css">
+</head>
+
+<body>
+  <div id="headerContainer"></div>
+<script src="/devtools/devtools_loader.js" defer></script>
+<script src="/devtools/use_real_theme.js" defer></script>
+<script src="/devtools/motion_presets.js"></script>
+<!-- TOP CONTROL BAR -->
+<div class="topbar">
+  <strong>📱 Device Simulator</strong>
+
+  <select id="pageSelector">
+    <option value="../index.html">Onboarding (index.html)</option>
+    <option value="../dashboard.html">Dashboard</option>
+    <option value="../groups.html">Groups</option>
+    <option value="../group_overview.html">Group Overview</option>
+    <option value="../notifications.html">Alerts</option>
+    <option value="../profile.html">Profile</option>
+    <option value="../create_stokvel.html">Create Stokvel</option>
+  </select>
+
+  <glass-glass-glass-btn onclick="loadPage()">Load</glass-glass-glass-btn>
+</div>
+
+<!-- MAIN SIMULATOR -->
+<div class="sim-wrap">
+  <div class="device">
+    <iframe id="simFrame" src="../index.html"></iframe>
+  </div>
+</div>
+
+<script>
+  function loadPage(){
+    const page = document.getElementById("pageSelector").value;
+    document.getElementById("simFrame").src = page;
+  }
+</script>
+
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

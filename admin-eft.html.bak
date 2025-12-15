@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Admin — EFT Verifications — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- Supabase client (anon key) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Replace these values with your project values if you didn't already initialize globally
+    const SUPABASE_URL = "https://kmujqhvywyykwaiwalys.supabase.co";
+    const SUPABASE_ANON_KEY = "YOUR_PUBLIC_ANON_KEY_OR_KEEP_GLOBAL_INIT";
+    // If you already initialize `supabase` globally, remove the next line.
+    // window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  </script>
+
+  <style>
+    /* small inline helpers so this page looks okay without extra CSS changes */
+    .pending-row { padding:12px; margin-bottom:10px; border:1px solid #eee; border-radius:8px; display:flex; gap:12px; justify-content:space-between; align-items:center; }
+    .pending-meta { max-width:62%; }
+    .proof-thumb { width:150px; height:100px; object-fit:cover; border-radius:6px; border:1px solid #ddd; }
+    .admin-actions { display:flex; gap:8px; flex-direction:column; align-items:flex-end; }
+    .btn { padding:8px 12px; border-radius:8px; cursor:pointer; border:1px solid #ccc; background:#f6f6f6; }
+    .btn-primary { background:#2563eb; color:white; border-color:transparent; }
+    .btn-danger { background:#ef4444; color:white; border-color:transparent; }
+    .small { font-size:13px; color:#666; }
+    .status { margin-top:8px; color:#666; }
+    .modal { position:fixed; left:0; right:0; top:0; bottom:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.45); }
+    .modal-card { background:white; padding:18px; border-radius:8px; width:420px; max-width:90%; }
+    textarea { width:100%; min-height:80px; padding:8px; }
+  </style>
+</head>
+<body class="motion-fade-scale">
+  <main style="max-width:1000px;margin:28px auto;padding:18px;">
+    <h1>EFT Verifications</h1>
+    <p class="small">Approve or reject pending bank transfer proofs for groups you administer.</p>
+
+    <div id="statusBanner" class="status">Loading pending transfers...</div>
+
+    <div id="pendingList" style="margin-top:18px;"></div>
+
+    <hr style="margin-top:24px;margin-bottom:18px;" />
+
+    <h3>Search / Filters</h3>
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;">
+      <input id="filterRef" placeholder="Filter by bank reference" style="padding:8px;flex:1" />
+      <select id="filterStatus" style="padding:8px;">
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+        <option value="">All</option>
+      </select>
+      <button id="btnRefresh" class="btn">Refresh</button>
+    </div>
+
+    <!-- Rejection / view modal -->
+    <div id="modalRoot" style="display:none;"></div>
+  </main>
+
+  <script src="js/admin-eft.js"></script>
+</body>
+</html>

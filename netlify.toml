@@ -1,0 +1,10 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[dev]
+  functions = "netlify/functions"
+  [[redirects]]
+from = "/"
+to = "/splash.html"
+status = 200

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PIN Lock — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <script type="module" src="js/load-partials.js"></script>
+  <link rel="stylesheet" href="css/glass-ui.css">
+</head>
+<body class="motion-page">
+  <div id="headerContainer"></div>
+
+  <div id="header"></div>
+
+  <main style="max-width:420px;margin:48px auto;padding:18px;">
+    <h2>Enter PIN</h2>
+    <p class="muted">This device requires a PIN to continue.</p>
+
+    <div style="margin-top:18px;">
+      <input id="pinInput" type="password" maxlength="6" placeholder="••••••" style="font-size:20px;padding:12px;width:100%;border-radius:10px" />
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <glass-glass-glass-btn class="glass-glass-btn glass-glass-glass-btn" id="unlockBtn">Unlock</glass-glass-glass-btn>
+      <glass-glass-glass-btn class="glass-glass-btn glass-glass-btn-ghost" id="resetPinBtn">Forgot PIN</glass-glass-glass-btn>
+    </div>
+
+    <div id="pinStatus" style="margin-top:12px;color:#ef4444;display:none;"></div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module">
+    // Simple client-side PIN check (store only for dev testing; move to secure store in production)
+    const pinKey = 'stokvel_pin_v1';
+    const pinInput = document.getElementById('pinInput');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const resetBtn = document.getElementById('resetPinBtn');
+    const statusEl = document.getElementById('pinStatus');
+
+    function showStatus(msg, show=true){ statusEl.style.display = show ? 'block' : 'none'; statusEl.textContent = msg; }
+
+    // For first-time dev: if no PIN set, set default '123456' (change before launch)
+    if(!localStorage.getItem(pinKey)){
+      localStorage.setItem(pinKey, '123456');
+      console.warn('Dev-only default PIN set to 123456 — change this before production.');
+    }
+
+    unlockBtn.addEventListener('click', () => {
+      const entered = pinInput.value.trim();
+      const actual = localStorage.getItem(pinKey);
+      if(!entered) { showStatus('Enter your PIN'); return; }
+      if(entered === actual){
+        showStatus('', false);
+        // proceed — navigate to where the user came from or dashboard
+        window.location.href = 'dashboard.html';
+      } else {
+        showStatus('Incorrect PIN — try again');
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      if(confirm('Reset PIN? This is a dev flow — real reset should be via verified account.')){
+        localStorage.removeItem(pinKey);
+        alert('PIN removed. On next load a default dev PIN will be created.');
+        location.reload();
+      }
+    });
+  </script>
+
+  <script src="js/load-partials.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

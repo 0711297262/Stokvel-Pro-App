@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Join Group</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const supabase = supabase.createClient(
+      "https://YOURPROJECT.supabase.co",
+      "YOUR_PUBLIC_ANON_KEY"
+    );
+  </script>
+
+  <link rel="stylesheet" href="css/layout.css">
+</head>
+
+<body class="motion-fade-scale">
+  <div class="card centered" style="max-width:400px;">
+    <h2>Joining Group...</h2>
+    <p id="status">Checking your invite...</p>
+  </div>
+
+  <script src="js/join_group.js"></script>
+</body>
+</html>

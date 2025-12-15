@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Footer Preview — Enhanced</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Load main layout -->
+  <link rel="stylesheet" href="css/layout.css">
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #eef3f9, #dfe7f3);
+      padding: 40px 0 160px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .phone-frame {
+      width: 430px;
+      max-width: 92%;
+      height: 860px;
+      border-radius: 42px;
+      border: 14px solid #111;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    .notch {
+      width: 160px;
+      height: 38px;
+      background: #111;
+      border-radius: 0 0 20px 20px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .toolbar {
+      margin-top: 20px;
+      padding: 18px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .tool-glass-glass-btn {
+      padding: 8px 16px;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #d0d7e4;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .tool-glass-glass-btn:hover {
+      background: #f0f4fa;
+    }
+
+    h1 {
+      margin-top: 10px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #22303c;
+    }
+
+    .footer-preview-area {
+      width: 100%;
+      height: calc(100% - 60px);
+      overflow-y: auto;
+      background: #f9fbfd;
+      padding-bottom: 120px;
+    }
+
+    /* Fake content */
+    .fake-content {
+      padding: 32px;
+      text-align: center;
+      color: #667788;
+    }
+  </style>
+  <link rel="stylesheet" href="/css/glass-ui.css">
+</head>
+<body>
+
+  <h1>Enhanced Glass Nav Preview</h1>
+
+  <!-- Tools -->
+  <div class="toolbar">
+    <button class="tool-glass-glass-btn" onclick="setTheme('light')">☀ Light Mode</button>
+    <button class="tool-glass-glass-btn" onclick="setTheme('dark')">🌙 Dark Mode</button>
+    <button class="tool-glass-glass-btn" onclick="setTheme('system')">🖥 System Mode</button>
+
+    <button class="tool-glass-glass-btn" onclick="activate('home')">🏠 Active: Home</button>
+    <button class="tool-glass-glass-btn" onclick="activate('groups')">👥 Active: Groups</button>
+    <button class="tool-glass-glass-btn" onclick="activate('alerts')">🔔 Active: Alerts</button>
+    <button class="tool-glass-glass-btn" onclick="activate('profile')">👤 Active: Profile</button>
+
+    <button class="tool-glass-glass-btn" onclick="window._glassNav.setBadge('alerts', Math.floor(Math.random()*12))">
+      🔔 Random Badge
+    </button>
+  </div>
+
+  <!-- Phone Simulator -->
+  <div class="phone-frame">
+    <div class="notch"></div>
+
+    <div class="footer-preview-area" id="previewArea">
+      <div class="fake-content">
+        <p>(Scroll down to preview the nav bar inside the phone)</p>
+        <p>This is a simulated content area.</p>
+      </div>
+
+      <!-- Real footer loads here -->
+      <div id="footer"></div>
+    </div>
+  </div>
+
+  <!-- Load partials -->
+  <script type="module" src="js/load-partials.js"></script>
+
+  <script>
+    // Theme controls
+    function setTheme(mode){
+      if(mode === 'system'){
+        document.documentElement.removeAttribute('data-theme');
+        alert("System theme mode enabled.");
+      } else {
+        document.documentElement.setAttribute('data-theme', mode);
+      }
+    }
+
+    // Active state controls using nav API
+    function activate(name){
+      if(window._glassNav){
+        window._glassNav.setActive(name);
+      }
+    }
+  </script>
+
+</body>
+</html>

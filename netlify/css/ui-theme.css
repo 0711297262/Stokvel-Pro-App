@@ -1,0 +1,47 @@
+/* ---------------------------------------------------------
+   THEME COLORS (LIGHT + DARK)
+   These are your brand colors for Stokvel PRO.
+----------------------------------------------------------*/
+
+:root {
+  /* BRAND COLORS */
+  --primary: #0057ff;
+  --primary-rgb: 0, 87, 255;
+  --primary-light: #3b82ff;
+  --primary-dark: #003bb3;
+
+  --accent: #10b981;
+  --accent-rgb: 16,185,129;
+
+  /* NEUTRALS */
+  --text-color: #1a1a1a;
+  --text-muted: #6b7280;
+
+  --bg-1: #ffffff;
+  --bg-2: #f7f9fc;
+  --bg-3: #eef1f5;
+
+  /* APP BACKGROUND */
+  --app-bg: var(--bg-2);
+
+  /* GLASS COLORS */
+  --glass-light: rgba(255,255,255,0.55);
+  --glass-dark: rgba(0,0,0,0.35);
+}
+
+/* ----------------------------------
+   DARK MODE
+-----------------------------------*/
+[data-theme="dark"] {
+  --text-color: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --bg-1: #121212;
+  --bg-2: #181818;
+  --bg-3: #222;
+
+  --app-bg: var(--bg-2);
+
+  --glass-light: rgba(255,255,255,0.08);
+  --glass-dark: rgba(0,0,0,0.45);
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enter OTP — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+  <!-- Load header + footer -->
+  <script type="module" src="js/load-partials.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabase = supabase.createClient(
+    "https://YOURPROJECT.supabase.co",
+    "YOUR_PUBLIC_ANON_KEY"
+  );
+</script>
+
+</head>
+
+<body class="motion-fade-scale">
+
+  <div id="header"></div>
+
+  <main class="page motion-container">
+
+    <div class="card centered">
+      <h2>Verify your phone</h2>
+
+      <p>Enter the one-time code we sent via SMS.</p>
+
+      <input id="otpInput" placeholder="123456" />
+
+      <button id="sendOtpBtn">Send OTP</button>
+      <button id="verifyOtpBtn">Verify OTP</button>
+
+      <p id="otpStatus" class="small mt-2">Status: ready</p>
+    </div>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- OTP logic (ONLY ONCE) -->
+  <script type="module" src="js/auth-otp.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+
+</body>
+</html>

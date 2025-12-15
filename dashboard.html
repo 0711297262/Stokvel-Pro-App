@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard — Stokvel Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Supabase JS v2 -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root {
+      --navy-deep: #0b1220;
+      --navy-soft: #0f172a;
+
+      --rose-core: #ec4899;
+      --rose-soft: #f472b6;
+      --rose-glow: rgba(236, 72, 153, 0.18);
+
+      --text-dark: #0f172a;
+      --text-muted: #6b7280;
+
+      --radius-soft: 20px;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 22px;
+      min-height: 100vh;
+      background: radial-gradient(
+        1200px 600px at top,
+        #111827,
+        var(--navy-deep)
+      );
+      color: var(--text-dark);
+      animation: fadeLift 0.35s ease-out;
+    }
+
+    @keyframes fadeLift {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 0;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      border: none;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(
+        135deg,
+        var(--rose-core),
+        var(--rose-soft)
+      );
+      box-shadow: 0 10px 26px var(--rose-glow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .secondary {
+      background: rgba(255,255,255,0.6);
+      color: var(--text-dark);
+      box-shadow: none;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.68);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-soft);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 20px;
+      box-shadow:
+        0 14px 40px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.45);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .meta {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .empty {
+      text-align: center;
+      margin-top: 90px;
+      color: var(--text-muted);
+    }
+
+    .empty p {
+      margin: 8px 0 16px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div>
+      <h1>Your savings circles</h1>
+      <div class="subtitle">Save together, one contribution at a time.</div>
+    </div>
+
+    <div class="actions">
+      <button class="secondary" id="logoutBtn">Sign out</button>
+      <button onclick="window.location.href='create-stokvel.html'">
+        + Start a savings circle
+      </button>
+    </div>
+  </header>
+
+  <div id="list" class="grid"></div>
+
+  <div id="emptyState" class="empty" style="display:none;">
+    <h3>You haven’t started a savings circle yet</h3>
+    <p>Create one to help everyone save consistently and transparently.</p>
+    <button onclick="window.location.href='create-stokvel.html'">
+      Start your first savings circle
+    </button>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://kmujqhvywyykwaiwalys.supabase.co";
+    const SUPABASE_ANON_KEY = "YOUR_ANON_KEY_HERE";
+
+    const supabase = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+    async function requireAuth() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        window.location.href = "./index.html";
+        return null;
+      }
+      return session;
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      window.location.href = "./index.html";
+    });
+
+    async function loadDashboard() {
+      const session = await requireAuth();
+      if (!session) return;
+
+      const list = document.getElementById("list");
+      const emptyState = document.getElementById("emptyState");
+
+      const { data, error } = await supabase
+        .from("stokvels")
+        .select("*")
+        .eq("owner_id", session.user.id)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      if (!data || data.length === 0) {
+        emptyState.style.display = "block";
+        return;
+      }
+
+      data.forEach(stokvel => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.style.cursor = "pointer";
+
+  card.innerHTML = `
+    <h3>${stokvel.name}</h3>
+    <p>${stokvel.description || "No description"}</p>
+    <div class="meta">
+      R${stokvel.contribution_amount} per person · Up to ${stokvel.max_members} people
+    </div>
+  `;
+
+  card.addEventListener("click", () => {
+    window.location.href = `circle.html?id=${stokvel.id}`;
+  });
+
+  list.appendChild(card);
+});
+
+    }
+
+    loadDashboard();
+  </script>
+
+</body>
+</html>

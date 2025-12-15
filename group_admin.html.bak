@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Group Admin — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <script type="module" src="js/load-partials.js"></script>
+
+</head>
+<body>
+  <div id="header"></div>
+
+  <main style="max-width:1100px;margin:24px auto;padding:18px;">
+    <h1 id="groupName">Group Admin</h1>
+
+    <div style="display:flex;gap:18px;flex-wrap:wrap">
+      <div style="flex:1;min-width:280px" class="card">
+        <h3>Members</h3>
+        <div id="membersList">Loading…</div>
+        <div style="margin-top:12px">
+          <input id="invitePhoneAdmin" placeholder="+27 82 000 0000" />
+          <button class="btn btn-primary" id="inviteBtn">Invite</button>
+        </div>
+      </div>
+
+      <div style="width:320px" class="card">
+        <h3>Settings</h3>
+        <label>Monthly contribution</label>
+        <input id="contribAmt" type="number" />
+        <div style="margin-top:12px">
+          <button class="btn btn-primary" id="saveBtn">Save</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  </script>
+
+  <div id="footer"></div>
+  <script src="js/load-partials.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+
+</body>
+</html>

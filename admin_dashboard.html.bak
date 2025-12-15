@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Stokvel PRO</title>
+
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script type="module" src="js/load-partials.js"></script>
+</head>
+<body class="motion-page">
+
+  <div id="header"></div>
+
+  <main class="container">
+    <h1>Admin Dashboard</h1>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+      <div class="card" style="flex:1;min-width:220px">
+        <div class="muted">Groups</div>
+        <div id="adminGroupsCount" style="font-size:20px;font-weight:800">0</div>
+      </div>
+      <div class="card" style="flex:1;min-width:220px">
+        <div class="muted">Users</div>
+        <div id="adminUsersCount" style="font-size:20px;font-weight:800">0</div>
+      </div>
+      <div class="card" style="flex:1;min-width:220px">
+        <div class="muted">Pending Invites</div>
+        <div id="adminInvitesCount" style="font-size:20px;font-weight:800">0</div>
+      </div>
+    </div>
+
+    <section class="card list" style="margin-top:18px;">
+      <h3>Quick Actions</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-primary" id="btn-manage-groups">Manage groups</button>
+        <button class="btn btn-ghost" id="btn-manage-users">Manage users</button>
+        <button class="btn btn-ghost" id="btn-view-logs">View logs</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/auth-guard.js"></script>
+  <script type="module">
+    // Lightweight admin bootstrap (replace with real logic)
+    document.getElementById('btn-manage-groups').addEventListener('click', () => window.location.href='groups.html');
+    document.getElementById('btn-manage-users').addEventListener('click', () => alert('Open user management — integrate later'));
+    document.getElementById('btn-view-logs').addEventListener('click', () => alert('Logs view — integrate later'));
+  </script>
+
+  <script src="js/load-partials.js"></script>
+  <script type="module" src="js/motion-engine.js"></script>
+  <script type="module" src="js/router-transitions.js"></script>
+</body>
+</html>

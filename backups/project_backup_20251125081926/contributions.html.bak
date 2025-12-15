@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contributions — Stokvel Pro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f3f6fc;
+      --card: #ffffff;
+      --accent: #1a365d;
+      --muted: #6b7280;
+      --glass: rgba(255,255,255,0.85);
+    }
+    body{
+      margin:0;
+      font-family:Inter, Arial, sans-serif;
+      background: var(--bg);
+      color:var(--accent);
+    }
+    .wrap{max-width:920px;margin:28px auto;padding:18px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+    h1{margin:0;font-size:20px}
+    .controls{display:flex;gap:10px;align-items:center}
+    .btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:600}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#2b6cb0);color:#fff}
+    .btn-ghost{background:#fff;border:1px solid rgba(26,54,93,0.12);color:var(--accent)}
+    .meta {color:var(--muted);font-size:14px}
+    .summary{display:flex;gap:18px;align-items:center;margin-bottom:16px}
+    .chip{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06);min-width:160px}
+    .list{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 20px rgba(0,0,0,0.06);}
+    .item{display:flex;justify-content:space-between;align-items:center;padding:12px 8px;border-bottom:1px solid rgba(0,0,0,0.04)}
+    .item:last-child{border-bottom:0}
+    .left{display:flex;gap:12px;align-items:center}
+    .avatar{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#2b6cb0);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+    .meta-small{color:var(--muted);font-size:13px}
+    .amount{font-weight:700;color:var(--accent)}
+    .filters{display:flex;gap:8px;align-items:center}
+    .input, select {padding:10px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);font-size:14px}
+    .empty{padding:28px;text-align:center;color:var(--muted)}
+    a.link{color:var(--accent);text-decoration:none}
+    /* modal */
+    .modal {position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);z-index:40}
+    .modal-box{width:380px;background:var(--card);padding:18px;border-radius:12px}
+    .row{display:flex;gap:8px;align-items:center}
+  </style>
+</head>
+<body>
+<div id="header"></div>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1 id="title">Contributions</h1>
+        <div class="meta" id="subtitle">Group: —</div>
+      </div>
+
+      <div class="controls">
+        <div class="filters">
+          <select id="filterMember">
+            <option value="">All members</option>
+          </select>
+          <input id="filterFrom" class="input" type="date" />
+          <input id="filterTo" class="input" type="date" />
+        </div>
+
+        <button class="btn btn-ghost" id="backBtn">← Back</button>
+        <button class="btn btn-ghost" id="exportBtn">Export CSV</button>
+        <button class="btn btn-primary" id="openAdd">+ Add</button>
+      </div>
+    </header>
+
+    <div class="summary">
+      <div class="chip">
+        <div style="font-size:13px;color:var(--muted)">Total contributions</div>
+        <div style="font-size:20px;font-weight:700;margin-top:6px" id="total">R 0.00</div>
+      </div>
+      <div class="chip">
+        <div style="font-size:13px;color:var(--muted)">Count</div>
+        <div style="font-size:20px;font-weight:700;margin-top:6px" id="count">0</div>
+      </div>
+    </div>
+
+    <div class="list" id="list">
+      <div class="empty">Loading contributions…</div>
+    </div>
+  </div>
+
+  <!-- Add contribution modal -->
+  <div id="modal" class="modal">
+    <div class="modal-box">
+      <h3>Add Contribution</h3>
+      <div style="margin-top:12px">
+        <label class="meta-small">Amount (R)</label>
+        <input id="amt" class="input" type="number" min="0.01" step="0.01" placeholder="100.00" />
+      </div>
+      <div style="margin-top:10px">
+        <label class="meta-small">Note</label>
+        <input id="note" class="input" type="text" placeholder="Optional note" />
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+        <button class="btn btn-ghost" id="cancelAdd">Cancel</button>
+        <button class="btn btn-primary" id="saveAdd">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="contributions.js"></script>
+  <script type="module" src="js/auth-guard.js"></script>
+
+<div id="footer"></div>
+<script type="module" src="js/load-partials.js"></script>
+</body>
+</html>
