@@ -1,9 +1,0 @@
-{
-  "name": "stokvel-pro-deploy",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "twilio": "^4.15.0",
-    "@supabase/supabase-js": "^2.27.0"
-  }
-}
