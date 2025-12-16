@@ -110,6 +110,27 @@
       color:#fff;
       box-shadow:0 10px 26px rgba(79,140,255,.35);
     }
+    .top-nav{
+  display:flex;
+  gap:14px;
+  justify-content:flex-end;
+  margin-bottom:20px;
+}
+
+.top-nav a{
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:10px;
+}
+
+.top-nav a:hover{
+  background:#eef2ff;
+  color:var(--primary);
+}
+
   </style>
 </head>
 
@@ -121,6 +142,13 @@
     </div>
     <button onclick="location.href='dashboard.html'">Back</button>
   </header>
+<nav class="top-nav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="create-stokvel.html">Create</a>
+  <a href="contributions.html">Contributions</a>
+  <a href="payouts.html">Payouts</a>
+  <a href="profile.html">Profile</a>
+</nav>
 
   <div class="timeline">
     <div class="card">

@@ -106,10 +106,39 @@
     @media(max-width:420px){
       .row{grid-template-columns:1fr}
     }
+    .top-nav{
+  display:flex;
+  gap:14px;
+  justify-content:flex-end;
+  margin-bottom:20px;
+}
+
+.top-nav a{
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:10px;
+}
+
+.top-nav a:hover{
+  background:#eef2ff;
+  color:var(--primary);
+}
+
   </style>
 </head>
 
 <body>
+    <nav class="top-nav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="create-stokvel.html">Create</a>
+  <a href="contributions.html">Contributions</a>
+  <a href="payouts.html">Payouts</a>
+  <a href="profile.html">Profile</a>
+</nav>
+
   <div class="card">
     <h1>Create a Stokvel</h1>
     <div class="subtitle">Set up your savings circle in minutes</div>
