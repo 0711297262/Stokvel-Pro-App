@@ -2,244 +2,221 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dashboard — Stokvel Pro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — Stokvel Pro</title>
 
-  <!-- Supabase JS v2 -->
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --navy-deep: #0b1220;
-      --navy-soft: #0f172a;
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --primary: #1b3b5a;
+      --accent: #2563eb;
+      --muted: #6b7280;
+      --radius: 16px;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
 
-      --rose-core: #ec4899;
-      --rose-soft: #f472b6;
-      --rose-glow: rgba(236, 72, 153, 0.18);
-
-      --text-dark: #0f172a;
-      --text-muted: #6b7280;
-
-      --radius-soft: 20px;
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, sans-serif;
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       margin: 0;
-      padding: 22px;
-      min-height: 100vh;
-      background: radial-gradient(
-        1200px 600px at top,
-        #111827,
-        var(--navy-deep)
-      );
-      color: var(--text-dark);
-      animation: fadeLift 0.35s ease-out;
+      background: var(--bg);
+      color: #111827;
     }
 
-    @keyframes fadeLift {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: none; }
-    }
-
+    /* Header */
     header {
+      background: #fff;
+      padding: 18px 24px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 26px;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .actions a {
+      margin-left: 10px;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #2563eb, #4f8cff);
+      color: white;
+    }
+
+    /* Main */
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
     h1 {
-      font-size: 22px;
-      margin: 0;
+      font-size: 26px;
+      margin-bottom: 4px;
     }
 
-    .subtitle {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-top: 4px;
+    .subtle {
+      color: var(--muted);
+      margin-bottom: 28px;
     }
 
-    .actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    button {
-      border: none;
-      padding: 10px 16px;
-      border-radius: 14px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      color: white;
-      background: linear-gradient(
-        135deg,
-        var(--rose-core),
-        var(--rose-soft)
-      );
-      box-shadow: 0 10px 26px var(--rose-glow);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    button:hover {
-      transform: translateY(-1px);
-    }
-
-    .secondary {
-      background: rgba(255,255,255,0.6);
-      color: var(--text-dark);
-      box-shadow: none;
-    }
-
-    .grid {
+    /* Cards */
+    .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
     }
 
-    .card {
-      background: rgba(255,255,255,0.68);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: var(--radius-soft);
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 20px;
-      box-shadow:
-        0 14px 40px rgba(0,0,0,0.22),
-        inset 0 1px 0 rgba(255,255,255,0.45);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    .stokvel-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
     }
 
-    .card:hover {
-      transform: translateY(-2px);
-    }
-
-    .card h3 {
+    .stokvel-card h2 {
       margin: 0 0 6px;
       font-size: 18px;
     }
 
-    .card p {
-      margin: 0;
+    .muted {
+      color: var(--muted);
       font-size: 14px;
-      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    /* Progress */
+    .progress {
+      background: #e5e7eb;
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 60%;
+      background: linear-gradient(90deg, #2563eb, #4f8cff);
     }
 
     .meta {
-      margin-top: 12px;
-      font-size: 13px;
-      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin: 14px 0;
     }
 
-    .empty {
-      text-align: center;
-      margin-top: 90px;
-      color: var(--text-muted);
+    .card-actions a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      text-decoration: none;
+      color: #1f2937;
+      font-weight: 500;
+      font-size: 14px;
     }
 
-    .empty p {
-      margin: 8px 0 16px;
+    /* Empty helper */
+    .helper {
+      margin-top: 40px;
+      padding: 20px;
+      background: #eef2ff;
+      border-radius: 14px;
+      color: #3730a3;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div>
-      <h1>Your savings circles</h1>
-      <div class="subtitle">Save together, one contribution at a time.</div>
+<header>
+  <div class="logo">Stokvel Pro</div>
+  <div class="actions">
+    <a href="index.html" class="btn-outline">Sign out</a>
+    <a href="create-stokvel.html" class="btn-primary">+ Start a savings circle</a>
+  </div>
+</header>
+
+<main>
+  <h1>My Stokvels</h1>
+  <p class="subtle">Manage your savings circles and track contributions</p>
+
+  <div class="cards">
+
+    <!-- Demo Stokvel Card -->
+    <div class="stokvel-card">
+      <h2>Family Savings Circle</h2>
+      <p class="muted">Monthly contribution: R500</p>
+
+      <div class="progress">
+        <div class="progress-bar"></div>
+      </div>
+      <small class="muted">6 of 10 members have contributed</small>
+
+      <div class="meta">
+        <span>💰 Total saved: R3,000</span>
+        <span>📅 Next payout: 25 Jan</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="contributions.html">View contributions</a>
+        <a href="payouts.html">View payouts</a>
+      </div>
     </div>
 
-    <div class="actions">
-      <button class="secondary" id="logoutBtn">Sign out</button>
-      <button onclick="window.location.href='create-stokvel.html'">
-        + Start a savings circle
-      </button>
+    <!-- Second demo card -->
+    <div class="stokvel-card">
+      <h2>Friends December Club</h2>
+      <p class="muted">Weekly contribution: R200</p>
+
+      <div class="progress">
+        <div class="progress-bar" style="width: 85%"></div>
+      </div>
+      <small class="muted">5 of 6 members have contributed</small>
+
+      <div class="meta">
+        <span>💰 Total saved: R5,400</span>
+        <span>📅 Payout completed</span>
+      </div>
+
+      <div class="card-actions">
+        <a href="contributions.html">View contributions</a>
+        <a href="payouts.html">View payouts</a>
+      </div>
     </div>
-  </header>
 
-  <div id="list" class="grid"></div>
-
-  <div id="emptyState" class="empty" style="display:none;">
-    <h3>You haven’t started a savings circle yet</h3>
-    <p>Create one to help everyone save consistently and transparently.</p>
-    <button onclick="window.location.href='create-stokvel.html'">
-      Start your first savings circle
-    </button>
   </div>
 
-  <script>
-    const SUPABASE_URL = "https://kmujqhvywyykwaiwalys.supabase.co";
-    const SUPABASE_ANON_KEY = "YOUR_ANON_KEY_HERE";
-
-    const supabase = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
-
-    async function requireAuth() {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        window.location.href = "./index.html";
-        return null;
-      }
-      return session;
-    }
-
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      await supabase.auth.signOut();
-      window.location.href = "./index.html";
-    });
-
-    async function loadDashboard() {
-      const session = await requireAuth();
-      if (!session) return;
-
-      const list = document.getElementById("list");
-      const emptyState = document.getElementById("emptyState");
-
-      const { data, error } = await supabase
-        .from("stokvels")
-        .select("*")
-        .eq("owner_id", session.user.id)
-        .order("created_at", { ascending: false });
-
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      if (!data || data.length === 0) {
-        emptyState.style.display = "block";
-        return;
-      }
-
-      data.forEach(stokvel => {
-  const card = document.createElement("div");
-  card.className = "card";
-  card.style.cursor = "pointer";
-
-  card.innerHTML = `
-    <h3>${stokvel.name}</h3>
-    <p>${stokvel.description || "No description"}</p>
-    <div class="meta">
-      R${stokvel.contribution_amount} per person · Up to ${stokvel.max_members} people
-    </div>
-  `;
-
-  card.addEventListener("click", () => {
-    window.location.href = `circle.html?id=${stokvel.id}`;
-  });
-
-  list.appendChild(card);
-});
-
-    }
-
-    loadDashboard();
-  </script>
+  <div class="helper">
+    💡 This is demo data. Real contributions and payouts will appear here once connected.
+  </div>
+</main>
 
 </body>
 </html>

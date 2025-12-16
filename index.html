@@ -1,85 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Stokvel Pro — Demo Login</title>
-<script>
-  if (localStorage.getItem("stokvel_demo_auth") !== "true") {
-    window.location.replace("index.html");
-  }
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stokvel Pro — Smart Group Savings</title>
+  <meta
+    name="description"
+    content="Stokvel Pro helps stokvels manage members, contributions, payouts, and reports securely."
+  />
+
+  <!-- Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffffcc;
+      --primary: #1b3b5a;
+      --accent: #4f8cff;
+      --muted: #6b7280;
+      --radius: 18px;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: system-ui, sans-serif;
-      background: #f6f7fb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, #eef3ff, #f6f8fb);
+      color: #111827;
     }
-    .card {
-      width: 320px;
-      background: white;
-      padding: 24px;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+
+    /* Header */
+    header {
+      padding: 24px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 12px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      font-size: 15px;
+
+    .logo {
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.3px;
+      color: var(--primary);
     }
-    button {
-      background: #155eef;
-      color: white;
+
+    .btn {
+      background: var(--accent);
+      color: #fff;
       border: none;
+      padding: 12px 18px;
+      border-radius: 12px;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: 0 8px 18px rgba(79, 140, 255, 0.35);
     }
-    .note {
-      font-size: 13px;
-      color: #666;
-      margin-top: 10px;
+
+    .btn.secondary {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: var(--shadow);
+    }
+
+    /* Layout */
+    main {
+      max-width: 1100px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      line-height: 1.05;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 520px;
+    }
+
+    .actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+    }
+
+    /* Card */
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .features {
+      display: grid;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .feature {
+      padding: 16px;
+      border-radius: 14px;
+      background: #f9fafb;
+      font-weight: 500;
+    }
+
+    footer {
       text-align: center;
+      color: var(--muted);
+      padding: 24px;
+      font-size: 14px;
     }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+    }
+    .top-nav{
+  display:flex;
+  gap:14px;
+  justify-content:flex-end;
+  margin-bottom:20px;
+}
+
+.top-nav a{
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:10px;
+}
+
+.top-nav a:hover{
+  background:#eef2ff;
+  color:var(--primary);
+}
+
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <h2>Welcome</h2>
-    <p>Enter demo PIN</p>
+  <!-- Header -->
+  <header>
+    <div class="logo">Stokvel Pro</div>
+    <button class="btn" onclick="location.href='dashboard.html'">
+      Open App
+    </button>
+  </header>
+<nav class="top-nav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="create-stokvel.html">Create</a>
+  <a href="contributions.html">Contributions</a>
+  <a href="payouts.html">Payouts</a>
+  <a href="profile.html">Profile</a>
+</nav>
 
-    <input id="pin" type="password" placeholder="1234" />
-<button id="loginBtn">Enter</button>
+  <!-- Main -->
+  <main>
+    <section class="hero">
+      <h1>Smart savings for modern stokvels</h1>
+      <p>
+        Manage members, track contributions, automate payouts, and generate
+        reports — all in one secure platform.
+      </p>
 
+      <div class="actions">
+        <button class="btn" onclick="location.href='dashboard.html'">
+          Get Started
+        </button>
+        <button class="btn secondary">View Demo</button>
+      </div>
+    </section>
 
-    <div class="note">Demo access — no signup</div>
-  </div>
+    <section class="card">
+      <h3>Why Stokvel Pro?</h3>
+      <div class="features">
+        <div class="feature">✔ Group & member management</div>
+        <div class="feature">✔ Contribution & payout tracking</div>
+        <div class="feature">✔ Secure role-based access</div>
+        <div class="feature">✔ Exportable reports</div>
+      </div>
+    </section>
+  </main>
 
-<script>
-  document.getElementById("loginBtn").onclick = () => {
-    const pin = document.getElementById("pin").value.trim();
-
-    if (pin.length !== 4) {
-      alert("Enter 4-digit demo PIN");
-      return;
-    }
-
-    // Demo unlock
-    localStorage.setItem("stokvel_demo_auth", "true");
-
-    // HARD redirect (Netlify-safe)
-    window.location.assign("dashboard.html");
-  };
-</script>
-
-
+  <!-- Footer -->
+  <footer>
+    © 2025 Stokvel Pro. All rights reserved.
+  </footer>
 </body>
 </html>
