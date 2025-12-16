@@ -1,43 +1,57 @@
-<!-- dashboard.html -->
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Stokvel PRO — Dashboard</title>
-  <style>
-    body{font-family:system-ui, sans-serif;padding:24px;background:#f6f7fb;}
-    .card{max-width:920px;margin:30px auto;background:white;padding:20px;border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.06);}
-    button{padding:10px 12px;border-radius:8px;background:#ef4444;color:white;border:0;cursor:pointer;}
-  </style>
-  <script type="module">
-  import { supabase } from "./js/supabase-client.js";
-
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) window.location.href = "index.html";
+  <title>Stokvel Pro — Dashboard</title>
+<script>
+  if (localStorage.getItem("stokvel_demo_auth") !== "true") {
+    window.location.replace("index.html");
+  }
 </script>
 
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f6f7fb;
+      padding: 24px;
+    }
+    .card {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 24px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    button {
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #ef4444;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+
+  <script>
+    if (localStorage.getItem("stokvel_demo_auth") !== "true") {
+      window.location.replace("index.html");
+    }
+  </script>
 </head>
+
 <body>
   <div class="card">
     <h1>Dashboard</h1>
-    <p id="welcome">Loading…</p>
-    <button id="signOut">Sign out</button>
+    <p>You are logged in (demo mode).</p>
+
+    <button onclick="
+      localStorage.removeItem('stokvel_demo_auth');
+      window.location.href='index.html';
+    ">
+      Sign out
+    </button>
   </div>
-
-  <script type="module" src="js/supabase-client.js"></script>
-  <script type="module">
-    import { supabase } from "./js/supabase-client.js";
-    (async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return location.href = "index.html";
-      document.getElementById("welcome").textContent = `Welcome, ${session.user?.phone || session.user?.email || "User"}`;
-
-      document.getElementById("signOut").addEventListener("click", async () => {
-        await supabase.auth.signOut();
-        location.href = "index.html";
-      });
-    })();
-  </script>
 </body>
 </html>

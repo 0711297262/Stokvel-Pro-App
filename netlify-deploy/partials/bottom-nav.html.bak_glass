@@ -1,0 +1,93 @@
+<style>
+  /* Bottom Nav Container */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 72px;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    z-index: 9999;
+  }
+
+  .bottom-nav a {
+    text-decoration: none;
+    color: #1a365d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Icon appearance */
+  .bn-icon {
+    width: 26px;
+    height: 26px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    transition: all .25s ease;
+  }
+
+  /* ACTIVE STATE — GOLD */
+  .bottom-nav a.active img {
+    filter: drop-shadow(0 0 10px rgba(255,184,0,0.9)) brightness(1.6);
+  }
+
+  .bottom-nav a.active span {
+    color: #FFB800;
+    font-weight: 600;
+  }
+</style>
+
+<nav class="bottom-nav">
+
+  <!-- Dashboard -->
+  <a href="/dashboard.html">
+    <img src="/assets/icons/nav-dashboard.svg" class="navDashboard bn-icon">
+    <span>Dashboard</span>
+  </a>
+
+  <!-- Groups -->
+  <a href="/groups.html">
+    <img src="/assets/icons/nav-groups.svg" class="navGroups bn-icon">
+    <span>Groups</span>
+  </a>
+
+  <!-- Activity -->
+  <a href="/activity.html">
+    <img src="/assets/icons/nav-activity.svg" class="navActivity bn-icon">
+    <span>Activity</span>
+  </a>
+
+  <!-- Profile -->
+  <a href="/profile.html">
+    <img src="/assets/icons/nav-user.svg" class="navUser bn-icon">
+    <span>Profile</span>
+  </a>
+
+</nav>
+
+<script>
+  (function () {
+    const map = {
+      "/dashboard.html": "navDashboard",
+      "/groups.html": "navGroups",
+      "/activity.html": "navActivity",
+      "/profile.html": "navUser"
+    };
+
+    const current = window.location.pathname;
+    const activeClass = map[current];
+
+    if (activeClass) {
+      const el = document.querySelector(`img.${activeClass}`);
+      if (el) el.parentElement.classList.add("active");
+    }
+  })();
+</script>

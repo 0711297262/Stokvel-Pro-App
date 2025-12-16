@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Start a savings circle — Stokvel Pro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Supabase JS v2 -->
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root {
+      --rose-core: #ec4899;
+      --rose-soft: #f472b6;
+      --rose-glow: rgba(236, 72, 153, 0.18);
+
+      --text-dark: #0f172a;
+      --text-muted: #6b7280;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 24px;
+      min-height: 100vh;
+      background: radial-gradient(
+        1200px 600px at top,
+        #111827,
+        #0b1220
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dark);
+      animation: fadeLift 0.35s ease-out;
+    }
+
+    @keyframes fadeLift {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255,255,255,0.68);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 26px;
+      box-shadow:
+        0 14px 40px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.45);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+    }
+
+    p {
+      margin: 0 0 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.9);
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(
+        135deg,
+        var(--rose-core),
+        var(--rose-soft)
+      );
+      box-shadow: 0 10px 26px var(--rose-glow);
+      transition: transform 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Start a savings circle</h1>
+    <p>
+      Set up a shared savings goal for your group.
+      You can adjust details later.
+    </p>
+
+    <label>Circle name</label>
+    <input id="name" placeholder="e.g. Beirut Savings Circle" />
+
+    <label>Description</label>
+    <textarea
+      id="description"
+      placeholder="What is this savings circle for? (Optional)"
+    ></textarea>
+
+    <label>Contribution per person (ZAR)</label>
+    <input id="amount" type="number" placeholder="500" />
+
+    <label>How many people can join?</label>
+    <input id="maxMembers" type="number" placeholder="12" />
+
+    <button id="saveBtn">Start savings circle</button>
+  </div>
+
+  <script>
+    const SUPABASE_URL = "https://kmujqhvywyykwaiwalys.supabase.co";
+    const SUPABASE_ANON_KEY = "YOUR_ANON_KEY_HERE";
+
+    const supabase = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+    async function requireAuth() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        window.location.href = "./index.html";
+        return null;
+      }
+      return session;
+    }
+
+    const saveBtn = document.getElementById("saveBtn");
+
+    saveBtn.addEventListener("click", async () => {
+      const session = await requireAuth();
+      if (!session) return;
+
+      const name = document.getElementById("name").value.trim();
+      const description = document.getElementById("description").value.trim();
+      const amount = Number(document.getElementById("amount").value);
+      const maxMembers = Number(document.getElementById("maxMembers").value);
+
+      if (!name || !amount || !maxMembers) {
+        alert("Please fill in the required fields");
+        return;
+      }
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = "Saving...";
+
+      const { error } = await supabase
+        .from("stokvels")
+        .insert({
+          name,
+          description,
+          contribution_amount: amount,
+          max_members: maxMembers,
+          owner_id: session.user.id
+        });
+
+      if (error) {
+        alert(error.message);
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Start savings circle";
+        return;
+      }
+
+      window.location.href = "./dashboard.html";
+    });
+  </script>
+
+</body>
+</html>
