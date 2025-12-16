@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contributions — Stokvel Pro</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --surface:rgba(255,255,255,.9);
+      --primary:#1b3b5a;
+      --accent:#4f8cff;
+      --muted:#6b7280;
+      --success:#16a34a;
+      --warning:#f59e0b;
+      --radius:20px;
+      --shadow:0 18px 40px rgba(0,0,0,.12);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter,system-ui,-apple-system,sans-serif;
+      background:linear-gradient(180deg,#eef3ff,var(--bg));
+      color:#0f172a;
+      padding:24px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:28px;
+    }
+
+    h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.3px;
+    }
+
+    .subtitle{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    .list{
+      max-width:520px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .card{
+      background:var(--surface);
+      backdrop-filter:blur(18px);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .name{
+      font-weight:600;
+      font-size:15px;
+    }
+
+    .amount{
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    .status{
+      font-size:13px;
+      font-weight:600;
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    .paid{
+      background:#dcfce7;
+      color:var(--success);
+    }
+
+    .pending{
+      background:#fef3c7;
+      color:var(--warning);
+    }
+
+    .actions{
+      margin-top:28px;
+      text-align:center;
+    }
+
+    button{
+      border:none;
+      padding:14px 22px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),#7aa7ff);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(79,140,255,.35);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>Contributions</h1>
+      <div class="subtitle">Monthly payment status</div>
+    </div>
+    <button onclick="location.href='dashboard.html'">Back</button>
+  </header>
+
+  <div class="list">
+    <div class="card">
+      <div>
+        <div class="name">Nomsa M.</div>
+        <div class="amount">R500</div>
+      </div>
+      <div class="status paid">Paid</div>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="name">Thabo K.</div>
+        <div class="amount">R500</div>
+      </div>
+      <div class="status paid">Paid</div>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="name">Lerato S.</div>
+        <div class="amount">R500</div>
+      </div>
+      <div class="status pending">Pending</div>
+    </div>
+
+    <div class="card">
+      <div>
+        <div class="name">Sipho D.</div>
+        <div class="amount">R500</div>
+      </div>
+      <div class="status pending">Pending</div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button>Send reminder</button>
+  </div>
+</body>
+</html>
