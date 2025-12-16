@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Stokvel PRO — Demo Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh">
+
+  <div>
+    <h2>Enter Demo PIN</h2>
+    <input id="pin" placeholder="PIN" />
+    <button onclick="login()">Enter</button>
+  </div>
+
+  <script>
+    function login() {
+      const pin = document.getElementById("pin").value;
+      if (pin === "1234") {
+        localStorage.setItem("stokvel_demo_auth", "true");
+       document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("enterBtn").onclick = () => {
+      const pin = document.getElementById("pin").value;
+      if (pin === "1234") {
+        localStorage.setItem("stokvel_demo_auth", "true");
+        window.location.href = "dashboard.html";
+      } else {
+        alert("Wrong PIN");
+      }
+    };
+  });
+      } else {
+        alert("Wrong PIN");
+      }
+    }
+  </script>
+
+</body>
+</html>
