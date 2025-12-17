@@ -5,169 +5,178 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Create Stokvel — Stokvel Pro</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#f6f8fb;
-      --surface:rgba(255,255,255,.9);
-      --primary:#1b3b5a;
-      --accent:#4f8cff;
-      --muted:#6b7280;
-      --radius:20px;
-      --shadow:0 18px 40px rgba(0,0,0,.12);
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --primary: #1b3b5a;
+      --accent: #2563eb;
+      --muted: #6b7280;
+      --radius: 16px;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
     }
 
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:Inter,system-ui,-apple-system,sans-serif;
-      background:linear-gradient(180deg,#eef3ff,var(--bg));
-      color:#0f172a;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, sans-serif;
     }
 
-    .card{
-      width:100%;
-      max-width:440px;
-      background:var(--surface);
-      backdrop-filter:blur(18px);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:30px;
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111827;
     }
 
-    h1{
-      margin:0 0 6px;
-      font-size:22px;
-      letter-spacing:-.3px;
+    header {
+      background: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
     }
 
-    .subtitle{
-      font-size:14px;
-      color:var(--muted);
-      margin-bottom:24px;
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
     }
 
-    label{
-      display:block;
-      font-size:13px;
-      font-weight:600;
-      margin:16px 0 6px;
+    .nav a {
+      margin-left: 14px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent);
     }
 
-    input{
-      width:100%;
-      padding:14px 16px;
-      border-radius:14px;
-      border:1px solid #d1d5db;
-      font-size:15px;
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    input::placeholder{color:#9ca3af}
-
-    .row{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
+    h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
     }
 
-    .actions{
-      margin-top:26px;
-      display:flex;
-      gap:12px;
+    .subtle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 14px;
     }
 
-    button{
-      flex:1;
-      border:none;
-      padding:14px 18px;
-      border-radius:14px;
-      font-size:14px;
-      font-weight:600;
-      cursor:pointer;
-      background:linear-gradient(135deg,var(--accent),#7aa7ff);
-      color:#fff;
-      box-shadow:0 10px 26px rgba(79,140,255,.35);
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-top: 24px;
     }
 
-    .secondary{
-      background:#fff;
-      color:var(--primary);
-      box-shadow:0 10px 26px rgba(0,0,0,.08);
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      margin-top: 18px;
     }
 
-    @media(max-width:420px){
-      .row{grid-template-columns:1fr}
+    input,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
     }
-    .top-nav{
-  display:flex;
-  gap:14px;
-  justify-content:flex-end;
-  margin-bottom:20px;
-}
 
-.top-nav a{
-  font-size:13px;
-  font-weight:600;
-  text-decoration:none;
-  color:var(--muted);
-  padding:8px 12px;
-  border-radius:10px;
-}
+    .hint {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
 
-.top-nav a:hover{
-  background:#eef2ff;
-  color:var(--primary);
-}
+    button {
+      margin-top: 28px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #2563eb, #4f8cff);
+      color: white;
+      cursor: pointer;
+    }
 
+    .after-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
-    <nav class="top-nav">
-  <a href="dashboard.html">Dashboard</a>
-  <a href="create-stokvel.html">Create</a>
-  <a href="contributions.html">Contributions</a>
-  <a href="payouts.html">Payouts</a>
-  <a href="profile.html">Profile</a>
-</nav>
+
+<header>
+  <div class="logo">Stokvel Pro</div>
+  <div class="nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+  </div>
+</header>
+
+<main>
+  <h1>Create a Stokvel</h1>
+
+  <!-- TRUST COPY -->
+  <p class="subtle">
+    🔒 Demo mode: You are setting up the rules of your stokvel.
+    Members will only be invited once the group is confirmed.
+  </p>
 
   <div class="card">
-    <h1>Create a Stokvel</h1>
-    <div class="subtitle">Set up your savings circle in minutes</div>
 
     <label for="name">Stokvel name</label>
-    <input id="name" placeholder="e.g. December Savings Club" />
+    <input id="name" placeholder="e.g. Family Savings Circle" />
+    <div class="hint">Choose a name your members will recognize.</div>
 
-    <div class="row">
-      <div>
-        <label for="amount">Monthly contribution (R)</label>
-        <input id="amount" type="number" placeholder="500" />
-      </div>
-      <div>
-        <label for="members">Number of members</label>
-        <input id="members" type="number" placeholder="12" />
-      </div>
-    </div>
+    <label for="amount">Contribution amount (per cycle)</label>
+    <input id="amount" placeholder="e.g. 500" />
+    <div class="hint">This is how much each member contributes.</div>
 
-    <label for="start">Start month</label>
-    <input id="start" type="month" />
+    <label for="frequency">Contribution frequency</label>
+    <select id="frequency">
+      <option>Monthly</option>
+      <option>Weekly</option>
+    </select>
+    <div class="hint">How often members contribute.</div>
 
-    <div class="actions">
-      <button class="secondary" onclick="location.href='dashboard.html'">
-        Cancel
-      </button>
-      <button>
-        Create stokvel
-      </button>
-    </div>
+    <label for="members">Number of members</label>
+    <input id="members" placeholder="e.g. 10" />
+    <div class="hint">Including yourself.</div>
+
+    <label for="payout">Payout method</label>
+    <select id="payout">
+      <option>Rotation (each member gets a turn)</option>
+      <option>Fixed recipient</option>
+    </select>
+    <div class="hint">How payouts will be distributed.</div>
+
+    <button>Create stokvel</button>
+
+    <p class="after-note">
+      You’ll be able to review everything before any payments are enabled.
+    </p>
+
   </div>
+</main>
+
 </body>
 </html>

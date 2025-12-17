@@ -5,191 +5,225 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contributions — Stokvel Pro</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#f6f8fb;
-      --surface:rgba(255,255,255,.9);
-      --primary:#1b3b5a;
-      --accent:#4f8cff;
-      --muted:#6b7280;
-      --success:#16a34a;
-      --warning:#f59e0b;
-      --radius:20px;
-      --shadow:0 18px 40px rgba(0,0,0,.12);
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --primary: #1b3b5a;
+      --accent: #2563eb;
+      --muted: #6b7280;
+      --radius: 16px;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
+      --paid: #16a34a;
+      --pending: #d97706;
     }
 
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:Inter,system-ui,-apple-system,sans-serif;
-      background:linear-gradient(180deg,#eef3ff,var(--bg));
-      color:#0f172a;
-      padding:24px;
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, sans-serif;
     }
 
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:28px;
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111827;
     }
 
-    h1{
-      margin:0;
-      font-size:22px;
-      letter-spacing:-.3px;
+    header {
+      background: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
     }
 
-    .subtitle{
-      font-size:14px;
-      color:var(--muted);
-      margin-top:4px;
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
     }
 
-    .list{
-      max-width:520px;
-      margin:0 auto;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    .nav a {
+      margin-left: 14px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent);
     }
 
-    .card{
-      background:var(--surface);
-      backdrop-filter:blur(18px);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    .name{
-      font-weight:600;
-      font-size:15px;
+    h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
     }
 
-    .amount{
-      font-size:14px;
-      color:var(--muted);
+    .subtle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 14px;
     }
 
-    .status{
-      font-size:13px;
-      font-weight:600;
-      padding:6px 10px;
-      border-radius:999px;
+    /* Summary */
+    .summary {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      margin: 24px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
     }
 
-    .paid{
-      background:#dcfce7;
-      color:var(--success);
+    .summary h3 {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 6px;
     }
 
-    .pending{
-      background:#fef3c7;
-      color:var(--warning);
+    .summary p {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
     }
 
-    .actions{
-      margin-top:28px;
-      text-align:center;
+    /* List */
+    .list {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    button{
-      border:none;
-      padding:14px 22px;
-      border-radius:14px;
-      font-size:14px;
-      font-weight:600;
-      cursor:pointer;
-      background:linear-gradient(135deg,var(--accent),#7aa7ff);
-      color:#fff;
-      box-shadow:0 10px 26px rgba(79,140,255,.35);
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 14px;
     }
-    .top-nav{
-  display:flex;
-  gap:14px;
-  justify-content:flex-end;
-  margin-bottom:20px;
-}
 
-.top-nav a{
-  font-size:13px;
-  font-weight:600;
-  text-decoration:none;
-  color:var(--muted);
-  padding:8px 12px;
-  border-radius:10px;
-}
+    .row:last-child {
+      border-bottom: none;
+    }
 
-.top-nav a:hover{
-  background:#eef2ff;
-  color:var(--primary);
-}
+    .name {
+      font-weight: 600;
+    }
 
+    .amount {
+      font-weight: 600;
+    }
+
+    .status {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .paid {
+      background: #dcfce7;
+      color: var(--paid);
+    }
+
+    .pending {
+      background: #ffedd5;
+      color: var(--pending);
+    }
+
+    .notice {
+      margin-top: 32px;
+      padding: 18px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 14px;
+      font-size: 14px;
+    }
   </style>
 </head>
 
 <body>
-  <header>
+
+<header>
+  <div class="logo">Stokvel Pro</div>
+  <div class="nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="payouts.html">Payouts</a>
+    <a href="profile.html">Profile</a>
+  </div>
+</header>
+
+<main>
+  <h1>Contributions</h1>
+
+  <!-- TRUST COPY -->
+  <p class="subtle">
+    🔒 Demo mode: No real money is moved. Contributions shown are sample data.
+  </p>
+  <p class="subtle">
+    Contributions marked “Pending” have not yet been paid for this cycle.
+  </p>
+
+  <!-- Summary -->
+  <div class="summary">
     <div>
-      <h1>Contributions</h1>
-      <div class="subtitle">Monthly payment status</div>
+      <h3>Contribution amount</h3>
+      <p>R500</p>
     </div>
-    <button onclick="location.href='dashboard.html'">Back</button>
-  </header>
-  <nav class="top-nav">
-  <a href="dashboard.html">Dashboard</a>
-  <a href="create-stokvel.html">Create</a>
-  <a href="contributions.html">Contributions</a>
-  <a href="payouts.html">Payouts</a>
-  <a href="profile.html">Profile</a>
-</nav>
+    <div>
+      <h3>Members paid</h3>
+      <p>6 / 10</p>
+    </div>
+    <div>
+      <h3>Total collected</h3>
+      <p>R3,000</p>
+    </div>
+  </div>
 
-
+  <!-- List -->
   <div class="list">
-    <div class="card">
-      <div>
-        <div class="name">Nomsa M.</div>
-        <div class="amount">R500</div>
-      </div>
-      <div class="status paid">Paid</div>
+    <div class="row">
+      <span class="name">Sipho K.</span>
+      <span class="amount">R500</span>
+      <span class="status paid">Paid</span>
     </div>
-
-    <div class="card">
-      <div>
-        <div class="name">Thabo K.</div>
-        <div class="amount">R500</div>
-      </div>
-      <div class="status paid">Paid</div>
+    <div class="row">
+      <span class="name">Thandi M.</span>
+      <span class="amount">R500</span>
+      <span class="status paid">Paid</span>
     </div>
-
-    <div class="card">
-      <div>
-        <div class="name">Lerato S.</div>
-        <div class="amount">R500</div>
-      </div>
-      <div class="status pending">Pending</div>
+    <div class="row">
+      <span class="name">Lerato S.</span>
+      <span class="amount">R500</span>
+      <span class="status paid">Paid</span>
     </div>
-
-    <div class="card">
-      <div>
-        <div class="name">Sipho D.</div>
-        <div class="amount">R500</div>
-      </div>
-      <div class="status pending">Pending</div>
+    <div class="row">
+      <span class="name">Kabelo T.</span>
+      <span class="amount">R500</span>
+      <span class="status pending">Pending</span>
+    </div>
+    <div class="row">
+      <span class="name">Nomsa D.</span>
+      <span class="amount">R500</span>
+      <span class="status pending">Pending</span>
     </div>
   </div>
 
-  <div class="actions">
-    <button>Send reminder</button>
+  <!-- Notice -->
+  <div class="notice">
+    ⚠️ This is a demo preview. Payments will only be enabled once the group is verified and activated.
   </div>
+</main>
+
 </body>
 </html>

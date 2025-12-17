@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Join Stokvel — StokvelPRO</title>
+  <style>
+    body{font-family:Inter,system-ui;margin:0;padding:24px;background:#f4f8fb}
+    .card{max-width:520px;margin:40px auto;padding:18px;background:white;border-radius:12px;box-shadow:0 6px 20px rgba(12,20,40,0.06)}
+    input{width:100%;padding:12px;border-radius:10px;border:1px solid #e6eef8;margin-top:8px}
+    .row{display:flex;gap:8px;margin-top:14px}
+    .btn{flex:1;padding:12px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,#2b6cb0,#1a365d);color:white}
+    .btn-ghost{background:transparent;border:1px solid rgba(10,20,30,0.06)}
+    .note{font-size:13px;color:#6b7280;margin-top:12px}
+    .muted{color:#6b7280}
+  </style>
+</head>
+<body>
+<div id="header"></div>
+  <main class="card" role="main" aria-labelledby="joinTitle">
+    <h2 id="joinTitle">Join a Stokvel</h2>
+    <div class="muted" style="margin-top:6px">Enter the group code</div>
+
+    <label style="display:block;margin-top:12px">Group code</label>
+    <input id="groupCode" type="text" maxlength="12" placeholder="E.g. A7B3C9"/>
+
+    <div class="row">
+      <button id="joinBtn" class="btn btn-primary">Join Stokvel</button>
+      <button id="backBtn" class="btn btn-ghost">Back</button>
+    </div>
+
+    <div class="note">If the code is valid you'll join immediately and be redirected to the group page.</div>
+  </main>
+  
+
+  <script type="module" src="js/auth-guard.js"></script>
+
+
+    // Use shared firebase-config.js (must exist in project root)
+    import {
+      auth,
+      db,
+      onAuthStateChanged,
+      collection,
+      query,
+      where,
+      getDocs,
+      doc,
+      updateDoc,
+      arrayUnion,
+      serverTimestamp,
+      increment // 🚩 ADDED FOR ATOMIC COUNTER UPDATE
+    } from './firebase-config.js';
+
+    const groupInput = document.getElementById('groupCode');
+    const joinBtn = document.getElementById('joinBtn');
+    const backBtn = document.getElementById('backBtn');
+
+    backBtn.addEventListener('click', () => window.location.href = 'dashboard.html');
+
+    let currentUser = null;
+    onAuthStateChanged(auth, (u) => {
+      if (!u) {
+        // Not logged in — redirect to login
+        window.location.href = 'index.html';
+        return;
+      }
+      currentUser = u;
+    });
+
+    function normalizeCode(s){ return (s||'').replace(/\s+/g,'').toUpperCase(); }
+    function showToast(msg){ alert(msg); } // simple fallback toast
+
+    joinBtn.addEventListener('click', async () => {
+      const code = normalizeCode(groupInput.value);
+      if (!code) { showToast('Enter the group code'); return; }
+      if (!currentUser) { showToast('You must be logged in'); return; }
+
+      // UI state
+      joinBtn.disabled = true;
+      joinBtn.textContent = 'Joining…';
+
+      try {
+        // 1) Query groups by groupCode
+        const groupsRef = collection(db, 'groups');
+        // Use 'code' or 'groupCode' based on your create_stokvel.js
+        const q = query(groupsRef, where('groupCode', '==', code)); 
+        const snaps = await getDocs(q);
+
+        if (snaps.empty) {
+          showToast('Invalid code — group not found');
+          return; // Exit here, finally block handles re-enabling button
+        }
+
+        // Use the first matched group
+        const gDoc = snaps.docs[0];
+        const gid = gDoc.id;
+        const gData = gDoc.data();
+        const gRef = doc(db, 'groups', gid);
+        
+        // Check if user is already a member
+        if ((gData.memberUIDs || []).includes(currentUser.uid)) {
+            showToast('You are already a member of this group.');
+            setTimeout(()=> window.location.href = `group_overview.html?gid=${gid}`, 300);
+            return;
+        }
+
+
+        // 2) Atomically add member record, update count, and add to Payout Schedule 
+        await updateDoc(gRef, {
+          // A. Add member object to denormalized array
+          members: arrayUnion({
+            uid: currentUser.uid,
+            name: currentUser.displayName || currentUser.phoneNumber || null,
+            phone: currentUser.phoneNumber || null,
+            role: 'member',
+            joinedAt: serverTimestamp()
+          }),
+          // B. Add UID to the list of member IDs
+          memberUIDs: arrayUnion(currentUser.uid), 
+          // C. Crucial for Phase 2: Add member to the end of the rotation schedule
+          payoutSchedule: arrayUnion(currentUser.uid), 
+          // D. Atomically increment the count
+          membersCount: increment(1)
+        });
+        
+        // 3) Update user's profile with the new group ID (for dashboard loading)
+        const userRef = doc(db, "users", currentUser.uid);
+        await updateDoc(userRef, {
+            groups: arrayUnion(gid)
+        }, { merge: true });
+
+
+        // Success — redirect to group overview
+        showToast('Joined! Opening group…');
+        setTimeout(()=> window.location.href = `group_overview.html?gid=${gid}`, 600);
+
+      } catch (err) {
+        console.error('join error', err);
+        // Removed the commented-out server-side code block and the extra syntax error code.
+        showToast('Unexpected error — check console');
+      } finally {
+        joinBtn.disabled = false;
+        joinBtn.textContent = 'Join Stokvel';
+      }
+    });
+
+  </script>
+<div id="footer"></div>
+<script type="module" src="js/load-partials.js"></script>
+</body>
+</html>

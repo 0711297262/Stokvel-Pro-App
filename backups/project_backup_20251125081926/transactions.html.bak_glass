@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Transactions — StokvelPRO</title>
+
+  <style>
+    :root{
+      --primary:#1a365d;
+      --accent:#2b6cb0;
+      --muted:rgba(234,244,255,0.7);
+      --glass-glass-card: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.06);
+      --radius:14px;
+    }
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--muted)}
+    body{
+      background:linear-gradient(180deg, rgba(10,20,36,0.92), rgba(6,12,24,0.95)), url("/mnt/data/final image copy.png");
+      background-size:cover;background-position:center;
+      -webkit-font-smoothing:antialiased;
+    }
+    header{padding:16px 20px;display:flex;align-items:center;gap:12px;background:rgba(0,0,0,0.28);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.04)}
+    .logo{width:52px;height:52px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+    .logo img{width:100%;height:100%;object-fit:cover}
+    .title-wrap{display:flex;flex-direction:column}
+    h1{margin:0;color:white;font-size:20px}
+    .subtitle{font-size:13px;color:var(--muted)}
+
+    .wrap{max-width:1100px;margin:18px auto;padding:18px;display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+    .panel{background:var(--glass-glass-card);border:1px solid var(--glass-border);border-radius:var(--radius);padding:14px;backdrop-filter:blur(8px)}
+    .panel h3{margin:0 0 8px 0;color:white}
+    .muted{color:var(--muted);font-size:13px}
+
+    .txn-list{display:flex;flex-direction:column;gap:8px;max-height:60vh;overflow:auto;padding-right:6px}
+    .txn{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
+    .txn .left{display:flex;gap:12px;align-items:center}
+    .avatar{width:44px;height:44;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--primary));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+    .txn .meta{display:flex;flex-direction:column}
+    .amount{font-weight:800}
+
+    .totals{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+    .tot-glass-glass-card{padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+    .glass-glass-btn{padding:10px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:800}
+    .glass-glass-glass-btn{background:linear-gradient(90deg,var(--accent),var(--primary));color:white}
+    .glass-glass-btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* modal */
+    .modal { display:none; position:fixed; inset:0; align-items:center; justify-content:center; z-index:4000 }
+    .modal .bg { position:absolute; inset:0; background:rgba(2,6,23,0.6) }
+    .modal .box { position:relative; z-index:4001; width:92%; max-width:520px; border-radius:12px; padding:18px; background: linear-gradient(180deg, #071229, #0b2540); color:white; box-shadow:0 20px 60px rgba(2,6,23,0.6) }
+
+    input, select, textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--muted);margin-top:8px}
+    label{font-weight:700;font-size:13px;margin-top:10px;color:var(--muted)}
+
+    @media (max-width:980px){
+      .wrap{grid-template-columns:1fr;padding:14px}
+    }
+  </style>
+  <link rel="stylesheet" href="/css/glass-ui.css">
+</head>
+<body>
+  <div id="headerContainer"></div>
+<div id="header"></div>
+  <header>
+    <div class="logo"><img src="/mnt/data/final image copy.png" alt="logo"></div>
+    <div class="title-wrap">
+      <h1>Transactions</h1>
+      <div class="subtitle">Record contributions, payouts & view history</div>
+    </div>
+    <div style="margin-left:auto;display:flex;gap:8px">
+      <button class="glass-glass-btn glass-glass-btn-ghost" onclick="goBack()">Back</button>
+      <button id="addTxnBtn" class="glass-glass-btn glass-glass-glass-btn" style="display:none" onclick="openAddTxn()">Record</button>
+    </div>
+  </header>
+
+  <div class="wrap" role="main">
+    <!-- LEFT: transactions -->
+    <main>
+      <div class="panel">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <h3 id="groupName">Loading group…</h3>
+            <div id="groupMeta" class="muted">—</div>
+          </div>
+          <div style="text-align:right">
+            <div class="small">Balance</div>
+            <div style="font-weight:800;font-size:20px">R <span id="groupBalance">0</span></div>
+          </div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="panel" style="padding:10px;margin-bottom:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div class="small">Transactions history</div>
+            <div class="small" id="txnCount">—</div>
+          </div>
+        </div>
+
+        <div class="txn-list" id="txnList" aria-live="polite">
+          <!-- transactions injected here -->
+        </div>
+      </div>
+    </main>
+
+    <!-- RIGHT: totals & actions -->
+    <aside>
+      <div class="panel">
+        <h3>Totals</h3>
+        <div class="totals" id="memberTotals">
+          <!-- member totals injected here -->
+        </div>
+        <div style="height:12px"></div>
+        <div>
+          <button class="glass-glass-btn glass-glass-btn-ghost" onclick="refresh()">Refresh</button>
+          <button class="glass-glass-btn glass-glass-glass-btn" id="openAddBtn" style="width:100%;margin-top:10px;display:none" onclick="openAddTxn()">Record Contribution</button>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:12px">
+        <h3>Quick actions</h3>
+        <div class="small" style="margin-bottom:8px">Admin-only actions will be hidden for non-admins.</div>
+        <div style="display:flex;gap:8px;flex-direction:column">
+          <button class="glass-glass-btn glass-glass-btn-ghost" onclick="exportCSV()">Export CSV</button>
+          <button class="glass-glass-btn glass-glass-btn-ghost" onclick="openPayoutModal()">Record Payout</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ADD TRANSACTION MODAL -->
+  <div id="txnModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="bg" onclick="closeAddTxn()"></div>
+    <div class="box">
+      <h3 id="modalTitle">Record Contribution</h3>
+      <div class="small">Only group admins can record transactions here.</div>
+
+      <label>Member (UID or name)</label>
+      <select id="txnMember"></select>
+
+      <label>Type</label>
+      <select id="txnType">
+        <option value="contribution">Contribution</option>
+        <option value="payout">Payout</option>
+      </select>
+
+      <label>Amount (R)</label>
+      <input id="txnAmount" type="number" min="1" />
+
+      <label>Method</label>
+      <select id="txnMethod">
+        <option value="cash">Cash</option>
+        <option value="bank">Bank</option>
+        <option value="manual">Manual</option>
+      </select>
+
+      <label>Note (optional)</label>
+      <textarea id="txnNote" rows="3"></textarea>
+
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end">
+        <button class="glass-glass-btn glass-glass-btn-ghost" onclick="closeAddTxn()">Cancel</button>
+        <button class="glass-glass-btn glass-glass-glass-btn" id="saveTxnBtn" onclick="saveTransaction()">Save</button>
+      </div>
+    </div>
+  </div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+  import {
+    getFirestore,
+    collection,
+    query,
+    orderBy,
+    onSnapshot,
+    addDoc,
+    serverTimestamp,
+    doc,
+    getDoc,
+    updateDoc,
+    increment,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+  // FIREBASE CONFIG — same as other pages
+  const firebaseConfig = {
+    apiKey: "AIzaSyAUIOcaIXcVRPBCG_95-TttwYD32yoJSG8",
+    authDomain: "stokvelpro.firebaseapp.com",
+    projectId: "stokvelpro",
+    storageBucket: "stokvelpro.firebasestorage.app",
+    messagingSenderId: "655524343942",
+    appId: "1:655524343942:web:03d5ca1374a794e3ee6107",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // UI refs
+  const txnListEl = document.getElementById('txnList');
+  const txnCountEl = document.getElementById('txnCount');
+  const groupNameEl = document.getElementById('groupName');
+  const groupMetaEl = document.getElementById('groupMeta');
+  const groupBalanceEl = document.getElementById('groupBalance');
+  const memberTotalsEl = document.getElementById('memberTotals');
+  const addTxnBtn = document.getElementById('addTxnBtn');
+  const openAddBtn = document.getElementById('openAddBtn');
+
+  const txnModal = document.getElementById('txnModal');
+  const txnMember = document.getElementById('txnMember');
+  const txnType = document.getElementById('txnType');
+  const txnAmount = document.getElementById('txnAmount');
+  const txnMethod = document.getElementById('txnMethod');
+  const txnNote = document.getElementById('txnNote');
+  const saveTxnBtn = document.getElementById('saveTxnBtn');
+  const modalTitle = document.getElementById('modalTitle');
+
+  // Get gid from query
+  const url = new URL(window.location.href);
+  const gid = url.searchParams.get('gid');
+  if(!gid){
+    alert('Open this page from the group overview (gid required).');
+    window.location.href = 'group_overview.html';
+  }
+
+  let currentUser = null;
+  let isAdmin = false;
+  let membersMap = {}; // uid -> {name, role}
+
+  let unsubTxns = null;
+  let unsubMembers = null;
+
+  onAuthStateChanged(auth, async (user) => {
+    if(!user) return window.location.href = 'index.html';
+    currentUser = user;
+    await initForGroup();
+  });
+
+  async function initForGroup(){
+    try{
+      // load group doc
+      const groupRef = doc(db, 'groups', gid);
+      const gSnap = await getDoc(groupRef);
+      if(!gSnap.exists()){
+        alert('Group not found'); window.location.href = 'dashboard.html'; return;
+      }
+      const g = gSnap.data();
+      groupNameEl.textContent = g.groupName || 'Group';
+      groupMetaEl.textContent = `Code: ${g.groupCode || '—'}`;
+      groupBalanceEl.textContent = (g.groupBalance || 0);
+
+      // check admin role for current user
+      const memberRef = doc(db, 'groups', gid, 'members', currentUser.uid);
+      const mSnap = await getDoc(memberRef);
+      if(mSnap.exists()){
+        const m = mSnap.data();
+        isAdmin = ['admin','chair'].includes(m.role);
+      } else {
+        isAdmin = false;
+      }
+
+      // show/hide UI
+      if(isAdmin){
+        addTxnBtn.style.display = 'inline-flex';
+        openAddBtn.style.display = 'block';
+      }
+
+      // realtime members list (to populate selector & totals)
+      const membersCol = collection(db, 'groups', gid, 'members');
+      unsubMembers = onSnapshot(membersCol, snapshot => {
+        membersMap = {};
+        txnMember.innerHTML = '';
+        const placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = 'Select member…';
+        txnMember.appendChild(placeholder);
+
+        snapshot.forEach(ds => {
+          const d = ds.data();
+          const uid = ds.id;
+          membersMap[uid] = { name: d.name || d.phone || uid, role: d.role || 'member' };
+          const opt = document.createElement('option');
+          opt.value = uid;
+          opt.textContent = `${membersMap[uid].name} (${membersMap[uid].role})`;
+          txnMember.appendChild(opt);
+        });
+      });
+
+      // realtime transactions
+      const txnsCol = collection(db, 'groups', gid, 'transactions');
+      const q = query(txnsCol, orderBy('timestamp','desc'));
+      unsubTxns = onSnapshot(q, snapshot => {
+        const docs = [];
+        snapshot.forEach(s => docs.push({ id: s.id, ...s.data() }));
+        renderTxns(docs);
+      });
+
+    }catch(err){
+      console.error('initForGroup', err); alert('Failed to initialize transactions'); 
+    }
+  }
+
+  function renderTxns(docs){
+    txnListEl.innerHTML = '';
+    txnCountEl.textContent = `${docs.length} txns`;
+    // compute totals per member
+    const totals = {}; // uid -> sum
+    docs.forEach(t => {
+      const uid = t.uid || 'unknown';
+      if(!(uid in totals)) totals[uid] = 0;
+      totals[uid] += (t.type === 'payout' ? -Math.abs(Number(t.amount || 0)) : Number(t.amount || 0));
+    });
+
+    // show totals in right pane
+    memberTotalsEl.innerHTML = '';
+    Object.keys(totals).forEach(uid => {
+      const name = membersMap[uid]?.name || uid;
+      const val = totals[uid];
+      const glass-glass-card = document.createElement('div');
+      glass-glass-card.className = 'tot-glass-glass-card';
+      glass-glass-card.innerHTML = `<div style="font-weight:800">${name}</div><div class="small">Total: R ${Math.abs(val).toLocaleString()}</div>`;
+      memberTotalsEl.appendChild(glass-glass-card);
+    });
+
+    // render txn items
+    if(docs.length === 0){
+      txnListEl.innerHTML = `<div class="muted">No transactions yet</div>`;
+      return;
+    }
+
+    docs.forEach(t => {
+      const left = document.createElement('div');
+      left.className = 'left';
+      const avatar = document.createElement('div'); avatar.className = 'avatar';
+      const letter = (membersMap[t.uid]?.name || t.memberName || 'M')[0] || 'M';
+      avatar.textContent = letter.toUpperCase();
+      const meta = document.createElement('div'); meta.className = 'meta';
+      const title = document.createElement('div'); title.style.fontWeight = '700';
+      title.textContent = `${t.type === 'payout' ? 'Payout' : 'Contribution'} • ${t.memberName || (membersMap[t.uid]?.name) || (t.uid)}`;
+      const sub = document.createElement('div'); sub.className = 'small';
+      const d = t.timestamp ? new Date(t.timestamp.seconds * 1000).toLocaleString() : '—';
+      sub.textContent = `${d} • ${t.method || 'manual'}${t.note ? ' • ' + t.note : ''}`;
+      meta.appendChild(title); meta.appendChild(sub);
+
+      left.appendChild(avatar); left.appendChild(meta);
+
+      const right = document.createElement('div');
+      right.innerHTML = `<div class="amount" style="font-weight:900">${t.type==='payout' ? '-' : ''}R ${Number(t.amount).toLocaleString()}</div>`;
+
+      const row = document.createElement('div');
+      row.className = 'txn';
+      row.appendChild(left); row.appendChild(right);
+
+      txnListEl.appendChild(row);
+    });
+  }
+
+  function openAddTxn(){
+    if(!isAdmin){ alert('Only admins can record transactions'); return; }
+    modalTitle.textContent = 'Record Contribution';
+    txnType.value = 'contribution';
+    txnAmount.value = '';
+    txnMethod.value = 'manual';
+    txnNote.value = '';
+    txnModal.style.display = 'flex';
+    txnModal.setAttribute('aria-hidden','false');
+  }
+  function closeAddTxn(){
+    txnModal.style.display = 'none';
+    txnModal.setAttribute('aria-hidden','true');
+  }
+
+  async function saveTransaction(){
+    if(!isAdmin){ alert('Only admins'); return; }
+    const uid = txnMember.value;
+    const amount = Number(txnAmount.value || 0);
+    const type = txnType.value;
+    if(!uid){ alert('Pick a member'); return; }
+    if(!amount || amount <= 0){ alert('Enter a valid amount'); return; }
+
+    saveTxnBtn.disabled = true;
+    saveTxnBtn.textContent = 'Saving…';
+
+    try{
+      const txnPayload = {
+        uid,
+        memberName: membersMap[uid]?.name || null,
+        amount: amount,
+        type: type,
+        method: txnMethod.value || 'manual',
+        note: txnNote.value || '',
+        timestamp: serverTimestamp()
+      };
+
+      // write txn doc
+      const txnsCol = collection(db, 'groups', gid, 'transactions');
+      await addDoc(txnsCol, txnPayload);
+
+      // update group balance: contribution -> +amount ; payout -> -amount
+      const delta = (type === 'payout') ? -Math.abs(amount) : Math.abs(amount);
+      const groupRef = doc(db, 'groups', gid);
+      await updateDoc(groupRef, { groupBalance: increment(delta) });
+
+      showToast('Transaction recorded','success');
+      closeAddTxn();
+    }catch(err){
+      console.error('saveTransaction', err);
+      alert('Failed to save transaction');
+    }finally{
+      saveTxnBtn.disabled = false;
+      saveTxnBtn.textContent = 'Save';
+    }
+  }
+
+  // small helpers
+  function showToast(msg, type='info'){
+    const t = document.createElement('div'); t.textContent = msg;
+    t.className = 'toast'; t.style.position='fixed'; t.style.right='18px'; t.style.bottom='18px';
+    t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.color='white';
+    t.style.background = type==='success' ? 'linear-gradient(90deg,#16a34a,#059669)' : (type==='error' ? '#ef4444' : '#1a365d');
+    document.body.appendChild(t);
+    setTimeout(()=>{ t.style.opacity='0'; setTimeout(()=>t.remove(),350) }, 2400);
+  }
+
+  function refresh(){ /* manual refresh handled by realtime listeners; kept for UI */ }
+
+  function goBack(){ window.location.href = `group_overview.html?gid=${gid}` }
+
+  function exportCSV(){
+    // basic CSV export of current transactions visible in DOM (convenience)
+    const rows = [['timestamp','type','member','amount','method','note']];
+    // Pull from txnList DOM (better to re-run a query if needed)
+    const items = txnListEl.querySelectorAll('.txn');
+    items.forEach(item=>{
+      const meta = item.querySelector('.meta');
+      const title = meta.querySelector('div').textContent;
+      const sub = meta.querySelector('.small').textContent;
+      const amount = item.querySelector('.amount').textContent.replace(/\s/g,'');
+      rows.push([sub, title, '', amount, '', '']);
+    });
+    const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], {type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = `transactions_${gid}.csv`; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function openPayoutModal(){
+    if(!isAdmin){ alert('Only admins'); return; }
+    modalTitle.textContent = 'Record Payout';
+    txnType.value = 'payout';
+    txnAmount.value = '';
+    txnModal.style.display = 'flex';
+    txnModal.setAttribute('aria-hidden','false');
+  }
+
+  // cleanup on unload
+  window.addEventListener('beforeunload', ()=>{
+    if(typeof unsubTxns === 'function') unsubTxns();
+    if(typeof unsubMembers === 'function') unsubMembers();
+  });
+
+</script>
+<div id="footer"></div>
+<script type="module" src="js/load-partials.js"></script>
+  <div id="footerContainer"></div>
+  <div id="bottomNavContainer"></div>
+  <script type="module" src="/js/load-partials.js"></script>
+</body>
+</html>

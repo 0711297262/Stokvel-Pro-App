@@ -2,181 +2,186 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Profile — Stokvel PRO</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile — Stokvel Pro</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f6f7f9;
-      color: #222;
+    :root{
+      --bg:#f6f8fb;
+      --surface:rgba(255,255,255,.9);
+      --primary:#1b3b5a;
+      --accent:#4f8cff;
+      --muted:#6b7280;
+      --danger:#dc2626;
+      --radius:20px;
+      --shadow:0 18px 40px rgba(0,0,0,.12);
     }
 
-    .app {
-      max-width: 420px;
-      margin: 0 auto;
-      min-height: 100vh;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter,system-ui,-apple-system,sans-serif;
+      background:linear-gradient(180deg,#eef3ff,var(--bg));
+      color:#0f172a;
+      padding:24px;
     }
 
-    /* Header */
-    .header {
-      padding: 20px;
-      border-bottom: 1px solid #eee;
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:28px;
     }
 
-    .header h1 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 600;
+    h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.3px;
     }
 
-    .header p {
-      margin: 6px 0 0;
-      color: #666;
-      font-size: 14px;
+    .subtitle{
+      font-size:14px;
+      color:var(--muted);
+      margin-top:4px;
     }
 
-    /* Content */
-    .content {
-      flex: 1;
-      padding: 24px 20px;
+    .container{
+      max-width:520px;
+      margin:0 auto;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
     }
 
-    .section {
-      margin-bottom: 28px;
+    .card{
+      background:var(--surface);
+      backdrop-filter:blur(18px);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px 22px;
     }
 
-    .section-title {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      color: #444;
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 0;
+      border-bottom:1px solid #e5e7eb;
     }
 
-    .card {
-      border: 1px solid #eee;
-      border-radius: 12px;
-      padding: 16px;
+    .row:last-child{border-bottom:none}
+
+    .label{
+      font-size:13px;
+      color:var(--muted);
     }
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .value{
+      font-size:14px;
+      font-weight:600;
     }
 
-    .label {
-      font-size: 13px;
-      color: #666;
+    .actions{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-top:10px;
     }
 
-    .value {
-      font-size: 14px;
-      font-weight: 500;
+    button{
+      border:none;
+      padding:14px 18px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),#7aa7ff);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(79,140,255,.35);
     }
 
-    .about {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.5;
+    .secondary{
+      background:#fff;
+      color:var(--primary);
+      box-shadow:0 10px 26px rgba(0,0,0,.08);
     }
 
-    .secondary-btn {
-      margin-top: 10px;
-      background: #f1f3f6;
-      color: #222;
-      border: none;
-      border-radius: 10px;
-      padding: 14px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
+    .danger{
+      background:#fee2e2;
+      color:var(--danger);
+      box-shadow:none;
     }
+    .top-nav{
+  display:flex;
+  gap:14px;
+  justify-content:flex-end;
+  margin-bottom:20px;
+}
 
-    .secondary-btn:active {
-      transform: scale(0.98);
-    }
+.top-nav a{
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:10px;
+}
 
-    /* Navigation */
-    .nav {
-      display: flex;
-      border-top: 1px solid #eee;
-    }
+.top-nav a:hover{
+  background:#eef2ff;
+  color:var(--primary);
+}
 
-    .nav a {
-      flex: 1;
-      padding: 12px 0;
-      text-align: center;
-      font-size: 12px;
-      text-decoration: none;
-      color: #666;
-    }
-
-    .nav a.active {
-      color: #0b5cff;
-      font-weight: 600;
-    }
   </style>
 </head>
 
 <body>
-  <div class="app">
+  <header>
+    <div>
+      <h1>My Profile</h1>
+      <div class="subtitle">Account & role information</div>
+    </div>
+    <button onclick="location.href='dashboard.html'">Back</button>
+  </header>
+  
+<nav class="top-nav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="create-stokvel.html">Create</a>
+  <a href="contributions.html">Contributions</a>
+  <a href="payouts.html">Payouts</a>
+  <a href="profile.html">Profile</a>
+</nav>
 
-    <!-- Header -->
-    <div class="header">
-      <h1>Profile</h1>
-      <p>Your account details</p>
+  <div class="container">
+    <div class="card">
+      <div class="row">
+        <div class="label">Name</div>
+        <div class="value">Nthabiseng Phooko</div>
+      </div>
+      <div class="row">
+        <div class="label">Role</div>
+        <div class="value">Administrator</div>
+      </div>
+      <div class="row">
+        <div class="label">Phone</div>
+        <div class="value">+27••• ••••</div>
+      </div>
+      <div class="row">
+        <div class="label">Active stokvels</div>
+        <div class="value">1</div>
+      </div>
     </div>
 
-    <!-- Content -->
-    <div class="content">
-
-      <!-- Account section -->
-      <div class="section">
-        <div class="section-title">Account</div>
-
-        <div class="card">
-          <div class="row">
-            <div class="label">Phone number</div>
-            <div class="value">+27 71 129 7262</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- About section -->
-      <div class="section">
-        <div class="section-title">About Stokvel PRO</div>
-
-        <div class="card">
-          <p class="about">
-            Stokvel PRO helps groups save together in a simple
-            and transparent way. Create a stokvel, stay accountable,
-            and reach your goals as a community.
-          </p>
-        </div>
-      </div>
-
-      <!-- Actions -->
-      <div class="section">
-        <button class="secondary-btn">
-          Log out
-        </button>
-      </div>
-
+    <div class="card actions">
+      <button class="secondary">Edit profile</button>
+      <button class="secondary">Change PIN</button>
+      <button class="danger">Log out</button>
     </div>
-
-    <!-- Navigation -->
-    <div class="nav">
-      <a href="dashboard.html">🏠 Home</a>
-      <a href="create-stokvel.html">➕ Create</a>
-      <a href="profile.html" class="active">⚙️ Profile</a>
-    </div>
-
   </div>
 </body>
 </html>

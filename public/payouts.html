@@ -5,187 +5,209 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Payouts — Stokvel Pro</title>
 
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#f6f8fb;
-      --surface:rgba(255,255,255,.9);
-      --primary:#1b3b5a;
-      --accent:#4f8cff;
-      --muted:#6b7280;
-      --success:#16a34a;
-      --radius:20px;
-      --shadow:0 18px 40px rgba(0,0,0,.12);
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --primary: #1b3b5a;
+      --accent: #2563eb;
+      --muted: #6b7280;
+      --radius: 16px;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
+      --paid: #16a34a;
+      --upcoming: #2563eb;
     }
 
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:Inter,system-ui,-apple-system,sans-serif;
-      background:linear-gradient(180deg,#eef3ff,var(--bg));
-      color:#0f172a;
-      padding:24px;
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, sans-serif;
     }
 
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:28px;
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111827;
     }
 
-    h1{
-      margin:0;
-      font-size:22px;
-      letter-spacing:-.3px;
+    header {
+      background: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
     }
 
-    .subtitle{
-      font-size:14px;
-      color:var(--muted);
-      margin-top:4px;
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
     }
 
-    .timeline{
-      max-width:560px;
-      margin:0 auto;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    .nav a {
+      margin-left: 14px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent);
     }
 
-    .card{
-      background:var(--surface);
-      backdrop-filter:blur(18px);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:18px 20px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    .left{
-      display:flex;
-      flex-direction:column;
+    h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
     }
 
-    .month{
-      font-weight:600;
-      font-size:15px;
+    .subtle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 14px;
     }
 
-    .name{
-      font-size:14px;
-      color:var(--muted);
-      margin-top:4px;
+    /* Summary */
+    .summary {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin: 24px 0;
     }
 
-    .status{
-      font-size:13px;
-      font-weight:600;
-      padding:6px 10px;
-      border-radius:999px;
-      background:#dcfce7;
-      color:var(--success);
+    .summary h2 {
+      margin-top: 0;
+      font-size: 18px;
     }
 
-    .actions{
-      margin-top:30px;
-      text-align:center;
+    .amount {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 10px 0;
     }
 
-    button{
-      border:none;
-      padding:14px 22px;
-      border-radius:14px;
-      font-size:14px;
-      font-weight:600;
-      cursor:pointer;
-      background:linear-gradient(135deg,var(--accent),#7aa7ff);
-      color:#fff;
-      box-shadow:0 10px 26px rgba(79,140,255,.35);
+    .badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #eef2ff;
+      color: var(--upcoming);
     }
-    .top-nav{
-  display:flex;
-  gap:14px;
-  justify-content:flex-end;
-  margin-bottom:20px;
-}
 
-.top-nav a{
-  font-size:13px;
-  font-weight:600;
-  text-decoration:none;
-  color:var(--muted);
-  padding:8px 12px;
-  border-radius:10px;
-}
+    /* Order list */
+    .list {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
 
-.top-nav a:hover{
-  background:#eef2ff;
-  color:var(--primary);
-}
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 14px;
+    }
 
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .status {
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .paid {
+      color: var(--paid);
+    }
+
+    .next {
+      color: var(--upcoming);
+    }
+
+    .upcoming {
+      color: var(--muted);
+    }
+
+    .notice {
+      margin-top: 32px;
+      padding: 18px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 14px;
+      font-size: 14px;
+    }
   </style>
 </head>
 
 <body>
-  <header>
-    <div>
-      <h1>Payout Schedule</h1>
-      <div class="subtitle">Rotation overview</div>
-    </div>
-    <button onclick="location.href='dashboard.html'">Back</button>
-  </header>
-<nav class="top-nav">
-  <a href="dashboard.html">Dashboard</a>
-  <a href="create-stokvel.html">Create</a>
-  <a href="contributions.html">Contributions</a>
-  <a href="payouts.html">Payouts</a>
-  <a href="profile.html">Profile</a>
-</nav>
 
-  <div class="timeline">
-    <div class="card">
-      <div class="left">
-        <div class="month">March 2025</div>
-        <div class="name">Nomsa M.</div>
-      </div>
-      <div class="status">Completed</div>
-    </div>
+<header>
+  <div class="logo">Stokvel Pro</div>
+  <div class="nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contributions.html">Contributions</a>
+    <a href="profile.html">Profile</a>
+  </div>
+</header>
 
-    <div class="card">
-      <div class="left">
-        <div class="month">April 2025</div>
-        <div class="name">Thabo K.</div>
-      </div>
-      <div class="status">Upcoming</div>
-    </div>
+<main>
+  <h1>Payouts</h1>
 
-    <div class="card">
-      <div class="left">
-        <div class="month">May 2025</div>
-        <div class="name">Lerato S.</div>
-      </div>
-      <div class="status">Upcoming</div>
-    </div>
+  <!-- TRUST COPY -->
+  <p class="subtle">
+    🔒 Demo mode: No real money is moved. Payouts shown are sample data.
+  </p>
+  <p class="subtle">
+    Payouts follow the agreed rotation order and are visible to all members.
+  </p>
 
-    <div class="card">
-      <div class="left">
-        <div class="month">June 2025</div>
-        <div class="name">Sipho D.</div>
-      </div>
-      <div class="status">Upcoming</div>
+  <!-- Next payout summary -->
+  <div class="summary">
+    <h2>Next Payout</h2>
+    <div class="amount">R5,000</div>
+    <p>Scheduled for <strong>25 January</strong></p>
+    <p>Recipient: <strong>Thandi M.</strong></p>
+    <span class="badge">Upcoming</span>
+  </div>
+
+  <!-- Payout order -->
+  <h2>Payout Order</h2>
+  <div class="list">
+    <div class="row">
+      <span>1. Sipho K.</span>
+      <span class="status paid">Paid</span>
+    </div>
+    <div class="row">
+      <span>2. Thandi M.</span>
+      <span class="status next">Next</span>
+    </div>
+    <div class="row">
+      <span>3. Lerato S.</span>
+      <span class="status upcoming">Upcoming</span>
+    </div>
+    <div class="row">
+      <span>4. Kabelo T.</span>
+      <span class="status upcoming">Upcoming</span>
     </div>
   </div>
 
-  <div class="actions">
-    <button>Export schedule</button>
+  <!-- Notice -->
+  <div class="notice">
+    ⚠️ This is a demo preview. Payouts will only be processed once the group and members are verified.
   </div>
+</main>
+
 </body>
 </html>

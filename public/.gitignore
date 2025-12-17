@@ -1,0 +1,9 @@
+# Ignore backups and old snapshots
+backups/
+*.bak
+*.backup
+
+# OS / editor noise
+.DS_Store
+.vscode/
+git add .gitignore

@@ -2,205 +2,172 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Start a savings circle — Stokvel Pro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Stokvel — Stokvel Pro</title>
 
-  <!-- Supabase JS v2 -->
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --rose-core: #ec4899;
-      --rose-soft: #f472b6;
-      --rose-glow: rgba(236, 72, 153, 0.18);
-
-      --text-dark: #0f172a;
-      --text-muted: #6b7280;
+    :root{
+      --bg:#f6f8fb;
+      --surface:rgba(255,255,255,.9);
+      --primary:#1b3b5a;
+      --accent:#4f8cff;
+      --muted:#6b7280;
+      --radius:20px;
+      --shadow:0 18px 40px rgba(0,0,0,.12);
     }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      margin: 0;
-      padding: 24px;
-      min-height: 100vh;
-      background: radial-gradient(
-        1200px 600px at top,
-        #111827,
-        #0b1220
-      );
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-dark);
-      animation: fadeLift 0.35s ease-out;
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter,system-ui,-apple-system,sans-serif;
+      background:linear-gradient(180deg,#eef3ff,var(--bg));
+      color:#0f172a;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
     }
 
-    @keyframes fadeLift {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: none; }
+    .card{
+      width:100%;
+      max-width:440px;
+      background:var(--surface);
+      backdrop-filter:blur(18px);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:30px;
     }
 
-    .card {
-      width: 100%;
-      max-width: 420px;
-      background: rgba(255,255,255,0.68);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.25);
-      padding: 26px;
-      box-shadow:
-        0 14px 40px rgba(0,0,0,0.22),
-        inset 0 1px 0 rgba(255,255,255,0.45);
+    h1{
+      margin:0 0 6px;
+      font-size:22px;
+      letter-spacing:-.3px;
     }
 
-    h1 {
-      margin: 0 0 6px;
-      font-size: 22px;
+    .subtitle{
+      font-size:14px;
+      color:var(--muted);
+      margin-bottom:24px;
     }
 
-    p {
-      margin: 0 0 20px;
-      color: var(--text-muted);
-      font-size: 14px;
-      line-height: 1.5;
+    label{
+      display:block;
+      font-size:13px;
+      font-weight:600;
+      margin:16px 0 6px;
     }
 
-    label {
-      display: block;
-      margin-top: 14px;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 14px;
+    input{
+      width:100%;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid #d1d5db;
+      font-size:15px;
     }
 
-    input, textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(0,0,0,0.08);
-      background: rgba(255,255,255,0.9);
-      font-size: 15px;
+    input::placeholder{color:#9ca3af}
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
     }
 
-    textarea {
-      resize: vertical;
-      min-height: 90px;
+    .actions{
+      margin-top:26px;
+      display:flex;
+      gap:12px;
     }
 
-    button {
-      width: 100%;
-      margin-top: 22px;
-      padding: 14px;
-      border-radius: 14px;
-      border: none;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      color: white;
-      background: linear-gradient(
-        135deg,
-        var(--rose-core),
-        var(--rose-soft)
-      );
-      box-shadow: 0 10px 26px var(--rose-glow);
-      transition: transform 0.15s ease;
+    button{
+      flex:1;
+      border:none;
+      padding:14px 18px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:600;
+      cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),#7aa7ff);
+      color:#fff;
+      box-shadow:0 10px 26px rgba(79,140,255,.35);
     }
 
-    button:hover {
-      transform: translateY(-1px);
+    .secondary{
+      background:#fff;
+      color:var(--primary);
+      box-shadow:0 10px 26px rgba(0,0,0,.08);
     }
 
-    button:disabled {
-      opacity: 0.6;
+    @media(max-width:420px){
+      .row{grid-template-columns:1fr}
     }
+    .top-nav{
+  display:flex;
+  gap:14px;
+  justify-content:flex-end;
+  margin-bottom:20px;
+}
+
+.top-nav a{
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:10px;
+}
+
+.top-nav a:hover{
+  background:#eef2ff;
+  color:var(--primary);
+}
+
   </style>
 </head>
 
 <body>
+    <nav class="top-nav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="create-stokvel.html">Create</a>
+  <a href="contributions.html">Contributions</a>
+  <a href="payouts.html">Payouts</a>
+  <a href="profile.html">Profile</a>
+</nav>
 
   <div class="card">
-    <h1>Start a savings circle</h1>
-    <p>
-      Set up a shared savings goal for your group.
-      You can adjust details later.
-    </p>
+    <h1>Create a Stokvel</h1>
+    <div class="subtitle">Set up your savings circle in minutes</div>
 
-    <label>Circle name</label>
-    <input id="name" placeholder="e.g. Beirut Savings Circle" />
+    <label for="name">Stokvel name</label>
+    <input id="name" placeholder="e.g. December Savings Club" />
 
-    <label>Description</label>
-    <textarea
-      id="description"
-      placeholder="What is this savings circle for? (Optional)"
-    ></textarea>
+    <div class="row">
+      <div>
+        <label for="amount">Monthly contribution (R)</label>
+        <input id="amount" type="number" placeholder="500" />
+      </div>
+      <div>
+        <label for="members">Number of members</label>
+        <input id="members" type="number" placeholder="12" />
+      </div>
+    </div>
 
-    <label>Contribution per person (ZAR)</label>
-    <input id="amount" type="number" placeholder="500" />
+    <label for="start">Start month</label>
+    <input id="start" type="month" />
 
-    <label>How many people can join?</label>
-    <input id="maxMembers" type="number" placeholder="12" />
-
-    <button id="saveBtn">Start savings circle</button>
+    <div class="actions">
+      <button class="secondary" onclick="location.href='dashboard.html'">
+        Cancel
+      </button>
+      <button>
+        Create stokvel
+      </button>
+    </div>
   </div>
-
-  <script>
-    const SUPABASE_URL = "https://kmujqhvywyykwaiwalys.supabase.co";
-    const SUPABASE_ANON_KEY = "YOUR_ANON_KEY_HERE";
-
-    const supabase = window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
-
-    async function requireAuth() {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        window.location.href = "./index.html";
-        return null;
-      }
-      return session;
-    }
-
-    const saveBtn = document.getElementById("saveBtn");
-
-    saveBtn.addEventListener("click", async () => {
-      const session = await requireAuth();
-      if (!session) return;
-
-      const name = document.getElementById("name").value.trim();
-      const description = document.getElementById("description").value.trim();
-      const amount = Number(document.getElementById("amount").value);
-      const maxMembers = Number(document.getElementById("maxMembers").value);
-
-      if (!name || !amount || !maxMembers) {
-        alert("Please fill in the required fields");
-        return;
-      }
-
-      saveBtn.disabled = true;
-      saveBtn.textContent = "Saving...";
-
-      const { error } = await supabase
-        .from("stokvels")
-        .insert({
-          name,
-          description,
-          contribution_amount: amount,
-          max_members: maxMembers,
-          owner_id: session.user.id
-        });
-
-      if (error) {
-        alert(error.message);
-        saveBtn.disabled = false;
-        saveBtn.textContent = "Start savings circle";
-        return;
-      }
-
-      window.location.href = "./dashboard.html";
-    });
-  </script>
-
 </body>
 </html>

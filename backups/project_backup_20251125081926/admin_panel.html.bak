@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Panel — Stokvel Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ===== iOS Bottom Sheet Confirm (Style A) ===== */
+#confirmSheetRoot { position: fixed; inset: 0; z-index: 99999; font-family: Inter, Arial; }
+#confirmOverlay {
+  position: absolute; inset:0;
+  background: rgba(2,6,23,0.45);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity .28s ease;
+}
+
+#confirmSheet {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  bottom: 14px;
+  width: calc(100% - 28px);
+  max-width: 520px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(2,6,23,0.45);
+  transition: transform .34s cubic-bezier(.22,1,.36,1);
+  will-change: transform;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#confirmContent {
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,252,255,0.98));
+  color: #0b1220;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#confirmGrab {
+  height: 8px;
+  width: 48px;
+  background: rgba(11,18,32,0.06);
+  margin: 10px auto 0;
+  border-radius: 999px;
+}
+
+#confirmHeader { display:flex; gap:12px; align-items:flex-start; }
+#confirmIcon {
+  min-width:44px; min-height:44px; border-radius:10px;
+  background: linear-gradient(135deg,#1a365d,#2b6cb0);
+  color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px;
+}
+#confirmTitle { font-size:16px; font-weight:700; color:#0b1220; }
+#confirmMessage { font-size:13px; color:#334155; margin-top:4px; }
+
+#confirmActions { display:flex; gap:10px; margin-top:6px; }
+.confirm-btn {
+  flex:1; padding:12px 10px; border-radius:12px; border:0; cursor:pointer; font-weight:700;
+  box-shadow: 0 8px 20px rgba(11,18,32,0.06);
+}
+.confirm-btn.cancel {
+  background: transparent; color:#0b1220; border:1px solid rgba(11,18,32,0.06);
+}
+.confirm-btn.ok {
+  background: linear-gradient(90deg,#1a365d,#2b6cb0); color:white;
+}
+
+/* Visible state */
+#confirmSheetRoot.show #confirmOverlay { opacity: 1; }
+#confirmSheetRoot.show #confirmSheet { transform: translateX(-50%) translateY(0%); }
+
+/* small-screen tweaks */
+@media (max-width:420px) {
+  #confirmContent { padding:14px; }
+  #confirmTitle { font-size:15px; }
+  .confirm-btn { padding:10px; font-size:15px; }
+}
+.confirmSheet {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: rgba(0,0,0,0.45);
+}
+
+.sheetBox {
+  width: 100%;
+  max-width: 480px;
+  background: white;
+  padding: 20px;
+  border-radius: 16px 16px 0 0;
+  color: #1a365d;
+  animation: slideUp .3s ease;
+}
+
+.sheetActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  background: #e2e8f0;
+  border: none;
+}
+
+.yesBtn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  background: #1a365d;
+  border: none;
+  color: white;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+  </style>
+</head>
+<body>
+<div id="header"></div>
+  <div class="wrap">
+    <div class="header">
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="back" onclick="goBack()">‹ Back</div>
+        <h1 id="groupName">Admin Panel</h1>
+      </div>
+      <div class="note" id="groupMeta">Loading…</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 8px 0">Members</h3>
+      <div id="memberList">Loading members…</div>
+    </div>
+<div class="card" style="margin-top: 12px;">
+      <h3 style="margin:0 0 8px 0">Financial Controls</h3>
+      <button class="btn btn-primary" onclick="triggerPayout()" style="width: 100%;">
+        Trigger Next Payout
+      </button>
+      <div class="note" style="margin-top: 8px;">Deducts funds, rotates schedule, and records transaction.</div>
+    </div>
+    <div style="height:12px"></div>
+    <button class="btn btn-ghost" onclick="window.location='group_overview.html?id=' + groupId">Back to Group</button>
+    <div style="height:12px"></div>
+    <button class="btn btn-ghost" onclick="window.location='group_overview.html?id=' + groupId">Back to Group</button>
+  </div>
+<!-- CONFIRMATION BOTTOM SHEET (Style A: iOS Bottom Sheet) -->
+<div id="confirmSheetRoot" style="display:none;">
+  <div id="confirmOverlay" aria-hidden="true"></div>
+
+  <div id="confirmSheet" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" tabindex="-1">
+    <div id="confirmGrab" aria-hidden="true"></div>
+
+    <div id="confirmContent">
+      <div id="confirmHeader">
+        <div id="confirmIcon"></div>
+        <div id="confirmTitle"></div>
+        <div id="confirmMessage"></div>
+      </div>
+
+      <div id="confirmActions">
+        <button id="confirmCancel" class="confirm-btn cancel">Cancel</button>
+        <button id="confirmOk" class="confirm-btn ok">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- CONFIRM BOTTOM SHEET -->
+<div id="confirmSheet" class="confirmSheet" style="display:none;">
+  <div class="sheetBox">
+    <p id="confirmMessage"></p>
+
+    <div class="sheetActions">
+      <button id="confirmCancel" class="cancelBtn">Cancel</button>
+      <button id="confirmYes" class="yesBtn">Yes</button>
+    </div>
+  </div>
+</div>
+
+  <script type="module" src="admin_panel.js"></script>
+  
+<div id="footer"></div>
+<script type="module" src="js/load-partials.js"></script>
+</body>
+</html>

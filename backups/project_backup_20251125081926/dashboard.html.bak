@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard — Stokvel PRO</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Load global header + footer via partial loader -->
+  <script type="module" src="/js/load-partials.js"></script>
+  
+  <!-- Global Stylesheet -->
+  <link rel="stylesheet" href="/css/layout.css" />
+</head>
+
+<body>
+
+  <!-- Header partial -->
+  <div id="header"></div>
+
+  <!-- Main Page Wrapper -->
+  <div class="page">
+
+    <!-- Page Title -->
+    <h1 class="page-title">Dashboard</h1>
+    <div class="small muted">Your groups, balances & activity at a glance</div>
+
+    <!-- 🔹 HERO SECTION -->
+    <div class="section-gradient" style="padding:28px; border-radius:22px; margin-top:22px;">
+        <div style="font-size:14px; color:var(--text-secondary);">Total Balance</div>
+        <div id="totalBalance" style="font-size:32px; font-weight:800; margin-top:4px;">
+            R0.00
+        </div>
+
+        <div style="margin-top:14px; display:flex; gap:10px;">
+            <button class="btn btn-primary" style="flex:1; font-size:14px;">+ Contribute</button>
+            <button class="btn btn-ghost" style="flex:1; font-size:14px;">View Groups</button>
+        </div>
+    </div>
+
+    <!-- 🔹 KPI SECTION -->
+    <h2 class="page-title" style="margin-top:32px;">Overview</h2>
+
+    <div class="flex" style="flex-wrap:wrap; gap:16px; margin-bottom:20px;">
+        
+        <div class="card-kpi" style="flex:1; min-width:180px;">
+            <div class="label">Total Groups</div>
+            <div class="value" id="kpiGroups">0</div>
+        </div>
+
+        <div class="card-kpi" style="flex:1; min-width:180px;">
+            <div class="label">Monthly Contributions</div>
+            <div class="value" id="kpiMonthly">0</div>
+        </div>
+
+        <div class="card-kpi" style="flex:1; min-width:180px;">
+            <div class="label">Upcoming Payout</div>
+            <div class="value" id="kpiPayout">0</div>
+        </div>
+
+    </div>
+
+    <!-- 🔹 GROUPS SECTION -->
+    <h3 class="card-header">My Groups</h3>
+    <div class="card list" id="groupsList" style="min-height:120px;">
+      <div class="skeleton" style="height:60px; margin-bottom:8px;"></div>
+      <div class="skeleton" style="height:60px;"></div>
+    </div>
+
+    <button class="btn btn-primary" onclick="location.href='create_stokvel.html'" style="margin-top:6px;">
+        + Create New Group
+    </button>
+
+    <!-- 🔹 ACTIVITY SECTION -->
+    <h3 class="card-header" style="margin-top:32px;">Recent Activity</h3>
+    <div class="card" id="activityList" style="min-height:110px;">
+        <div class="skeleton" style="height:40px; margin-bottom:10px;"></div>
+        <div class="skeleton" style="height:40px;"></div>
+    </div>
+
+    <!-- PWA INSTALL BUTTON -->
+    <button id="installAppBtn" class="btn btn-primary" style="display:none; margin-top:24px;">
+      Install Stokvel PRO
+    </button>
+
+  </div><!-- end .page -->
+
+  <!-- Footer partial -->
+  <div id="footer"></div>
+
+  <!-- KPI Animation Script -->
+  <script>
+    function animateValue(id, start, end, duration) {
+        const obj = document.getElementById(id);
+        let startTimestamp = null;
+
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerText = Math.floor(progress * (end - start) + start);
+            if (progress < 1) window.requestAnimationFrame(step);
+        };
+
+        window.requestAnimationFrame(step);
+    }
+
+    // Demo values (replace with Firestore values later)
+    animateValue("kpiGroups", 0, 4, 1200);
+    animateValue("kpiMonthly", 0, 1200, 1400);
+    animateValue("kpiPayout", 0, 700, 1600);
+
+    document.getElementById("totalBalance").innerText = "R 3,540.00";
+  </script>
+
+</body>
+</html>
