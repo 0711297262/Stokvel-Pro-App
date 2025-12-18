@@ -30,7 +30,7 @@
     }
 
     header {
-      background: #ffffff;
+      background: #fff;
       padding: 18px 24px;
       display: flex;
       justify-content: space-between;
@@ -44,19 +44,22 @@
       color: var(--primary);
     }
 
+    .actions button,
     .actions a {
       margin-left: 10px;
-      text-decoration: none;
       padding: 10px 14px;
       border-radius: 10px;
       font-size: 14px;
       font-weight: 500;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
     }
 
     .btn-outline {
       border: 1px solid var(--accent);
-      color: var(--accent);
       background: transparent;
+      color: var(--accent);
     }
 
     .btn-primary {
@@ -72,20 +75,18 @@
 
     h1 {
       font-size: 26px;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .subtle {
       color: var(--muted);
-      margin-bottom: 14px;
-      font-size: 14px;
+      margin-bottom: 28px;
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px;
-      margin-top: 24px;
     }
 
     .stokvel-card {
@@ -100,30 +101,23 @@
       font-size: 18px;
     }
 
-    .progress {
-      background: #e5e7eb;
-      border-radius: 999px;
-      height: 10px;
-      overflow: hidden;
-      margin: 10px 0;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 60%;
-      background: linear-gradient(90deg, #2563eb, #4f8cff);
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
     }
 
     .meta {
       display: flex;
       justify-content: space-between;
       font-size: 14px;
-      margin: 14px 0;
+      margin-top: 14px;
     }
 
     .card-actions a {
       display: inline-block;
-      margin-top: 10px;
+      margin-top: 14px;
+      margin-right: 10px;
       padding: 10px 14px;
       border-radius: 10px;
       background: #f1f5f9;
@@ -131,7 +125,6 @@
       color: #1f2937;
       font-weight: 500;
       font-size: 14px;
-      margin-right: 8px;
     }
 
     .helper {
@@ -142,6 +135,13 @@
       color: #3730a3;
       font-size: 14px;
     }
+
+    .empty {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+    }
   </style>
 </head>
 
@@ -150,66 +150,92 @@
 <header>
   <div class="logo">Stokvel Pro</div>
   <div class="actions">
-    <a href="index.html" class="btn-outline">Sign out</a>
     <a href="create-stokvel.html" class="btn-primary">+ Start a savings circle</a>
+    <button id="logoutBtn" class="btn-outline">Logout</button>
   </div>
 </header>
 
 <main>
   <h1>My Stokvels</h1>
+  <p class="subtle">Your savings circles — tracked clearly, no money handled</p>
 
-  <!-- TRUST COPY -->
-  <p class="subtle">🔒 Demo mode: No real money is moved. Payments activate after verification.</p>
-  <p class="subtle">All amounts shown below are sample data for preview purposes.</p>
-
-  <div class="cards">
-
-    <div class="stokvel-card">
-      <h2>Family Savings Circle</h2>
-      <p class="subtle">Monthly contribution: R500</p>
-
-      <div class="progress">
-        <div class="progress-bar"></div>
-      </div>
-      <small class="subtle">6 of 10 members have contributed</small>
-
-      <div class="meta">
-        <span>💰 Total saved: R3,000</span>
-        <span>📅 Next payout: 25 Jan</span>
-      </div>
-
-      <div class="card-actions">
-        <a href="contributions.html">View contributions</a>
-        <a href="payouts.html">View payouts</a>
-      </div>
-    </div>
-
-    <div class="stokvel-card">
-      <h2>Friends December Club</h2>
-      <p class="subtle">Weekly contribution: R200</p>
-
-      <div class="progress">
-        <div class="progress-bar" style="width:85%"></div>
-      </div>
-      <small class="subtle">5 of 6 members have contributed</small>
-
-      <div class="meta">
-        <span>💰 Total saved: R5,400</span>
-        <span>📅 Payout completed</span>
-      </div>
-
-      <div class="card-actions">
-        <a href="contributions.html">View contributions</a>
-        <a href="payouts.html">View payouts</a>
-      </div>
-    </div>
-
-  </div>
+  <div class="cards" id="stokvelList"></div>
 
   <div class="helper">
-    💡 This dashboard shows demo data. Real stokvels, contributions, and payouts will appear here once activated.
+    💡 Stokvel Pro does not move money. It helps groups stay organised, fair, and informed.
   </div>
 </main>
+
+<!-- ✅ SINGLE MODULE SCRIPT -->
+<script type="module">
+  import { supabase } from "./js/supabase.js";
+
+  /* 🔐 AUTH GUARD */
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    window.location.href = "/public/index.html";
+  }
+
+  /* 🚪 LOGOUT */
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    window.location.href = "/public/index.html";
+  });
+
+  /* 📦 LOAD STOKVELS */
+  async function loadStokvels() {
+    const container = document.getElementById("stokvelList");
+
+    const { data, error } = await supabase
+      .from("stokvels")
+      .select("id, name, contribution_amount, frequency")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      container.innerHTML = `<div class="empty">Failed to load stokvels</div>`;
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      container.innerHTML = `
+        <div class="empty">
+          No stokvels yet.<br />
+          Click <strong>“Start a savings circle”</strong> to create one.
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(stokvel => {
+      const card = document.createElement("div");
+      card.className = "stokvel-card";
+
+      card.innerHTML = `
+        <h2>${stokvel.name}</h2>
+        <p class="muted">
+          ${stokvel.frequency} contribution · R${stokvel.contribution_amount}
+        </p>
+
+        <div class="meta">
+          <span>🟢 Active</span>
+          <span>🔒 No money handled</span>
+        </div>
+
+        <div class="card-actions">
+          <a href="contributions.html">Contributions</a>
+          <a href="payouts.html">Payouts</a>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  loadStokvels();
+</script>
 
 </body>
 </html>
