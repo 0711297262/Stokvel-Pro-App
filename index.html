@@ -2,119 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Login — Stokvel Pro</title>
+  <title>Stokvel Pro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Stokvel Pro — Manage stokvel groups, members, contributions and payouts." />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Styles (RELATIVE PATHS – IMPORTANT) -->
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <!-- App Base Styles -->
   <style>
     body {
-      font-family: Inter, system-ui, sans-serif;
-      background: #f6f8fb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
-    }
-
-    .card {
-      background: #ffffff;
-      padding: 32px;
-      border-radius: 16px;
-      width: 360px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
-
-    h1 {
-      margin-top: 0;
-      font-size: 22px;
-    }
-
-    p {
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 14px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      font-size: 14px;
-    }
-
-    button {
-      margin-top: 18px;
-      width: 100%;
-      padding: 12px;
-      border-radius: 10px;
-      border: none;
-      background: #2563eb;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f6f8fb;
+      color: #111827;
     }
   </style>
 </head>
+
 <body>
 
-  <div class="card">
-    <h1>Login</h1>
-    <p>Enter your email to receive a secure login link.</p>
+  <!-- Header (loaded dynamically if you use partials) -->
+  <div id="header"></div>
 
-    <input id="email" type="email" placeholder="you@example.com" required />
-    <button id="loginBtn">Send login link</button>
-  </div>
+  <main class="page motion-container">
 
-<script type="module">
-  import { supabase } from "./js/supabase-client.js";
+    <!-- HERO / HOME -->
+    <section class="card">
+      <h1>Stokvel Pro</h1>
+      <p class="muted">
+        Manage stokvel groups, members, contributions and payouts — securely and simply.
+      </p>
 
-  // ✅ AUTO-REDIRECT IF ALREADY LOGGED IN
-  const { data: { user } } = await supabase.auth.getUser();
-  if (user) {
-    window.location.href = "./dashboard.html";
-  }
+      <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="dashboard.html" class="btn primary">Open Dashboard</a>
+        <a href="create-stokvel.html" class="btn">Create Stokvel</a>
+      </div>
+    </section>
 
-  const emailInput = document.getElementById("email");
-  const loginBtn = document.getElementById("loginBtn");
+    <!-- QUICK LINKS -->
+    <section class="grid" style="margin-top: 24px;">
+      <a href="contributions.html" class="card link-card">Contributions</a>
+      <a href="payouts.html" class="card link-card">Payouts</a>
+      <a href="profile.html" class="card link-card">Profile</a>
+      <a href="rules.html" class="card link-card">Rules</a>
+    </section>
 
-  loginBtn.addEventListener("click", async () => {
-    const email = emailInput.value.trim();
-    if (!email) {
-      alert("Please enter your email");
-      return;
-    }
+  </main>
 
-    loginBtn.textContent = "Sending...";
-    loginBtn.disabled = true;
+  <!-- Footer -->
+  <footer style="text-align:center; padding:24px; color:#6b7280; font-size:13px;">
+    © <span id="year"></span> Stokvel Pro
+  </footer>
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/Stokvel-Pro-App/`
-      }
-    });
+  <!-- Scripts (RELATIVE PATHS – IMPORTANT) -->
+  <script type="module" src="js/load-partials.js"></script>
+  <script type="module" src="js/supabase-client.js"></script>
 
-    if (error) {
-      alert(error.message);
-      loginBtn.textContent = "Send login link";
-      loginBtn.disabled = false;
-      return;
-    }
-
-    alert("Check your email for the login link 📧");
-    loginBtn.textContent = "Send login link";
-    loginBtn.disabled = false;
-  });
-</script>
-
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>
