@@ -95,14 +95,14 @@
 
     loginBtn.textContent = "Sending...";
     loginBtn.disabled = true;
+const { error } = await supabase.auth.signInWithOtp({
+  email,
+  options: {
+    emailRedirectTo:
+      "https://0711297262.github.io/Stokvel-Pro-App/dashboard.html"
+  }
+});
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: "https://0711297262.github.io/Stokvel-Pro-App/dashboard.html"
-
-      }
-    });
 
     if (error) {
       alert(error.message);
