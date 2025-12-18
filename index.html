@@ -79,8 +79,7 @@
   // ✅ AUTO-REDIRECT IF ALREADY LOGGED IN
   const { data: { user } } = await supabase.auth.getUser();
   if (user) {
-    window.location.href =
-      "/stokvel_pro_netlify_bundle/public/dashboard.html";
+    window.location.href = "./dashboard.html";
   }
 
   const emailInput = document.getElementById("email");
@@ -95,15 +94,14 @@
 
     loginBtn.textContent = "Sending...";
     loginBtn.disabled = true;
-const { error } = await supabase.auth.signInWithOtp({
-  email,
-  options: {
-    emailRedirectTo:
-      "https://0711297262.github.io/Stokvel-Pro-App/dashboard.html"
-  }
-});
 
-
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo:
+          window.location.origin + "/Stokvel-Pro-App/dashboard.html"
+      }
+    });
 
     if (error) {
       alert(error.message);
@@ -117,6 +115,7 @@ const { error } = await supabase.auth.signInWithOtp({
     loginBtn.disabled = false;
   });
 </script>
+
 
 </body>
 </html>
