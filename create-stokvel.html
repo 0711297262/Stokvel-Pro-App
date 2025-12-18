@@ -5,193 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Create Stokvel — Stokvel Pro</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/layout.css">
-  <script src="js/supabase.js"></script>
-  <script src="js/auth-guard.js"></script>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      background: #f5f7fb;
-      color: #111827;
-    }
-
-    header {
-      padding: 16px 24px;
-      font-weight: 700;
-      background: #fff;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
-    }
-
-    .page {
-      display: flex;
-      justify-content: center;
-      padding: 48px 16px;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 32px;
-      width: 100%;
-      max-width: 460px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
-
-    h2 {
-      margin-top: 0;
-    }
-
-    label {
-      font-weight: 600;
-      margin-top: 16px;
-      display: block;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 8px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      font-size: 14px;
-    }
-
-    button {
-      margin-top: 24px;
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: none;
-      background: linear-gradient(135deg, #2563eb, #1e40af);
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    button:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .note {
-      margin-top: 16px;
-      font-size: 13px;
-      color: #374151;
-      background: #eef2ff;
-      padding: 12px;
-      border-radius: 10px;
-    }
-  </style>
   <base href="/Stokvel-Pro-App/">
 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/layout.css">
 </head>
 
 <body>
-
-<header>Stokvel Pro</header>
-
-<main class="page">
-  <div class="card">
+  <main class="card centered">
     <h2>Create a Stokvel</h2>
-    <p>Stokvel Pro helps groups stay organised — we don’t handle money.</p>
 
-    <form id="createStokvelForm">
-      <label for="stokvelName">Stokvel name</label>
-      <input id="stokvelName" required />
-
-      <label for="contributionAmount">Contribution amount (R)</label>
-      <input id="contributionAmount" type="number" required />
-
-      <label for="contributionFrequency">Contribution frequency</label>
-      <select id="contributionFrequency" required>
+    <form>
+      <input id="stokvelName" placeholder="Stokvel name" required />
+      <input id="amount" type="number" placeholder="Contribution amount" required />
+      <select id="frequency">
         <option value="Monthly">Monthly</option>
         <option value="Weekly">Weekly</option>
       </select>
 
-      <button id="createStokvelBtn" type="submit">
-        Create stokvel
-      </button>
+      <button type="submit">Create stokvel</button>
     </form>
+  </main>
 
-    <div class="note">
-      🔒 No payments are processed in this app. Members contribute outside the app.
-    </div>
-  </div>
-</main>
-
-<!-- ✅ SUPABASE + LOGIC -->
-<script type="module">
-  import { supabase } from "./js/supabase.js";
-
-  const form = document.getElementById("createStokvelForm");
-  const btn = document.getElementById("createBtn");
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    btn.disabled = true;
-    btn.textContent = "Creating...";
-
-    /* 1️⃣ Get logged-in user */
-    const { data: { user } } = await supabase.auth.getUser();
-
-    if (!user) {
-      alert("You must be logged in");
-      window.location.href = "/public/index.html";
-      return;
-    }
-
-    const name = document.getElementById("name").value.trim();
-    const amount = Number(document.getElementById("amount").value);
-    const frequency = document.getElementById("frequency").value;
-
-    /* 2️⃣ Create stokvel */
-    const { data: stokvel, error: stokvelError } = await supabase
-      .from("stokvels")
-      .insert({
-        name,
-        contribution_amount: amount,
-        frequency,
-        created_by: user.id
-      })
-      .select()
-      .single();
-
-    if (stokvelError) {
-      alert(stokvelError.message);
-      btn.disabled = false;
-      btn.textContent = "Create stokvel";
-      return;
-    }
-
-    /* 3️⃣ Auto-add creator as ADMIN */
-    const { error: memberError } = await supabase
-      .from("members")
-      .insert({
-        stokvel_id: stokvel.id,
-        email: user.email,
-        role: "admin",
-        joined_date: new Date()
-      });
-
-    if (memberError) {
-      alert("Stokvel created, but failed to assign admin role");
-      console.error(memberError);
-      return;
-    }
-
-    /* 4️⃣ Done */
-    window.location.href = "/public/dashboard.html";
-  });
+  <script type="module">
+    import { supabase } from "./js/supabase.js";
     import { guard } from "./js/auth-guard.js";
 
-  // If NOT logged in → login
-  guard("protected");
-</script>
+    await guard("protected");
 
-<script type="module" src="js/create-stokvel.js"></script>
+    document.querySelector("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
 
+      await supabase.from("stokvels").insert({
+        name: stokvelName.value,
+        contribution_amount: amount.value,
+        frequency: frequency.value
+      });
+
+      window.location.href = "dashboard.html";
+    });
+  </script>
 </body>
 </html>

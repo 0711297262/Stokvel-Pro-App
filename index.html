@@ -2,76 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Stokvel Pro</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Stokvel Pro — Manage stokvel groups, members, contributions and payouts." />
+  <title>Stokvel Pro</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Styles (RELATIVE PATHS – IMPORTANT) -->
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/dashboard.css">
-  
-  <script src="js/supabase.js"></script>
-  <script src="js/auth-guard.js"></script>
-  <!-- App Base Styles -->
-  <style>
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f6f8fb;
-      color: #111827;
-    }
-  </style>
   <base href="/Stokvel-Pro-App/">
 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/layout.css">
 </head>
 
 <body>
+  <main class="card centered">
+    <h1>Stokvel Pro</h1>
+    <p>Organise savings groups. We don’t handle money.</p>
 
-  <!-- Header (loaded dynamically if you use partials) -->
-  <div id="header"></div>
-
-  <main class="page motion-container">
-
-    <!-- HERO / HOME -->
-    <section class="card">
-      <h1>Stokvel Pro</h1>
-      <p class="muted">
-        Manage stokvel groups, members, contributions and payouts — securely and simply.
-      </p>
-
-      <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
-        <a href="dashboard.html" class="btn primary">Open Dashboard</a>
-        <a href="create-stokvel.html" class="btn">Create Stokvel</a>
-      </div>
-    </section>
-
-    <!-- QUICK LINKS -->
-    <section class="grid" style="margin-top: 24px;">
-      <a href="contributions.html" class="card link-card">Contributions</a>
-      <a href="payouts.html" class="card link-card">Payouts</a>
-      <a href="profile.html" class="card link-card">Profile</a>
-      <a href="rules.html" class="card link-card">Rules</a>
-    </section>
-
+    <input id="phone" placeholder="+27..." />
+    <button id="loginBtn">Continue</button>
   </main>
 
-  <!-- Footer -->
-  <footer style="text-align:center; padding:24px; color:#6b7280; font-size:13px;">
-    © <span id="year"></span> Stokvel Pro
-  </footer>
+  <script type="module">
+    import { supabase } from "./js/supabase.js";
 
-  <!-- Scripts (RELATIVE PATHS – IMPORTANT) -->
-  <script type="module" src="js/load-partials.js"></script>
-  <script type="module" src="js/supabase-client.js"></script>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      // DEMO LOGIN (no OTP chaos)
+      await supabase.auth.signInAnonymously();
+      window.location.href = "dashboard.html";
+    });
   </script>
-
 </body>
 </html>
