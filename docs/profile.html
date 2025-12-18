@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile — Stokvel Pro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --primary: #1b3b5a;
+      --accent: #2563eb;
+      --muted: #6b7280;
+      --radius: 16px;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111827;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .nav a {
+      margin-left: 14px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .subtle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      margin-top: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      margin-top: 18px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 28px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #2563eb, #4f8cff);
+      color: white;
+      cursor: pointer;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 16px;
+      background: #eef2ff;
+      color: #3730a3;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Stokvel Pro</div>
+  <div class="nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="contributions.html">Contributions</a>
+    <a href="payouts.html">Payouts</a>
+  </div>
+</header>
+
+<main>
+  <h1>My Profile</h1>
+
+  <!-- TRUST COPY -->
+  <p class="subtle">
+    <div class="helper">
+  Stokvel Pro is live as a coordination and clarity tool — not a bank.
+</div>
+
+  </p>
+
+  <div class="card">
+    <label for="name">Full name</label>
+    <input id="name" placeholder="Nthabiseng Phooko" />
+
+    <label for="phone">Phone number</label>
+    <input id="phone" placeholder="+27 7X XXX XXXX" />
+
+    <label for="email">Email address</label>
+    <input id="email" placeholder="name@email.com" />
+
+    <button>Save changes</button>
+
+    <div class="helper">
+  Stokvel Pro is a coordination and clarity tool — not a bank.
+</div>
+
+  </div>
+</main>
+<footer style="
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #475569;
+">
+  <a href="rules.html" style="color:#2563eb; text-decoration:none;">
+    Rules & responsibility
+  </a>
+  <div style="margin-top:8px;">
+    Stokvel Pro is a coordination and clarity tool — not a bank.
+  </div>
+</footer>
+
+</body>
+</html>

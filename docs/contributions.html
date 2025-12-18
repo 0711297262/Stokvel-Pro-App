@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contributions — Stokvel Pro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --primary:#1b3b5a;
+  --accent:#2563eb;
+  --muted:#6b7280;
+  --success:#16a34a;
+  --pending:#f59e0b;
+  --radius:18px;
+  --shadow:0 16px 36px rgba(0,0,0,.08);
+}
+
+*{box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111827;
+}
+
+/* Header */
+header{
+  background:#fff;
+  padding:18px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
+
+.logo{
+  font-weight:700;
+  font-size:18px;
+  color:var(--primary);
+}
+
+header a{
+  text-decoration:none;
+  font-size:14px;
+  font-weight:500;
+  color:var(--accent);
+}
+
+/* Main */
+main{
+  max-width:900px;
+  margin:40px auto;
+  padding:0 20px;
+}
+
+h1{
+  font-size:26px;
+  margin-bottom:6px;
+}
+
+.subtle{
+  color:var(--muted);
+  margin-bottom:18px;
+}
+
+/* Notice */
+.notice{
+  background:#eef2ff;
+  color:#3730a3;
+  padding:14px 18px;
+  border-radius:14px;
+  font-size:14px;
+  margin-bottom:28px;
+}
+
+/* Card */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+
+.card h2{
+  margin:0 0 12px;
+  font-size:18px;
+}
+
+/* List */
+.list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.item:last-child{
+  border-bottom:none;
+}
+
+.name{
+  font-weight:500;
+}
+
+.status{
+  font-size:14px;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.paid{
+  color:var(--success);
+}
+
+.pending{
+  color:var(--pending);
+}
+
+/* Footer note */
+.helper{
+  margin-top:28px;
+  padding:16px;
+  background:#f8fafc;
+  border-radius:14px;
+  font-size:14px;
+  color:#475569;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Stokvel Pro</div>
+  <a href="dashboard.html">← Back to dashboard</a>
+</header>
+
+<main>
+  <h1>Contributions</h1>
+  <p class="subtle">A shared view of who has contributed this cycle</p>
+
+  <div class="notice">
+  🔒 <strong>Live mode:</strong> Stokvel Pro does not move or hold money.<br>
+  Members continue contributing using their usual methods.
+</div>
+
+
+  <div class="card">
+    <h2>Family Savings Circle — January cycle</h2>
+
+    <ul class="list">
+      <li class="item">
+        <span class="name">Sarah M.</span>
+        <span class="status paid">✔️ Contributed</span>
+      </li>
+      <li class="item">
+        <span class="name">Thabo K.</span>
+        <span class="status paid">✔️ Contributed</span>
+      </li>
+      <li class="item">
+        <span class="name">Nomsa L.</span>
+        <span class="status paid">✔️ Contributed</span>
+      </li>
+      <li class="item">
+        <span class="name">David P.</span>
+        <span class="status pending">⏳ Not yet contributed</span>
+      </li>
+      <li class="item">
+        <span class="name">Ayesha R.</span>
+        <span class="status pending">⏳ Not yet contributed</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="helper">
+  This list helps members stay aligned on who has contributed.<br>
+  This view is shared with all members so everyone has the same understanding.
+</div>
+
+</main>
+<footer style="
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #475569;
+">
+  <a href="rules.html" style="color:#2563eb; text-decoration:none;">
+    Rules & responsibility
+  </a>
+  <div style="margin-top:8px;">
+    Stokvel Pro is a coordination and clarity tool — not a bank.
+  </div>
+</footer>
+
+</body>
+</html>

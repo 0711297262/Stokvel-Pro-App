@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — Stokvel Pro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --primary: #1b3b5a;
+      --accent: #2563eb;
+      --muted: #6b7280;
+      --radius: 16px;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111827;
+    }
+
+    header {
+      background: #fff;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
+    }
+
+    .actions button,
+    .actions a {
+      margin-left: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #2563eb, #4f8cff);
+      color: white;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .subtle {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .stokvel-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .stokvel-card h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-top: 14px;
+    }
+
+    .card-actions a {
+      display: inline-block;
+      margin-top: 14px;
+      margin-right: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      text-decoration: none;
+      color: #1f2937;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .helper {
+      margin-top: 40px;
+      padding: 20px;
+      background: #eef2ff;
+      border-radius: 14px;
+      color: #3730a3;
+      font-size: 14px;
+    }
+
+    .empty {
+      padding: 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Stokvel Pro</div>
+  <div class="actions">
+    <a href="create-stokvel.html" class="btn-primary">+ Start a savings circle</a>
+    <button id="logoutBtn" class="btn-outline">Logout</button>
+  </div>
+</header>
+
+<main>
+  <h1>My Stokvels</h1>
+  <p class="subtle">Your savings circles — tracked clearly, no money handled</p>
+
+  <div class="cards" id="stokvelList"></div>
+
+  <div class="helper">
+    💡 Stokvel Pro does not move money. It helps groups stay organised, fair, and informed.
+  </div>
+</main>
+
+<!-- ✅ SINGLE MODULE SCRIPT -->
+<script type="module">
+  import { supabase } from "./js/supabase.js";
+
+  /* 🔐 AUTH GUARD */
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    window.location.href = "/public/index.html";
+  }
+
+  /* 🚪 LOGOUT */
+  document.getElementById("logoutBtn").addEventListener("click", async () => {
+    await supabase.auth.signOut();
+    window.location.href = "/public/index.html";
+  });
+
+  /* 📦 LOAD STOKVELS */
+  async function loadStokvels() {
+    const container = document.getElementById("stokvelList");
+
+    const { data, error } = await supabase
+      .from("stokvels")
+      .select("id, name, contribution_amount, frequency")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      container.innerHTML = `<div class="empty">Failed to load stokvels</div>`;
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      container.innerHTML = `
+        <div class="empty">
+          No stokvels yet.<br />
+          Click <strong>“Start a savings circle”</strong> to create one.
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(stokvel => {
+      const card = document.createElement("div");
+      card.className = "stokvel-card";
+
+      card.innerHTML = `
+        <h2>${stokvel.name}</h2>
+        <p class="muted">
+          ${stokvel.frequency} contribution · R${stokvel.contribution_amount}
+        </p>
+
+        <div class="meta">
+          <span>🟢 Active</span>
+          <span>🔒 No money handled</span>
+        </div>
+
+        <div class="card-actions">
+          <a href="contributions.html">Contributions</a>
+          <a href="payouts.html">Payouts</a>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  loadStokvels();
+</script>
+
+</body>
+</html>
