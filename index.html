@@ -76,7 +76,6 @@
 <script type="module">
   import { supabase } from "./js/supabase-client.js";
 
-
   // ✅ AUTO-REDIRECT IF ALREADY LOGGED IN
   const { data: { user } } = await supabase.auth.getUser();
   if (user) {
@@ -99,9 +98,7 @@
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo:
-  window.location.origin + "/Stokvel-Pro-App/dashboard.html";
-
+        emailRedirectTo: `${window.location.origin}/Stokvel-Pro-App/`
       }
     });
 
@@ -117,6 +114,7 @@
     loginBtn.disabled = false;
   });
 </script>
+
 
 </body>
 </html>
