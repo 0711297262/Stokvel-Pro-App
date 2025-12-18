@@ -133,7 +133,10 @@
 
   <!-- TRUST COPY -->
   <p class="subtle">
-    🔒 Demo mode: Your details help verify your identity before payments are enabled.
+    <div class="helper">
+  Stokvel Pro is live as a coordination and clarity tool — not a bank.
+</div>
+
   </p>
 
   <div class="card">
@@ -148,11 +151,30 @@
 
     <button>Save changes</button>
 
-    <div class="note">
-      ℹ️ Profile verification helps protect members and ensure fair payouts once payments are activated.
-    </div>
+    <div class="helper">
+  Stokvel Pro is a coordination and clarity tool — not a bank.
+</div>
+
   </div>
 </main>
-
+<footer style="
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #475569;
+">
+  <a href="rules.html" style="color:#2563eb; text-decoration:none;">
+    Rules & responsibility
+  </a>
+  <div style="margin-top:8px;">
+    Stokvel Pro is a coordination and clarity tool — not a bank.
+  </div>
+</footer>
+<!-- 🔒 Auth lock -->
+<script type="module">
+  import { guard } from "./js/auth-guard.js";
+  guard("protected");
+</script>
 </body>
 </html>

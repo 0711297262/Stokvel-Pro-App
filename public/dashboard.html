@@ -235,6 +235,10 @@
   }
 
   loadStokvels();
+    import { guard } from "./js/auth-guard.js";
+
+  // If NOT logged in → login
+  guard("protected");
 </script>
 
 </body>

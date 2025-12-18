@@ -1,229 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Contributions — Stokvel Pro</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contributions — Stokvel Pro</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --primary: #1b3b5a;
-      --accent: #2563eb;
-      --muted: #6b7280;
-      --radius: 16px;
-      --shadow: 0 12px 30px rgba(0,0,0,0.08);
-      --paid: #16a34a;
-      --pending: #d97706;
-    }
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --primary:#1b3b5a;
+  --accent:#2563eb;
+  --muted:#6b7280;
+  --success:#16a34a;
+  --pending:#f59e0b;
+  --radius:18px;
+  --shadow:0 16px 36px rgba(0,0,0,.08);
+}
 
-    * {
-      box-sizing: border-box;
-      font-family: Inter, system-ui, sans-serif;
-    }
+*{
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: #111827;
-    }
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111827;
+}
 
-    header {
-      background: #ffffff;
-      padding: 18px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-    }
+/* Header */
+header{
+  background:#fff;
+  padding:18px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
 
-    .logo {
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--primary);
-    }
+.logo{
+  font-weight:700;
+  font-size:18px;
+  color:var(--primary);
+}
 
-    .nav a {
-      margin-left: 14px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--accent);
-    }
+header a{
+  text-decoration:none;
+  font-size:14px;
+  font-weight:500;
+  color:var(--accent);
+}
 
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+/* Main */
+main{
+  max-width:900px;
+  margin:40px auto;
+  padding:0 20px;
+}
 
-    h1 {
-      font-size: 26px;
-      margin-bottom: 6px;
-    }
+h1{
+  font-size:26px;
+  margin-bottom:6px;
+}
 
-    .subtle {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 14px;
-    }
+.subtle{
+  color:var(--muted);
+  margin-bottom:18px;
+}
 
-    /* Summary */
-    .summary {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-      margin: 24px 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
+/* Notice */
+.notice{
+  background:#eef2ff;
+  color:#3730a3;
+  padding:14px 18px;
+  border-radius:14px;
+  font-size:14px;
+  margin-bottom:28px;
+}
 
-    .summary h3 {
-      font-size: 14px;
-      color: var(--muted);
-      margin: 0 0 6px;
-    }
+/* Card */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+}
 
-    .summary p {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 700;
-    }
+.card h2{
+  margin:0 0 12px;
+  font-size:18px;
+}
 
-    /* List */
-    .list {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
+/* List */
+.list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 18px;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 14px;
-    }
+.item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 0;
+  border-bottom:1px solid #e5e7eb;
+}
 
-    .row:last-child {
-      border-bottom: none;
-    }
+.item:last-child{
+  border-bottom:none;
+}
 
-    .name {
-      font-weight: 600;
-    }
+.name{
+  font-weight:500;
+}
 
-    .amount {
-      font-weight: 600;
-    }
+.status{
+  font-size:14px;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
 
-    .status {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: 999px;
-    }
+.paid{
+  color:var(--success);
+}
 
-    .paid {
-      background: #dcfce7;
-      color: var(--paid);
-    }
+.pending{
+  color:var(--pending);
+}
 
-    .pending {
-      background: #ffedd5;
-      color: var(--pending);
-    }
-
-    .notice {
-      margin-top: 32px;
-      padding: 18px;
-      background: #fef3c7;
-      color: #92400e;
-      border-radius: 14px;
-      font-size: 14px;
-    }
-  </style>
+/* Helper */
+.helper{
+  margin-top:28px;
+  padding:16px;
+  background:#f8fafc;
+  border-radius:14px;
+  font-size:14px;
+  color:#475569;
+}
+</style>
 </head>
 
 <body>
 
 <header>
   <div class="logo">Stokvel Pro</div>
-  <div class="nav">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="payouts.html">Payouts</a>
-    <a href="profile.html">Profile</a>
-  </div>
+  <a href="dashboard.html">← Back to dashboard</a>
 </header>
 
 <main>
   <h1>Contributions</h1>
+  <p class="subtle">A shared view of who has contributed during the current cycle</p>
 
-  <!-- TRUST COPY -->
-  <p class="subtle">
-    🔒 Demo mode: No real money is moved. Contributions shown are sample data.
-  </p>
-  <p class="subtle">
-    Contributions marked “Pending” have not yet been paid for this cycle.
-  </p>
-
-  <!-- Summary -->
-  <div class="summary">
-    <div>
-      <h3>Contribution amount</h3>
-      <p>R500</p>
-    </div>
-    <div>
-      <h3>Members paid</h3>
-      <p>6 / 10</p>
-    </div>
-    <div>
-      <h3>Total collected</h3>
-      <p>R3,000</p>
-    </div>
-  </div>
-
-  <!-- List -->
-  <div class="list">
-    <div class="row">
-      <span class="name">Sipho K.</span>
-      <span class="amount">R500</span>
-      <span class="status paid">Paid</span>
-    </div>
-    <div class="row">
-      <span class="name">Thandi M.</span>
-      <span class="amount">R500</span>
-      <span class="status paid">Paid</span>
-    </div>
-    <div class="row">
-      <span class="name">Lerato S.</span>
-      <span class="amount">R500</span>
-      <span class="status paid">Paid</span>
-    </div>
-    <div class="row">
-      <span class="name">Kabelo T.</span>
-      <span class="amount">R500</span>
-      <span class="status pending">Pending</span>
-    </div>
-    <div class="row">
-      <span class="name">Nomsa D.</span>
-      <span class="amount">R500</span>
-      <span class="status pending">Pending</span>
-    </div>
-  </div>
-
-  <!-- Notice -->
   <div class="notice">
-    ⚠️ This is a demo preview. Payments will only be enabled once the group is verified and activated.
+    🔒 <strong>Transparency only:</strong> Stokvel Pro does not collect, move, or store money.<br>
+    Members continue contributing using their usual methods.
+  </div>
+
+  <div class="card">
+    <h2>Family Savings Circle — January cycle</h2>
+
+    <ul class="list">
+      <li class="item">
+        <span class="name">Sarah M.</span>
+        <span class="status paid">✔️ Contributed</span>
+      </li>
+      <li class="item">
+        <span class="name">Thabo K.</span>
+        <span class="status paid">✔️ Contributed</span>
+      </li>
+      <li class="item">
+        <span class="name">Nomsa L.</span>
+        <span class="status paid">✔️ Contributed</span>
+      </li>
+      <li class="item">
+        <span class="name">David P.</span>
+        <span class="status pending">⏳ Not yet contributed</span>
+      </li>
+      <li class="item">
+        <span class="name">Ayesha R.</span>
+        <span class="status pending">⏳ Not yet contributed</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="helper">
+    This shared list keeps everyone aligned on contributions for the cycle.<br>
+    All members see the same information — no side conversations or confusion.
   </div>
 </main>
+
+<footer style="
+  margin-top:60px;
+  padding:20px;
+  text-align:center;
+  font-size:14px;
+  color:#475569;
+">
+  <a href="rules.html" style="color:#2563eb; text-decoration:none;">
+    Rules & responsibility
+  </a>
+  <div style="margin-top:8px;">
+    Stokvel Pro is a coordination and clarity tool — not a bank.
+  </div>
+</footer>
+
+<!-- 🔒 Auth lock -->
+<script type="module">
+  import { guard } from "./js/auth-guard.js";
+  guard("protected");
+</script>
 
 </body>
 </html>

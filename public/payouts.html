@@ -1,213 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Payouts — Stokvel Pro</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Payouts — Stokvel Pro</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --primary: #1b3b5a;
-      --accent: #2563eb;
-      --muted: #6b7280;
-      --radius: 16px;
-      --shadow: 0 12px 30px rgba(0,0,0,0.08);
-      --paid: #16a34a;
-      --upcoming: #2563eb;
-    }
+<style>
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --primary:#1b3b5a;
+  --accent:#2563eb;
+  --muted:#6b7280;
+  --success:#16a34a;
+  --upcoming:#2563eb;
+  --pending:#9ca3af;
+  --radius:18px;
+  --shadow:0 16px 36px rgba(0,0,0,.08);
+}
 
-    * {
-      box-sizing: border-box;
-      font-family: Inter, system-ui, sans-serif;
-    }
+*{box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: #111827;
-    }
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111827;
+}
 
-    header {
-      background: #ffffff;
-      padding: 18px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-    }
+/* Header */
+header{
+  background:#fff;
+  padding:18px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
+}
 
-    .logo {
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--primary);
-    }
+.logo{
+  font-weight:700;
+  font-size:18px;
+  color:var(--primary);
+}
 
-    .nav a {
-      margin-left: 14px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--accent);
-    }
+header a{
+  text-decoration:none;
+  font-size:14px;
+  font-weight:500;
+  color:var(--accent);
+}
 
-    main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+/* Main */
+main{
+  max-width:900px;
+  margin:40px auto;
+  padding:0 20px;
+}
 
-    h1 {
-      font-size: 26px;
-      margin-bottom: 6px;
-    }
+h1{
+  font-size:26px;
+  margin-bottom:6px;
+}
 
-    .subtle {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 14px;
-    }
+.subtle{
+  color:var(--muted);
+  margin-bottom:18px;
+}
 
-    /* Summary */
-    .summary {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      margin: 24px 0;
-    }
+/* Notice */
+.notice{
+  background:#eef2ff;
+  color:#3730a3;
+  padding:14px 18px;
+  border-radius:14px;
+  font-size:14px;
+  margin-bottom:28px;
+}
 
-    .summary h2 {
-      margin-top: 0;
-      font-size: 18px;
-    }
+/* Card */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:24px;
+  box-shadow:var(--shadow);
+}
 
-    .amount {
-      font-size: 32px;
-      font-weight: 700;
-      margin: 10px 0;
-    }
+/* Timeline */
+.timeline{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
 
-    .badge {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      background: #eef2ff;
-      color: var(--upcoming);
-    }
+.step{
+  display:flex;
+  gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid #e5e7eb;
+}
 
-    /* Order list */
-    .list {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
+.step:last-child{
+  border-bottom:none;
+}
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 18px;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 14px;
-    }
+.dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  margin-top:4px;
+}
 
-    .row:last-child {
-      border-bottom: none;
-    }
+.done{ background:var(--success); }
+.next{ background:var(--upcoming); }
+.wait{ background:var(--pending); }
 
-    .status {
-      font-weight: 600;
-      font-size: 13px;
-    }
+.content{
+  flex:1;
+}
 
-    .paid {
-      color: var(--paid);
-    }
+.name{
+  font-weight:600;
+}
 
-    .next {
-      color: var(--upcoming);
-    }
+.meta{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:4px;
+}
 
-    .upcoming {
-      color: var(--muted);
-    }
+.tag{
+  display:inline-block;
+  margin-top:6px;
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#f1f5f9;
+  color:#1f2937;
+}
 
-    .notice {
-      margin-top: 32px;
-      padding: 18px;
-      background: #fef3c7;
-      color: #92400e;
-      border-radius: 14px;
-      font-size: 14px;
-    }
-  </style>
+/* Helper */
+.helper{
+  margin-top:28px;
+  padding:16px;
+  background:#f8fafc;
+  border-radius:14px;
+  font-size:14px;
+  color:#475569;
+}
+</style>
 </head>
 
 <body>
 
 <header>
   <div class="logo">Stokvel Pro</div>
-  <div class="nav">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="contributions.html">Contributions</a>
-    <a href="profile.html">Profile</a>
-  </div>
+  <a href="dashboard.html">← Back to dashboard</a>
 </header>
 
 <main>
-  <h1>Payouts</h1>
+  <h1>Payout order</h1>
+  <p class="subtle">A clear and fair rotation agreed by the group</p>
 
-  <!-- TRUST COPY -->
-  <p class="subtle">
-    🔒 Demo mode: No real money is moved. Payouts shown are sample data.
-  </p>
-  <p class="subtle">
-    Payouts follow the agreed rotation order and are visible to all members.
-  </p>
+ <div class="notice">
+  🔒 <strong>Live mode:</strong> Stokvel Pro does not move or hold money.<br>
+  Members continue contributing using their usual methods.
+</div>
 
-  <!-- Next payout summary -->
-  <div class="summary">
-    <h2>Next Payout</h2>
-    <div class="amount">R5,000</div>
-    <p>Scheduled for <strong>25 January</strong></p>
-    <p>Recipient: <strong>Thandi M.</strong></p>
-    <span class="badge">Upcoming</span>
+
+  <div class="card">
+    <ul class="timeline">
+
+      <li class="step">
+        <span class="dot done"></span>
+        <div class="content">
+          <div class="name">Nomsa L.</div>
+          <div class="meta">Paid out — December</div>
+          <span class="tag">Completed</span>
+        </div>
+      </li>
+
+      <li class="step">
+        <span class="dot done"></span>
+        <div class="content">
+          <div class="name">Thabo K.</div>
+          <div class="meta">Paid out — January</div>
+          <span class="tag">Completed</span>
+        </div>
+      </li>
+
+      <li class="step">
+        <span class="dot next"></span>
+        <div class="content">
+          <div class="name">Sarah M.</div>
+          <div class="meta">Next payout — 25 February</div>
+          <span class="tag">Up next</span>
+        </div>
+      </li>
+
+      <li class="step">
+        <span class="dot wait"></span>
+        <div class="content">
+          <div class="name">Ayesha R.</div>
+          <div class="meta">Upcoming — March</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <span class="dot wait"></span>
+        <div class="content">
+          <div class="name">David P.</div>
+          <div class="meta">Upcoming — April</div>
+        </div>
+      </li>
+
+    </ul>
   </div>
 
-  <!-- Payout order -->
-  <h2>Payout Order</h2>
-  <div class="list">
-    <div class="row">
-      <span>1. Sipho K.</span>
-      <span class="status paid">Paid</span>
-    </div>
-    <div class="row">
-      <span>2. Thandi M.</span>
-      <span class="status next">Next</span>
-    </div>
-    <div class="row">
-      <span>3. Lerato S.</span>
-      <span class="status upcoming">Upcoming</span>
-    </div>
-    <div class="row">
-      <span>4. Kabelo T.</span>
-      <span class="status upcoming">Upcoming</span>
-    </div>
-  </div>
+ <div class="helper">
+  The payout order is visible to everyone to keep things fair.<br>
+  Stokvel Pro is a coordination and clarity tool — not a bank.
+</div>
 
-  <!-- Notice -->
-  <div class="notice">
-    ⚠️ This is a demo preview. Payouts will only be processed once the group and members are verified.
-  </div>
 </main>
+<footer style="
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #475569;
+">
+  <a href="rules.html" style="color:#2563eb; text-decoration:none;">
+    Rules & responsibility
+  </a>
+  <div style="margin-top:8px;">
+    Stokvel Pro is a coordination and clarity tool — not a bank.
+  </div>
+</footer>
+<!-- 🔒 Auth lock -->
+<script type="module">
+  import { guard } from "./js/auth-guard.js";
+  guard("protected");
+</script>
 
 </body>
 </html>

@@ -8,175 +8,185 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #f6f8fb;
-      --card: #ffffff;
-      --primary: #1b3b5a;
-      --accent: #2563eb;
-      --muted: #6b7280;
-      --radius: 16px;
-      --shadow: 0 12px 30px rgba(0,0,0,0.08);
-    }
-
-    * {
-      box-sizing: border-box;
-      font-family: Inter, system-ui, sans-serif;
-    }
-
     body {
       margin: 0;
-      background: var(--bg);
+      font-family: Inter, system-ui, sans-serif;
+      background: #f5f7fb;
       color: #111827;
     }
 
     header {
-      background: #ffffff;
-      padding: 18px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-    }
-
-    .logo {
+      padding: 16px 24px;
       font-weight: 700;
-      font-size: 18px;
-      color: var(--primary);
+      background: #fff;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
     }
 
-    .nav a {
-      margin-left: 14px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--accent);
-    }
-
-    main {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    h1 {
-      font-size: 26px;
-      margin-bottom: 6px;
-    }
-
-    .subtle {
-      color: var(--muted);
-      font-size: 14px;
-      margin-bottom: 14px;
+    .page {
+      display: flex;
+      justify-content: center;
+      padding: 48px 16px;
     }
 
     .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow);
-      margin-top: 24px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      margin-top: 0;
     }
 
     label {
-      display: block;
-      font-size: 14px;
       font-weight: 600;
-      margin-bottom: 6px;
-      margin-top: 18px;
+      margin-top: 16px;
+      display: block;
     }
 
-    input,
-    select {
+    input, select {
       width: 100%;
-      padding: 12px 14px;
+      padding: 12px;
+      margin-top: 8px;
       border-radius: 10px;
       border: 1px solid #e5e7eb;
       font-size: 14px;
     }
 
-    .hint {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
     button {
-      margin-top: 28px;
+      margin-top: 24px;
       width: 100%;
       padding: 14px;
       border-radius: 12px;
       border: none;
-      font-size: 15px;
-      font-weight: 600;
-      background: linear-gradient(90deg, #2563eb, #4f8cff);
+      background: linear-gradient(135deg, #2563eb, #1e40af);
       color: white;
+      font-weight: 600;
       cursor: pointer;
     }
 
-    .after-note {
+    button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .note {
       margin-top: 16px;
       font-size: 13px;
-      color: var(--muted);
-      text-align: center;
+      color: #374151;
+      background: #eef2ff;
+      padding: 12px;
+      border-radius: 10px;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">Stokvel Pro</div>
-  <div class="nav">
-    <a href="dashboard.html">Dashboard</a>
-    <a href="profile.html">Profile</a>
-  </div>
-</header>
+<header>Stokvel Pro</header>
 
-<main>
-  <h1>Create a Stokvel</h1>
-
-  <!-- TRUST COPY -->
-  <p class="subtle">
-    🔒 Demo mode: You are setting up the rules of your stokvel.
-    Members will only be invited once the group is confirmed.
-  </p>
-
+<main class="page">
   <div class="card">
+    <h2>Create a Stokvel</h2>
+    <p>Stokvel Pro helps groups stay organised — we don’t handle money.</p>
 
-    <label for="name">Stokvel name</label>
-    <input id="name" placeholder="e.g. Family Savings Circle" />
-    <div class="hint">Choose a name your members will recognize.</div>
+    <form id="createStokvelForm">
+      <label for="stokvelName">Stokvel name</label>
+      <input id="stokvelName" required />
 
-    <label for="amount">Contribution amount (per cycle)</label>
-    <input id="amount" placeholder="e.g. 500" />
-    <div class="hint">This is how much each member contributes.</div>
+      <label for="contributionAmount">Contribution amount (R)</label>
+      <input id="contributionAmount" type="number" required />
 
-    <label for="frequency">Contribution frequency</label>
-    <select id="frequency">
-      <option>Monthly</option>
-      <option>Weekly</option>
-    </select>
-    <div class="hint">How often members contribute.</div>
+      <label for="contributionFrequency">Contribution frequency</label>
+      <select id="contributionFrequency" required>
+        <option value="Monthly">Monthly</option>
+        <option value="Weekly">Weekly</option>
+      </select>
 
-    <label for="members">Number of members</label>
-    <input id="members" placeholder="e.g. 10" />
-    <div class="hint">Including yourself.</div>
+      <button id="createStokvelBtn" type="submit">
+        Create stokvel
+      </button>
+    </form>
 
-    <label for="payout">Payout method</label>
-    <select id="payout">
-      <option>Rotation (each member gets a turn)</option>
-      <option>Fixed recipient</option>
-    </select>
-    <div class="hint">How payouts will be distributed.</div>
-
-    <button>Create stokvel</button>
-
-    <p class="after-note">
-      You’ll be able to review everything before any payments are enabled.
-    </p>
-
+    <div class="note">
+      🔒 No payments are processed in this app. Members contribute outside the app.
+    </div>
   </div>
 </main>
+
+<!-- ✅ SUPABASE + LOGIC -->
+<script type="module">
+  import { supabase } from "./js/supabase.js";
+
+  const form = document.getElementById("createStokvelForm");
+  const btn = document.getElementById("createBtn");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = "Creating...";
+
+    /* 1️⃣ Get logged-in user */
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      alert("You must be logged in");
+      window.location.href = "/public/index.html";
+      return;
+    }
+
+    const name = document.getElementById("name").value.trim();
+    const amount = Number(document.getElementById("amount").value);
+    const frequency = document.getElementById("frequency").value;
+
+    /* 2️⃣ Create stokvel */
+    const { data: stokvel, error: stokvelError } = await supabase
+      .from("stokvels")
+      .insert({
+        name,
+        contribution_amount: amount,
+        frequency,
+        created_by: user.id
+      })
+      .select()
+      .single();
+
+    if (stokvelError) {
+      alert(stokvelError.message);
+      btn.disabled = false;
+      btn.textContent = "Create stokvel";
+      return;
+    }
+
+    /* 3️⃣ Auto-add creator as ADMIN */
+    const { error: memberError } = await supabase
+      .from("members")
+      .insert({
+        stokvel_id: stokvel.id,
+        email: user.email,
+        role: "admin",
+        joined_date: new Date()
+      });
+
+    if (memberError) {
+      alert("Stokvel created, but failed to assign admin role");
+      console.error(memberError);
+      return;
+    }
+
+    /* 4️⃣ Done */
+    window.location.href = "/public/dashboard.html";
+  });
+    import { guard } from "./js/auth-guard.js";
+
+  // If NOT logged in → login
+  guard("protected");
+</script>
+
+<script type="module" src="js/create-stokvel.js"></script>
 
 </body>
 </html>
