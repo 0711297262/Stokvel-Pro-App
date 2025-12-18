@@ -69,35 +69,25 @@
     <h1>Login</h1>
     <p>Enter your email to receive a secure login link.</p>
 
-    <input
-  id="email"
-  type="email"
-  placeholder="you@example.com"
-  required
-/>
-
+    <input id="email" type="email" placeholder="you@example.com" required />
     <button id="loginBtn">Send login link</button>
-
   </div>
 
-  <!-- ✅ SINGLE, CORRECT MODULE SCRIPT -->
 <script type="module">
   import { supabase } from "./js/supabase.js";
 
-  /* 🔁 AUTO-REDIRECT IF ALREADY LOGGED IN */
+  // ✅ AUTO-REDIRECT IF ALREADY LOGGED IN
   const { data: { user } } = await supabase.auth.getUser();
-
   if (user) {
-    window.location.href = "/public/dashboard.html";
+    window.location.href =
+      "/stokvel_pro_netlify_bundle/public/dashboard.html";
   }
 
-  /* 🔐 LOGIN LOGIC BELOW */
   const emailInput = document.getElementById("email");
   const loginBtn = document.getElementById("loginBtn");
 
   loginBtn.addEventListener("click", async () => {
     const email = emailInput.value.trim();
-
     if (!email) {
       alert("Please enter your email");
       return;
@@ -109,7 +99,8 @@
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: window.location.origin + "/public/dashboard.html"
+        emailRedirectTo:
+          "https://0711297262.github.io/stokvel_pro_netlify_bundle/public/dashboard.html"
       }
     });
 
@@ -124,10 +115,6 @@
     loginBtn.textContent = "Send login link";
     loginBtn.disabled = false;
   });
-    import { guard } from "./js/auth-guard.js";
-
-  // If already logged in → dashboard
-  guard("login");
 </script>
 
 </body>
