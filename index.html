@@ -104,6 +104,7 @@ const { error } = await supabase.auth.signInWithOtp({
 });
 
 
+
     if (error) {
       alert(error.message);
       loginBtn.textContent = "Send login link";
